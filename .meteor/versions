@@ -208,6 +208,7 @@ rocketchat:ui-flextab@0.1.0
 rocketchat:ui-login@0.1.0
 rocketchat:ui-master@0.1.0
 rocketchat:ui-message@0.1.0
+rocketchat:ui-saic@0.0.1
 rocketchat:ui-sidenav@0.1.0
 rocketchat:ui-vrecord@0.0.1
 rocketchat:version@1.0.0
