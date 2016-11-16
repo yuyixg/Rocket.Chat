@@ -1,32 +1,13 @@
 <template name="tasksList">
-	<div class="list">
-		<table>
-			<thead>
-				<tr>
-					<th width="25%">名字</th>
-					<th width="25%">说明</th>
-					<th width="25%">url</th>
-					<th width="25%">是否启用</th>
-					<th>删除</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each tasks}}
-				<tr class="task-info row-link" data-id="{{_id}}">
-					<td>{{title}}</td>
-					<td>{{description}}</td>
-					<td>{{url}}</td>
-					<td>{{#if enabled}}{{_ "Yes"}}{{else}}{{_ "No"}}{{/if}}</td>
-					<td><a href="#remove" class="remove-department"><i class="icon-trash"></i></a></td>
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
-	</div>
+	{{#each tasks}}
+	{{/each}}
 
+	<div id="test" class="list"></div>
+	
+	{{> ShiraPagination options=options}}
 	<a href="{{pathFor 'createtask'}}" class="button primary">新建任务</a>
 
 
 
-	
+
 </template>
