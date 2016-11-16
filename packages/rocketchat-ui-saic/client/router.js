@@ -1,40 +1,36 @@
-taskManagerRoutes = FlowRouter.group({
-    prefix: '/task-manager',
+saicManagerRoutes = FlowRouter.group({
+    prefix: '/saic',
     name: 'task-manager'
-});
-issueRoutes = FlowRouter.group({
-    prefix: '/issue',
-    name: 'issue'
 });
 
 AccountBox.addRoute({
-    name: 'issue-index',
+    name: 'knowledge-index',
     path: '/index',
-    sideNav: 'taskFlex',
-    i18nPageTitle: '问题',
-    pageTemplate: 'issueindex'
-}, issueRoutes);
+    sideNav: 'saicFlex',
+    i18nPageTitle: '知识库',
+    pageTemplate: 'knowledgeindex'
+}, saicManagerRoutes);
 
 AccountBox.addRoute({
     name: 'task-list',
     path: '/task-list',
-    sideNav: 'taskFlex',
-    i18nPageTitle: '任务列表',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '移动运营',
     pageTemplate: 'tasksList'
-}, taskManagerRoutes);
+}, saicManagerRoutes);
 
 AccountBox.addRoute({
     name: 'createtask',
     path: '/create',
-    sideNav: 'taskFlex',
+    sideNav: 'saicFlex',
     i18nPageTitle: '新建任务',
     pageTemplate: 'taskSubmit'
-}, taskManagerRoutes);
+}, saicManagerRoutes);
 
 AccountBox.addRoute({
 	name: 'task-edit',
 	path: '/departments/:_id/edit',
-	sideNav: 'taskFlex',
+	sideNav: 'saicFlex',
 	i18nPageTitle: '修改任务',
 	pageTemplate: 'taskSubmit'
-}, taskManagerRoutes);
+}, saicManagerRoutes);

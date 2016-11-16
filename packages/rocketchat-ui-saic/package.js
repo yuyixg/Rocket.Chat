@@ -33,10 +33,9 @@ Package.onUse(function (api) {
   api.use('tracker');
   api.use('less');
 
-  api.addFiles('client/collections/Tasks.js', 'client');
   //clinet
-  api.addFiles('client/templates/includes/taskFlex.html', 'client');
-  api.addFiles('client/templates/includes/taskFlex.js', 'client');
+  api.addFiles('client/templates/includes/saicFlex.html', 'client');
+  api.addFiles('client/templates/includes/saicFlex.js', 'client');
 
   api.addFiles('client/router.js', 'client');
   api.addFiles('client/ui.js', 'client');
@@ -50,14 +49,16 @@ Package.onUse(function (api) {
 
   api.addFiles('client/templates/issue/index.html', 'client');
   api.addFiles('client/templates/issue/index.js', 'client');
+
+   api.addFiles('client/templates/knowledge/index.html', 'client');
+  api.addFiles('client/templates/knowledge/index.js', 'client');
   //server
-  api.addFiles('server/models/posts.js', 'server');
 
   // api.addFiles('lib/router.js', 'server');
   //api.addFiles('server/main.js', 'server');
   api.addFiles('server/publications.js', 'server');
   api.addFiles('server/publications/tasks.js', 'server');
-
+  api.addFiles('server/publications/knowledge.js', 'server');
 
 });
 

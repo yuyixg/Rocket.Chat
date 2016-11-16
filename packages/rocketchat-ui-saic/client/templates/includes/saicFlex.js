@@ -1,4 +1,4 @@
-Template.taskFlex.helpers({
+Template.saicFlex.helpers({
 	active(...routes) {
 		FlowRouter.watchPathChange();
 		if (routes.indexOf(FlowRouter.current().route.name) !== -1) {
@@ -7,7 +7,7 @@ Template.taskFlex.helpers({
 	}
 });
 
-Template.taskFlex.events({
+Template.saicFlex.events({
 	'mouseenter header'() {
 		SideNav.overArrow();
 	},
