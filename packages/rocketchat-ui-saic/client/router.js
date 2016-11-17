@@ -5,7 +5,7 @@ saicManagerRoutes = FlowRouter.group({
 
 AccountBox.addRoute({
     name: 'knowledge-index',
-    path: '/index',
+    path: '/knowledgeindex',
     sideNav: 'saicFlex',
     i18nPageTitle: '知识库',
     pageTemplate: 'knowledgeindex'
@@ -18,6 +18,31 @@ AccountBox.addRoute({
     i18nPageTitle: '移动运营',
     pageTemplate: 'tasksList'
 }, saicManagerRoutes);
+
+AccountBox.addRoute({
+    name: 'issue-index',
+    path: '/issueindex',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '我的提问',
+    pageTemplate: 'issueindex'
+}, saicManagerRoutes);
+AccountBox.addRoute({
+    name: 'issue-create',
+    path: '/issuecreate',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '新建问题',
+    pageTemplate: 'issueSubmit'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
+    name: 'issue-edit',
+    path: '/issueedit/:_id',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '编辑问题',
+    pageTemplate: 'issueSubmit'
+}, saicManagerRoutes);
+
+
 
 AccountBox.addRoute({
     name: 'createtask',

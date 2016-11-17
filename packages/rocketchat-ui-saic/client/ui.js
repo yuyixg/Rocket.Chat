@@ -1,6 +1,6 @@
 AccountBox.addItem({
-	name: 'task-list',
+	name: '移动运营',
 	icon: 'icon-chat-empty',
-	href: 'task-list',
+	href: 'knowledge-index',
 	sideNav: 'saicFlex'
 });
