@@ -3,6 +3,23 @@ saicManagerRoutes = FlowRouter.group({
     name: 'task-manager'
 });
 
+
+AccountBox.addRoute({
+    name: 'itinfo-index',
+    path: '/itinfo/index',
+    sideNav: 'saicFlex',
+    i18nPageTitle: 'IT信息栏/公告栏',
+    pageTemplate: 'itinfoindex'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
+    name: 'itinfo-detail',
+    path: '/itinfo/index/:_id',
+    sideNav: 'saicFlex',
+    //i18nPageTitle: 'IT信息栏Detail',
+    pageTemplate: 'itinfodetail'
+}, saicManagerRoutes);
+
 AccountBox.addRoute({
     name: 'knowledge-index',
     path: '/index',
