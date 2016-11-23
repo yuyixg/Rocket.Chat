@@ -77,6 +77,9 @@ Package.onUse(function (api) {
 
    api.addFiles('client/templates/knowledge/index.html', 'client');
   api.addFiles('client/templates/knowledge/index.js', 'client');
+
+  api.addFiles('client/templates/itinfo/index.html', 'client');
+  api.addFiles('client/templates/itinfo/index.js', 'client');
   //server
 
   // api.addFiles('lib/router.js', 'server');
@@ -84,7 +87,12 @@ Package.onUse(function (api) {
   api.addFiles('server/publications.js', 'server');
   api.addFiles('server/publications/tasks.js', 'server');
   api.addFiles('server/publications/knowledge.js', 'server');
+<<<<<<< HEAD
      api.addFiles('server/publications/fileupload.js', 'server');
+=======
+  api.addFiles('server/publications/itinfo.js', 'server');
+
+>>>>>>> 1e85de2fd71d560908b7982c477ac088f35c2a83
 
 });
 
