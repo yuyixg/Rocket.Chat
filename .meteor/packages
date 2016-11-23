@@ -168,5 +168,5 @@ shira:pagination
 reneberwanger:bootstrap-table
 cfs:http-methods
 wenzhixin:bootstrap-table
-tomi:upload-jquery
-tomi:upload-server
+czbaker:lightbox2
+saic:upload-jquery
