@@ -4,16 +4,21 @@ Template.issueSubmit.onRendered(function () {
   $('.main-content').css("right", "0px");
 
   var _id = FlowRouter.getParam('_id');
+  //当点击分类时候弹出
+  $('#category').click(function () {
+    var texttree = $('#treecategory').prop('outerHTML');
+    console.log(texttree)
+    //处理代码 
 
-  $('.jqUploadclass').bind('fileuploadsubmit', function (e, data) {
-    // The example input, doesn't have to be part of the upload form:
-    var input = $('#input');
-    console.log(data.files);
-    console.log(data);
-    var content = '<a id="a"><b id="b">hey!</b></a>'; // the body of the new file...
-
-    console.log(data);
   });
+
+
+
+  $('.jqUploadclass').fileupload(
+    'option',
+    'redirect',
+    'http://localhost:3000/fileupoadresult?%s'
+  );
 
   $('#imagetable').bootstrapTable({
     uniqueId: 'id',
@@ -53,6 +58,20 @@ Template.issueSubmit.helpers({
   imageuploadCallbacks: function () {
     return {
       finished: function (index, fileInfo, content) {
+        if (!fileInfo.error) {
+          var url = Uploader.uploadUrl + fileInfo.path + fileInfo.name;
+          var file = { id: fileInfo.size, name: fileInfo.name, url: url }
+          $('#imagetable').bootstrapTable("append", file);
+        }
+        else {
+
+          swal({
+            title: "上传出错",
+            type: 'error',
+
+            text: fileInfo.error
+          });
+        }
         console.log(fileInfo);
       }
     }
@@ -78,44 +97,8 @@ Template.issueSubmit.events({
 
       reader.onload = function (e) {
 
-        text = "<div class='upload-preview'>\n	<audio  style=\"width: 100%;\" controls=\"controls\">\n		<source src=\"" + e.target.result + "\" type=\"audio/wav\">\n		Your browser does not support the audio element.\n	</audio>\n</div>\n<div class='upload-preview-title'>我的录音.war</div>";
-        swal({
-          title: "是否确定上传此录音?",
-          text: text,
-          html: true,
-          showCancelButton: true,
-          confirmButtonColor: "#DD6B55",
-          confirmButtonText: "我确认上传",
-          cancelButtonText: "取消",
-          closeOnConfirm: false,
-          closeOnCancel: false
-        },
-          function (isConfirm) {
-            if (isConfirm) {
-         
-              var filelist = new Array();
-              var file = new File([blob], 'my.wav', {
-                lastModified: new Date(), // optional - default = now
-                type: "audio/wav" // optional - default = ''
-              });
-              filelist.push(file);
-
-              $('.jqUploadclass').fileupload('send', { files: filelist })
-              .success(function(result,textStatus,jqXHR){
-                 swal("成功", "您的录音已经成功上传.", "success");
-              })
-              .error(function(result,textStatus,jqXHR){
-               console.log(result);
-                swal("失败", "您的录音已经成功上传.", "error");
-              })
-              .complete(function(result,textStatus,jqXHR){
-             
-              });
-             
-            } else {
-              swal("取消", "您的上传已经被取消 :)", "error");
-            }
-          });
+        text = "<div class='upload-preview'>\n	<audio  style=\"width: 100%;\" controls=\"controls\">\n		<source id='audiosource' src=\"" + e.target.result + "\" type=\"audio/wav\">\n		Your browser does not support the audio element.\n	</audio>\n</div>";
+        $("#micRecord").html(text);
       }
       reader.readAsDataURL(blob);
     });
@@ -125,6 +108,7 @@ Template.issueSubmit.events({
   'submit form': function (e) {
     e.preventDefault();
     console.log($('#imagetable').bootstrapTable("getData"));
+    console.log($('#audiosource')[0].src);
     return null;
     var postAttributes = {
       url: $(e.target).find('[name=url]').val(),
