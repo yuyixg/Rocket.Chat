@@ -23,10 +23,7 @@ function gettime(format) {
     return format;
 }
 
-Meteor.startup(()=>
-    {
-        
-    })
+
 
 
 
