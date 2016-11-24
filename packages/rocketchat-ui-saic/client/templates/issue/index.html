@@ -1,5 +1,41 @@
 <template name="issueindex">
-    	<a href="{{pathFor 'issue-create'}}" class="button primary">我要提问</a>
-<table id="issuetable">
-</table>
+
+	<form id="formSearch" class="form-horizontal">
+		<div class="form-group" style="margin-top:0px">
+			<label class="control-label col-sm-1" for="txt_search_departmentname">状态</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="txt_search_departmentname">
+			</div>
+			<label class="control-label col-sm-1" for="txt_search_statu">标题</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="txt_search_statu">
+			</div>
+			<div class="col-sm-4" style="text-align:left;">
+				<button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+			</div>
+		</div>
+		<div id="toolbar" class="btn-group">
+
+			<a href="{{pathFor 'issue-create'}}" class="btn btn-default">我要提问</a>
+
+		</div>
+		<script>
+			function queryParams(params) {  //配置参数  
+    var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的  
+      pageSize: params.limit,   //页面大小  
+      pageNumber: params.pageNumber,  //页码  
+        
+      sort: params.sort,  //排序列名  
+      sortOrder: params.order//排位命令（desc，asc）  
+    };  
+    return temp;  
+  }  
+		</script>
+		<table id="issuetable">
+		</table>
+
+	</form>
+
+
+
 </template>

@@ -3,46 +3,47 @@
 		<div class="rocket-form">
 			<fieldset>
 				<div class="input-line">
-					<label>问题类别</label>
 					<div>
-						<input type="text" name="title" id="title" placeholder="{{_ " Name "}}" />
+						<input type="text" name="title" id="category" placeholder="问题类别" />
 					</div>
 				</div>
 				<div class="input-line">
-					<label>问题标题</label>
 					<div>
-						<input type="text" name="title" id="title" placeholder="{{_ " Name "}}" />
+						<input type="text" name="title" id="title" placeholder="问题标题" />
 					</div>
 				</div>
 				<div class="input-line">
-					<label>问题内容</label>
 					<div>
-						<textarea name="url" class="form-control" id="url" rows="5"></textarea>
+						<textarea name="url" class="form-control" placeholder="问题内容" id="url" rows="5"></textarea>
 					</div>
 				</div>
+				<div class="input-line">
+					<label>录音</label>
 
-				<div class="input-line">
-					<div  class="input-line double-col" >
-					<label style="text-align:left">文件</label>
 					<div class="message-buttons">
-							<div class="mic">
-								<i class="icon-mic" style="font-size:20px" aria-label="{{_ " Record "}}"></i>
-							</div>
-							<div class="stop-mic hidden">
-								<i class="icon-stop" style="font-size:20px" aria-label="{{_ " Stop_Recording "}}"></i>
-							</div>
+						<div class="mic">
+							<i class="icon-mic" style="font-size:20px" aria-label="{{_ " Record "}}"></i>
 						</div>
+						<div class="stop-mic hidden">
+							<i class="icon-stop" style="font-size:20px" aria-label="{{_ " Stop_Recording "}}"></i>
 						</div>
-					<div>
-						
-						{{>upload_bootstrap multiple=true callbacks=imageuploadCallbacks}}
+						<div id="micRecord">
+						</div>
 					</div>
+
+					<div>
+					</div>
+				</div>
+				<div class="input-line">
+
+					<label style="text-align:left">文件</label> {{>upload_bootstrap multiple=true callbacks=imageuploadCallbacks}}
+
 				</div>
 				<table id="imagetable">
 
 				</table>
 			</fieldset>
-		
+
 			<div class="submit">
 				<button type="button" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
 				<button class="button save"><i class="icon-floppy"></i><span>{{_ "Save"}}</span></button>
@@ -51,7 +52,7 @@
 		</div>
 		<script>
 			//Uploader.uploadUrl='http://10.90.224.185:8080/mmt-web/a/file/upload/knowledge';
-		Uploader.uploadUrl="http://localhost:3000/uploadimages/";
+		Uploader.uploadUrl="http://10.64.20.165:8080/mmt-web/f/file/upload/knowledge";
 		//	document.domain = "http://10.90.224.185";
 			function deleteissue(id) {
               console.log(id);
