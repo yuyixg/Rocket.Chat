@@ -72,10 +72,10 @@ Package.onUse(function (api) {
 
   api.addFiles('client/templates/issue/index.html', 'client');
   api.addFiles('client/templates/issue/index.js', 'client');
-    api.addFiles('client/templates/issue/issue_submit.html', 'client');
+  api.addFiles('client/templates/issue/issue_submit.html', 'client');
   api.addFiles('client/templates/issue/issue_submit.js', 'client');
 
-   api.addFiles('client/templates/knowledge/index.html', 'client');
+  api.addFiles('client/templates/knowledge/index.html', 'client');
   api.addFiles('client/templates/knowledge/index.js', 'client');
 
   api.addFiles('client/templates/itinfo/index.html', 'client');
@@ -87,6 +87,7 @@ Package.onUse(function (api) {
   api.addFiles('server/publications.js', 'server');
   api.addFiles('server/publications/tasks.js', 'server');
   api.addFiles('server/publications/knowledge.js', 'server');
+  api.addFiles('server/publications/fileupload.js', 'server');
   api.addFiles('server/publications/itinfo.js', 'server');
 
 
