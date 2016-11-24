@@ -23,21 +23,7 @@ function gettime(format) {
     return format;
 }
 
-Meteor.startup(()=>
-    {
-        UploadServer.init({
-            tmpDir: '/app/uploads/tmp',
-            uploadDir: '/app/uploads/',
-            checkCreateDirectories: true,//create the directories for you
-            getDirectory: function (fileInfo, formData) {
-                var time = gettime('yyyyMMdd');
-                console.log(time);
-                // create a sub-directory in the uploadDir based on the content type (e.g. 'images')
-                return time + '/';
-            },
-        });
 
-    })
 
 
 
