@@ -13,6 +13,29 @@ Package.describe({
 //"soap" : "0.12.0",
 //"fibers" : "1.0.15"
 //});
+
+function gettime(format) {
+  var d = new Date();
+  var date = {
+    "M+": d.getMonth() + 1,
+    "d+": d.getDate(),
+    "h+": d.getHours(),
+    "m+": d.getMinutes(),
+    "s+": d.getSeconds(),
+    "q+": Math.floor((d.getMonth() + 3) / 3),
+    "S+": d.getMilliseconds()
+  };
+  if (/(y+)/i.test(format)) {
+    format = format.replace(RegExp.$1, (d.getFullYear() + '').substr(4 - RegExp.$1.length));
+  }
+  for (var k in date) {
+    if (new RegExp("(" + k + ")").test(format)) {
+      format = format.replace(RegExp.$1, RegExp.$1.length == 1
+        ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+    }
+  }
+  return format;
+}
 Package.onUse(function (api) {
   api.use(['webapp', 'autoupdate'], 'server');
   api.use('ecmascript');
@@ -49,12 +72,18 @@ Package.onUse(function (api) {
 
   api.addFiles('client/templates/issue/index.html', 'client');
   api.addFiles('client/templates/issue/index.js', 'client');
+  api.addFiles('client/templates/issue/issue_submit.html', 'client');
+  api.addFiles('client/templates/issue/issue_submit.js', 'client');
 
   api.addFiles('client/templates/knowledge/index.html', 'client');
   api.addFiles('client/templates/knowledge/index.js', 'client');
 
   api.addFiles('client/templates/knowledge/manager/index.html', 'client');
   api.addFiles('client/templates/knowledge/manager/index.js', 'client');
+
+  api.addFiles('client/templates/itinfo/index.html', 'client');
+  api.addFiles('client/templates/itinfo/index.js', 'client');
+
   //server
 
   // api.addFiles('lib/router.js', 'server');
@@ -62,7 +91,12 @@ Package.onUse(function (api) {
   api.addFiles('server/publications.js', 'server');
   api.addFiles('server/publications/tasks.js', 'server');
   api.addFiles('server/publications/knowledge.js', 'server');
+
   api.addFiles('server/publications/manager.js', 'server');
+
+  api.addFiles('server/publications/fileupload.js', 'server');
+  api.addFiles('server/publications/itinfo.js', 'server');
+
 
 });
 
