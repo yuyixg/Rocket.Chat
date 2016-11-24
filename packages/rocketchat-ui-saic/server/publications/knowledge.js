@@ -2,7 +2,7 @@ HTTP.methods(
   {
     '/knowledge/getlist': {
       post: function (data) {
-      //  console.log(data);
+       //  console.log(data);
         var postdata={
               title: "",
               page: {

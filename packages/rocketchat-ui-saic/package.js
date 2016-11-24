@@ -50,8 +50,11 @@ Package.onUse(function (api) {
   api.addFiles('client/templates/issue/index.html', 'client');
   api.addFiles('client/templates/issue/index.js', 'client');
 
-   api.addFiles('client/templates/knowledge/index.html', 'client');
+  api.addFiles('client/templates/knowledge/index.html', 'client');
   api.addFiles('client/templates/knowledge/index.js', 'client');
+
+  api.addFiles('client/templates/knowledge/manager/index.html', 'client');
+  api.addFiles('client/templates/knowledge/manager/index.js', 'client');
   //server
 
   // api.addFiles('lib/router.js', 'server');
@@ -59,6 +62,7 @@ Package.onUse(function (api) {
   api.addFiles('server/publications.js', 'server');
   api.addFiles('server/publications/tasks.js', 'server');
   api.addFiles('server/publications/knowledge.js', 'server');
+  api.addFiles('server/publications/manager.js', 'server');
 
 });
 

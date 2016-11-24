@@ -19,7 +19,7 @@ ejson@1.0.13
 email@1.1.18
 fastclick@1.0.13
 http@1.2.10
-jquery@1.11.10
+jquery
 less@2.7.6
 logging@1.1.16
 meteor-base@1.0.4
@@ -169,3 +169,4 @@ reneberwanger:bootstrap-table
 cfs:http-methods
 wenzhixin:bootstrap-table
 tomi:upload-jquery
+cloudspider:icheck

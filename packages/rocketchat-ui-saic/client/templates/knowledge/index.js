@@ -45,7 +45,10 @@ Template.knowledgeindex.onRendered(function () {
                 field: 'updateDate',
                 title: '更新时间'
             } 
-            ]
+            ],
+            formatLoadingMessage: function () {
+		return "请稍等，正在加载中...";
+	}
         });
 
 });
