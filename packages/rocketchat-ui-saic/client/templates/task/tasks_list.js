@@ -2,8 +2,6 @@ Template.tasksList.helpers({
   tasks: function () {
     // var task = Tasks.find();
     // console.log(task);
-
-    console.log(ShiraPagination.data());
     var result = Meteor.call('taskgetAll', function (error, result) {
       if (error) {
         return handleError(error);
