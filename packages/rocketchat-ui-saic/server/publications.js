@@ -1,5 +1,5 @@
 import { HTTP } from 'meteor/http';
-ServerURL='http://10.64.20.165:8080/';
+mmtServerURL='http://10.64.20.165:8080/';
 
 
 
