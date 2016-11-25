@@ -19,7 +19,7 @@ HTTP.methods(
        var datalist;
        if (data.listid==1) {
           datalist=[
-            {"id":1, "title":"test1","categoryNames":"DMS","author":"me","publishFlagName":"审核", "updateDate": 2016-11-01 },
+            {"id":1, "title":" 保值率排行：大众卫冕 德系车整体居高 ","categoryNames":"DMS","author":"me","publishFlagName":"审核", "updateDate": 2016-11-01 },
             {"id":2, "title":"test2","categoryNames":"DMS","author":"me","publishFlagName":"审核", "updateDate": 2016-11-01 },
             {"id":3, "title":"test3","categoryNames":"DMS","author":"me","publishFlagName":"审核", "updateDate": 2016-11-01 },
             {"id":4, "title":"test4","categoryNames":"DMS","author":"me","publishFlagName":"审核", "updateDate": 2016-11-01 },
@@ -83,7 +83,7 @@ Meteor.methods(
 
 
            var resultdata = [
-            {"id":1,"title":"test1", "description":"this is a test", "updateDate": 2016-11-01}];
+            {"id":1,"title":"保值率排行：大众卫冕 德系车整体居高", "description":"近日，中国汽车保值率研究委员会发布了一组最新“中国汽车保值率”数据。数据表明，微型、小型车市场呈现萎缩，保值率走低;在紧凑型车中，德系车保值率成交抢眼，保值率具有领先优势;中型车日系车成绩略有提升，与德系车势力旗鼓相当;中大型车市场逐渐打开，保值率整体有显著提高。综合数据来看，德系车仍是保值率榜单上占据绝对优势，其中大众旗下品牌依旧为榜单最大赢家。 基于政策的优势，二手车活跃程度愈加提升。随着全国约200个城市陆续取消限迁，各细分市场保值率均有所提升。截至今年9月，乘用车二手车的平均交易价格由年初的9.05万元上升至9.19万元。在七大细分市场车龄3年品牌保值率前三名的数据中，德系车占据9个席位，其中有7个均为大众旗下品牌，可见大众品牌在中国市场拥有良好的口碑和广泛的消费人群。", "updateDate": 2016-11-01}];
         console.log(resultdata);
         return resultdata;
       }  
