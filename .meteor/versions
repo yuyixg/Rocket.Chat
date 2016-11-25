@@ -225,7 +225,6 @@ service-configuration@1.0.11
 session@1.1.7
 sha@1.0.9
 shell-server@0.2.1
-shira:pagination@0.0.5
 simple:highlight.js@1.2.0
 simple:json-routes@2.1.0
 smoral:sweetalert@1.1.1
@@ -244,7 +243,6 @@ tmeasday:crypto-base@3.1.2
 tmeasday:crypto-md5@3.1.2
 todda00:friendly-slugs@0.6.0
 tracker@1.1.1
-twbs:bootstrap@3.3.6
 twitter@1.1.13
 ui@1.0.12
 underscore@1.0.10
