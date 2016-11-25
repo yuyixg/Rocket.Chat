@@ -159,3 +159,14 @@ body {
   margin-bottom: 5px;
   pointer-events: auto;
 }
+
+#demo{
+  border:1px dashed #666666
+  
+}
+
+.submit{
+  margin:0 auto;
+    width: 80px;
+     vertical-align: middle;
+}

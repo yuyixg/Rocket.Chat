@@ -1,0 +1,41 @@
+<template name="knowledgemanage">  
+<script>
+ function queryParams(params) {  //配置参数
+		var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+			pageSize: params.limit,   //页面大小
+			pageNumber: $(this).pageNumber,  //页码
+      listid:$("#mylist li.active a").attr('id'),
+			sort: params.sort,  //排序列名
+			sortOrder: params.order//排位命令（desc，asc）
+		};
+		return temp;
+	}
+</script>
+<div class="tab-content">
+  <div class="tab-pane active"><ul id="mylist" class="nav nav-pills">
+ <li ><a id="1">DMS</a></li>
+  <li><a  id="2">SAP</a></li> 
+  <li><a  id="3">EP</a></li>
+  <li><a  id="4">FDAPP</a></li>
+  <li><a id="5">同行</a></li>
+  <li><a id="6">Portal站点</a></li>
+  <li><a  id="7">TCE</a></li>
+</ul> </div>
+</div>
+  <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">
++
+</button>
+<div id="demo" class="collapse">
+    
+</div>
+
+<div>
+<table id="KMtable" style=" overflow:outo">
+</table>
+</div>
+</template>
+
+<template name="knowledgedetail">
+    <header><h2 id="title">detail</h2></header>
+   <label id="detail">detail</label>
+</template>

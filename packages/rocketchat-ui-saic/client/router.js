@@ -29,6 +29,22 @@ AccountBox.addRoute({
 }, saicManagerRoutes);
 
 AccountBox.addRoute({
+    name: 'knowledge-manager-index',
+    path: '/knowledge/manager/index',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '知识查询',
+    pageTemplate: 'knowledgemanage'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
+    name: 'knowledge-manager-index',
+    path: '/knowledge/manager/index/:_id',
+    sideNav: 'saicFlex',
+    //i18nPageTitle: '知识Manage',
+    pageTemplate: 'knowledgedetail'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
     name: 'task-list',
     path: '/task-list',
     sideNav: 'saicFlex',
