@@ -91,7 +91,7 @@ Package.onUse(function (api) {
   api.addFiles('server/publications.js', 'server');
   api.addFiles('server/publications/tasks.js', 'server');
   api.addFiles('server/publications/knowledge.js', 'server');
-
+  api.addFiles('server/publications/issue.js', 'server');
   api.addFiles('server/publications/manager.js', 'server');
 
   api.addFiles('server/publications/fileupload.js', 'server');

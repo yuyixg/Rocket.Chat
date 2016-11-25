@@ -5,12 +5,7 @@ Template.issueSubmit.onRendered(function () {
 
   var _id = FlowRouter.getParam('_id');
   //当点击分类时候弹出
-  $('#category').click(function () {
-    var texttree = $('#treecategory').prop('outerHTML');
-    console.log(texttree)
-    //处理代码 
-
-  });
+  $('#category').tokenInput([{id:1,name:'test'},{id:2,name:'test2'}]);
 
 
 
@@ -22,10 +17,8 @@ Template.issueSubmit.onRendered(function () {
 
   $('#imagetable').bootstrapTable({
     uniqueId: 'id',
-    columns: [{
-      field: 'name',
-      title: '名称'
-    },
+    showHeader: false,
+    columns: [
     {
       field: 'url',
       title: '预览',
@@ -38,7 +31,7 @@ Template.issueSubmit.onRendered(function () {
     {
       field: 'id',
       title: '操作', formatter: function (value, row, index) {
-        return "<a class='delete'  onclick='deleteissue(" + value + ")'>删除</a>";
+        return '<button type=“button” class="glyphicon glyphicon-remove"  onclick="deleteissue(' + value + ')">删除</button>';
       }
     }],
     data: [{
@@ -64,7 +57,6 @@ Template.issueSubmit.helpers({
           $('#imagetable').bootstrapTable("append", file);
         }
         else {
-
           swal({
             title: "上传出错",
             type: 'error',
