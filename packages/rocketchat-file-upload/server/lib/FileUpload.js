@@ -9,7 +9,7 @@ FileUpload.addHandler = function(store, handler) {
 
 FileUpload.delete = function(fileId) {
 	let file = RocketChat.models.Uploads.findOneById(fileId);
-
+ 
 	if (!file) {
 		return;
 	}

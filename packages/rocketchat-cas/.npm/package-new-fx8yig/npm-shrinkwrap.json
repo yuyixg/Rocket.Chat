@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "cas": {
-      "version": "git+https://github.com/kcbanner/node-cas#fcd27dad333223b3b75a048bce27973fb3ca0f62"
-    }
-  }
-}

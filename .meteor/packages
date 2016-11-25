@@ -164,12 +164,11 @@ yasaricli:slugify
 yasinuslu:blaze-meta
 deepwell:bootstrap-datepicker2
 rocketchat:ui-saic
-shira:pagination
 reneberwanger:bootstrap-table
 cfs:http-methods
 wenzhixin:bootstrap-table
 cloudspider:icheck
-tomi:upload-server
 chart:chart
 czbaker:lightbox2
 saic:upload-jquery
+bootstrap
