@@ -18,7 +18,7 @@ Template.knowledgemanage.onRendered(function () {
             pageNumber:1,                       //初始化加载第一页，默认第一页
             pageSize: 8,                       //每页的记录行数（*）
             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             strictSearch: true,
             showColumns: false,                  //是否显示所有的列
             showRefresh: true,                  //是否显示刷新按钮
@@ -27,9 +27,11 @@ Template.knowledgemanage.onRendered(function () {
             height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
             uniqueId: "id",                     //每一行的唯一标识pagination，一般为主键列
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
-            cardView: false,                    //是否显示详细视图
+            cardView: false, 
+             showHeader: false,                   //是否显示详细视图
             detailView: false,                   //是否显示父子表            
-            columns: [ {
+            columns: [ 
+                /*{
                 field: 'title',
                 title: '知识标题'
             },  
@@ -57,12 +59,21 @@ Template.knowledgemanage.onRendered(function () {
                 var e = '<a href="/saic/knowledge/manager/index/'+row.id+'">查看</a>'; 
                 return e;  
             }
-            } 
-            ]      
+            } */
+            {
+                 field: 'id',
+                formatter:function(value,row,index){  
+               var e = '<a href="/saic/knowledge/manager/index/'+row.id+'">'+row.title+'</a>'; 
+                return e;  
+              }
+            }
+            ],      
+             formatLoadingMessage: function () {
+		     return "请稍等，正在加载中...";
+            }
         });
   
    $("a").on("click", function() {  
-   //id=$(this).attr('id');  
    $(this).parent("#mylist li").attr('class','active'); 
    $(this).parent("li").siblings().attr('class','');
   $("#KMtable").bootstrapTable('refresh');
@@ -76,9 +87,9 @@ Template.knowledgemanage.onRendered(function () {
       }   
 
        $.each(result,function(idx,item){ 
-                $('#demo').append("<div>");
+          $('#demo').append("<div>");
           $('#demo').append("<label style='margin-right:12px;color:#54b4dd' id="+item.parentid+"> "+item.name+"</label>");
-         $.each(item.child,function(idx,item){ 
+           $.each(item.child,function(idx,item){ 
           $('#demo').append("<label style='margin-right:12px'>  <input type='checkbox' id="+item.id+"> "+item.title+"</label>");
         
      }    
