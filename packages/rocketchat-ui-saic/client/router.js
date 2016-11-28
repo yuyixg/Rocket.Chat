@@ -53,6 +53,14 @@ AccountBox.addRoute({
 }, saicManagerRoutes);
 
 AccountBox.addRoute({
+    name: 'task-list-type',
+    path: '/task-list/:_type',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '移动运营',
+    pageTemplate: 'tasksList'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
     name: 'issue-index',
     path: '/issueindex',
     sideNav: 'saicFlex',

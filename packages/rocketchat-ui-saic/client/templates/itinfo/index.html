@@ -2,10 +2,28 @@
    
     <table id="itinfotable">
     </table>
-<div>
-<div id="chartLegend"></div>
-<canvas id="myChart" width="200" height="200"></canvas>
+
+
+<div id="chartLegend"  style="float:left"></div>
+<div> 
+<canvas id="myChart" ></canvas>
 </div>
+
+<script>
+
+ //width="200" height="200" 
+			function queryParams(params) {  //配置参数  
+			   var querydata = {
+          page: {
+            "pageNo": params.offset/params.limit+1,
+            "pageSize":params.limit,
+            "orderBy": "update_date"
+          }
+        };
+
+    return querydata;  
+  }  
+		</script>
 </template>
 
 

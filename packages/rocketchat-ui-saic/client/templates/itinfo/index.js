@@ -9,7 +9,7 @@ Template.itinfoindex.onRendered(function () {
       pagination: false,                   //是否显示分页（*）
       sortable: true,                     //是否启用排序
       sortOrder: "asc",                   //排序方式
-      //queryParams: queryParams,//传递参数（*）
+      queryParams: queryParams,//传递参数（*）
       sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
       pageNumber: 1,                       //初始化加载第一页，默认第一页
       pageSize: 3 ,                       //每页的记录行数（*）
@@ -20,7 +20,7 @@ Template.itinfoindex.onRendered(function () {
       showRefresh: false,                  //是否显示刷新按钮
       minimumCountColumns: 2,             //最少允许的列数
       clickToSelect: true,                //是否启用点击选中行
-      height: 200,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+      //height: 200,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
       uniqueId: "id",                     //每一行的唯一标识pagination，一般为主键列
       showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
       cardView: false,                    //是否显示详细视图
@@ -152,14 +152,27 @@ Template.itinfoindex.onRendered(function () {
   };
 
   var myChart = new Chart(ctx).Pie(data, defaults);
-  //alert(myChart.generateLegend());
+  $("#chartLegend").append(myChart.generateLegend());
+  //$("#chartLegend").width($("#myChart").width());
+  //$("#chartLegend").css("padding", "0 auto"); 
+  //$("#parentDiv").css("align", "center");
+  //$("#chartLegend").css("margin", "0 auto");   
+
 
   $("#myChart").click( 
     function(evt){
         var activePoints = myChart.getSegmentsAtEvent(evt);  
-        alert(activePoints[0]["label"] + ":"+ activePoints[0]["value"]);      
-        //FlowRouter.go('task-edit', { _id: this._id });
-        /* do something */
+        //alert(activePoints[0]["label"] + ":"+ activePoints[0]["value"]); 
+        var typeName = activePoints[0]["label"];
+        var typeid = 0;
+        if(typeName == "处理中")
+          typeid = 1;
+        else if(typeName == "已答复")
+          typeid = 2;
+        else if(typeName == "已完成")
+          typeid = 3;
+
+        FlowRouter.go('task-list-type', { _type: typeid });
     }
 );  
 
