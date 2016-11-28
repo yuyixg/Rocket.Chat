@@ -2,6 +2,9 @@ Template.knowledgeindex.onRendered(function () {
  $('.flex-tab-bar').css("width","0px");
   $('.main-content').css("right","0px");
    var id; 
+   
+
+
  $("#mylist li:first-child").attr('class','active');
     $('#KMtable').bootstrapTable({
             url:'/getknowledgeList',
@@ -50,18 +53,17 @@ Template.knowledgeindex.onRendered(function () {
   $("#KMtable").bootstrapTable('refresh');
 });   
 
-      Meteor.call("getcategorybyid", null, function (error, result) {
+      Meteor.call("getallcategory", function (error, result) {
       // 向用户显示错误信息并终止
       if (error) {
-        console.log(error);
         return alert(error.reason);
       }   
 
        $.each(result,function(idx,item){ 
           $('#knowledgeList').append("<div>");
-          $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' id="+item.parentid+"> "+item.name+"</label>");
-           $.each(item.child,function(idx,item){ 
-          $('#knowledgeList').append("<label style='margin-right:12px'>  <input type='checkbox' id="+item.id+"> "+item.title+"</label>");
+          $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' id="+item.id+"> "+item.name+"</label>");
+           $.each(item.children,function(idx,item){ 
+          $('#knowledgeList').append("<label style='margin-right:12px'>  <input type='checkbox' id="+item.id+"> "+item.name+"</label>");
         
      }    
      );
@@ -69,9 +71,17 @@ Template.knowledgeindex.onRendered(function () {
 
 
  })
-          $('#knowledgeList').append("<br/><div class='submit'><button class='button save'><i class='icon-floppy'></i><span>Save</span></button></div>");
+          $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>Save</span></button></div>");
 
     });
+   // alert($("#save").value);
+$("#save").click( 
+    function(e){
+   // var arrChk=$("input[name='checkbox'][checked]");
+  //  $(arrChk).each(function(){
+       alert("a");                       
+    //});
+});
 
 });
         
@@ -110,3 +120,6 @@ Template.knowledgedetail.onDestroyed(function () {
        $('.main-content .fixed-title').css("height","");
 });
 
+//Template.knowledgeindex.events({
+
+//});
