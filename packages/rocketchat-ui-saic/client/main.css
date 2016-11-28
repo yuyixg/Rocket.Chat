@@ -110,6 +110,7 @@ div.token-input-dropdown-facebook ul li.token-input-dropdown-item2-facebook {
     background-color: #fff;
 }
 
+<<<<<<< HEAD
 div.token-input-dropdown-facebook ul li em {
     font-weight: bold;
     font-style: normal;
@@ -118,4 +119,26 @@ div.token-input-dropdown-facebook ul li em {
 div.token-input-dropdown-facebook ul li.token-input-selected-dropdown-item-facebook {
     background-color: #3b5998;
     color: #fff;
+=======
+#knowledgeList{
+  border:1px dashed #666666
+  
+}
+
+.submit{
+  margin:0 auto;
+    width: 80px;
+     vertical-align: middle;
+}
+
+.pie-legend li{
+    /*float:left;  向左漂移，将竖排变为横排display:*/    
+}
+
+.pie-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+>>>>>>> 60ff0976be2e21b16b14a2a0ab8c48df59581c26
 }
