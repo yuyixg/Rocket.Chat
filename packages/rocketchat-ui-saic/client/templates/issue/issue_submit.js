@@ -5,44 +5,48 @@ Template.issueSubmit.onRendered(function () {
 
   var _id = FlowRouter.getParam('_id');
   //当点击分类时候弹出
-  $('#category').tokenInput([{id:1,name:'test'},{id:2,name:'test2'}]);
+  $('#category').tokenInput('/issue/getcategory',{  
+        theme: "facebook",  
+        hintText: "请输入需要填写的系统。",//中文字时候需要输入空格。  
+        noResultsText: "没有结果。",  
+        searchingText: "查询中..." ,
+        tokenLimit:1  ,
+        method:'POST'     
+    });
 
 
-
+  var hosturl = 'http://' + window.location.host;
+  console.log(hosturl);
   $('.jqUploadclass').fileupload(
     'option',
     'redirect',
-    'http://localhost:3000/fileupoadresult?%s'
+    hosturl + '/fileupoadresult?%s'
   );
 
   $('#imagetable').bootstrapTable({
-    uniqueId: 'id',
+    uniqueId: 'name',
     showHeader: false,
     columns: [
-    {
-      field: 'url',
-      title: '预览',
-      formatter: function (value, row, index) {
-        var image = '<a href="' + value + '" data-lightbox="image1"><img style="width:100px;height:60px" src="' + value + '" /></a>';
-        return image;
-      }
+      {
+        field: 'url',
+        title: '预览',
+        formatter: function (value, row, index) {
+          var image = '<a href="' + value + '" data-lightbox="image1"><img style="width:100px;height:60px" src="' + value + '" /></a>';
+          return image;
+        }
 
-    },
-    {
-      field: 'id',
-      title: '操作', formatter: function (value, row, index) {
-        return '<button type=“button” class="glyphicon glyphicon-remove"  onclick="deleteissue(' + value + ')">删除</button>';
-      }
-    }],
+      },
+      {
+        field: 'name',
+        title: '操作', formatter: function (value, row, index) {
+          return '<a href="javascript:void(0)"  class="glyphicon glyphicon-remove"  onclick="deleteissue(&quot;' + value + '&quot;)" >删除</a>';
+        }
+      }],
     data: [{
-      id: 1,
       name: 'Item 1',
-      price: '$1',
       url: 'http://lokeshdhakar.com/projects/lightbox2/images/image-2.jpg'
     }, {
-      id: 2,
       name: 'Item 2',
-      price: '$2',
       url: 'http://lokeshdhakar.com/projects/lightbox2/images/image-1.jpg'
     }]
   });
@@ -97,37 +101,27 @@ Template.issueSubmit.events({
     t.$('.stop-mic').addClass('hidden');
     return t.$('.mic').removeClass('hidden');
   },
-  'submit form': function (e) {
+  'click button.save': function (e) {
     e.preventDefault();
     console.log($('#imagetable').bootstrapTable("getData"));
-    console.log($('#audiosource')[0].src);
-    return null;
-    var postAttributes = {
-      url: $(e.target).find('[name=url]').val(),
-      title: $(e.target).find('[name=title]').val()
+    var issueAttributes = {
+      category: { id: $('#category').val() },
+      title: $(e.target).find('[name=title]').val(),
+      description:$(e.target).find('[name=description]').val(),
+      processFlag: "0",
+      "remarks": ""
     };
     var _id = FlowRouter.getParam('_id');
     if (_id) {
-      Tasks.update(_id, { $set: postAttributes }, function (error) {
-        if (error) {
-          alert(error.reason);
-        } else {
-          FlowRouter.go('task-list');
-        }
-      })
-
+      FlowRouter.go('task-list');
     }
     else {
-      Meteor.call("taskInsert", postAttributes, function (error, result) {
+      Meteor.call("issueInsert", issueAttributes, function (error, result) {
         // 向用户显示错误信息并终止
         if (error) {
           console.log(error);
           return alert(error.reason);
         }
-        console.log(result);
-        // 显示结果，跳转页面
-        if (!result._id)
-          alert('插入失败!');
         FlowRouter.go('task-list');
       });
     }

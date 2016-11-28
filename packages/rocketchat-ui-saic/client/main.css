@@ -1,172 +1,121 @@
-/* CSS declarations go here */
-.grid-block, .main, .post, .comments li, .comment-form {
-  background: #fff;
-  border-radius: 3px;
-  padding: 10px;
-  margin-bottom: 10px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15); }
-
-body {
-  background: #eee;
-  color: #666666; }
-
-#main {
-  position: relative;
-}
-.page {
-  position: absolute;
-  top: 0px;
-  width: 100%;
+ul.token-input-list-facebook {
+    overflow: hidden; 
+    height: auto !important; 
+    height: 1%;
+    width: 400px;
+    border: 1px solid #8496ba;
+    cursor: text;
+    font-size: 12px;
+    font-family: Verdana, sans-serif;
+    min-height: 1px;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    list-style-type: none;
+    clear: left;
 }
 
-.navbar {
-  margin-bottom: 10px; }
-  /* line 32, ../sass/style.scss */
-  .navbar .navbar-inner {
-    border-radius: 0px 0px 3px 3px; }
-
-#spinner {
-  height: 300px; }
-
-.post {
-  /* For modern browsers */
-  /* For IE 6/7 (trigger hasLayout) */
-  *zoom: 1;
-  position: relative;
-  opacity: 1; }
-  .post:before, .post:after {
-    content: "";
-    display: table; }
-  .post:after {
-    clear: both; }
-  .post.invisible {
-    opacity: 0; }
-  .post.instant {
-    -webkit-transition: none;
-    -moz-transition: none;
-    -o-transition: none;
-    transition: none; }
-  .post.animate{
-    -webkit-transition: all 300ms 0ms;
-    -moz-transition: all 300ms 0ms ease-in;
-    -o-transition: all 300ms 0ms ease-in;
-    transition: all 300ms 0ms ease-in; }
-  .post .upvote {
-    display: block;
-    margin: 7px 12px 0 0;
-    float: left; }
-  .post .post-content {
-    float: left; }
-    .post .post-content h3 {
-      margin: 0;
-      line-height: 1.4;
-      font-size: 18px; }
-      .post .post-content h3 a {
-        display: inline-block;
-        margin-right: 5px; }
-      .post .post-content h3 span {
-        font-weight: normal;
-        font-size: 14px;
-        display: inline-block;
-        color: #aaaaaa; }
-    .post .post-content p {
-      margin: 0; }
-  .post .discuss {
-    display: block;
-    float: right;
-    margin-top: 7px; }
-
-.comments {
-  list-style-type: none;
-  margin: 0; }
-  .comments li h4 {
-    font-size: 16px;
-    margin: 0; }
-    .comments li h4 .date {
-      font-size: 12px;
-      font-weight: normal; }
-    .comments li h4 a {
-      font-size: 12px; }
-  .comments li p:last-child {
-    margin-bottom: 0; }
-
-.dropdown-menu span {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  line-height: 20px;
-  color: #bbb;
-  white-space: nowrap; }
-
-.load-more {
-  display: block;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.05);
-  text-align: center;
-  height: 60px;
-  line-height: 60px;
-  margin-bottom: 10px; }
-  .load-more:hover {
-    text-decoration: none;
-    background: rgba(0, 0, 0, 0.1); }
-
-.posts .spinner-container{
-  position: relative;
-  height: 100px;
+ul.token-input-list-facebook li input {
+    border: 0;
+    width: 100px;
+    padding: 3px 8px;
+    background-color: white;
+    margin: 2px 0;
+    -webkit-appearance: caret;
 }
 
-.jumbotron{
-  text-align: center;
-}
-.jumbotron h2{
-  font-size: 60px;
-  font-weight: 100;
-}
-
-@-webkit-keyframes fadeOut {
-  0% {opacity: 0;}
-  10% {opacity: 1;}
-  90% {opacity: 1;}
-  100% {opacity: 0;}
-}
-
-@keyframes fadeOut {
-  0% {opacity: 0;}
-  10% {opacity: 1;}
-  90% {opacity: 1;}
-  100% {opacity: 0;}
+li.token-input-token-facebook {
+    overflow: hidden; 
+    height: auto !important; 
+    height: 15px;
+    margin: 3px;
+    padding: 1px 3px;
+    background-color: #eff2f7;
+    color: #000;
+    cursor: default;
+    border: 1px solid #ccd5e4;
+    font-size: 11px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    float: left;
+    white-space: nowrap;
 }
 
-.errors{
-  position: fixed;
-  z-index: 10000;
-  padding: 10px;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  pointer-events: none;
-}
-.alert {
-          animation: fadeOut 2700ms ease-in 0s 1 forwards;
-  -webkit-animation: fadeOut 2700ms ease-in 0s 1 forwards;
-     -moz-animation: fadeOut 2700ms ease-in 0s 1 forwards;
-  width: 250px;
-  float: right;
-  clear: both;
-  margin-bottom: 5px;
-  pointer-events: auto;
+li.token-input-token-facebook p {
+    display: inline;
+    padding: 0;
+    margin: 0;
 }
 
-#demo{
-  border:1px dashed #666666
-  
+li.token-input-token-facebook span {
+    color: #a6b3cf;
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.submit{
-  margin:0 auto;
-    width: 80px;
-     vertical-align: middle;
+li.token-input-selected-token-facebook {
+    background-color: #5670a6;
+    border: 1px solid #3b5998;
+    color: #fff;
+}
+
+li.token-input-input-token-facebook {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+div.token-input-dropdown-facebook {
+    position: absolute;
+    width: 400px;
+    background-color: #fff;
+    overflow: hidden;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: default;
+    font-size: 11px;
+    font-family: Verdana, sans-serif;
+    z-index: 1;
+}
+
+div.token-input-dropdown-facebook p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    color: #777;
+}
+
+div.token-input-dropdown-facebook ul {
+    margin: 0;
+    padding: 0;
+}
+
+div.token-input-dropdown-facebook ul li {
+    background-color: #fff;
+    padding: 3px;
+    margin: 0;
+    list-style-type: none;
+}
+
+div.token-input-dropdown-facebook ul li.token-input-dropdown-item-facebook {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-facebook ul li.token-input-dropdown-item2-facebook {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-facebook ul li em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+div.token-input-dropdown-facebook ul li.token-input-selected-dropdown-item-facebook {
+    background-color: #3b5998;
+    color: #fff;
 }

@@ -4,7 +4,7 @@
 			<fieldset>
 				<div class="input-line">
 					<div>
-						<input type="text" name="title" id="category" placeholder="问题类别" />
+						<input type="text" name="category" id="category" placeholder="问题类别" />
 					</div>
 				</div>
 				<div class="input-line">
@@ -14,7 +14,7 @@
 				</div>
 				<div class="input-line">
 					<div>
-						<textarea name="url" class="form-control" placeholder="问题内容" id="url" rows="5"></textarea>
+						<textarea name="description" class="form-control" placeholder="问题内容" id="url" rows="5"></textarea>
 					</div>
 				</div>
 				<div class="input-line">
@@ -49,15 +49,10 @@
 
 		</div>
 		<script>
-			//Uploader.uploadUrl='http://10.90.224.185:8080/mmt-web/a/file/upload/knowledge';
-		Uploader.uploadUrl="http://10.64.20.165:8080/mmt-web/f/file/upload/knowledge";
-		//	document.domain = "http://10.90.224.185";
+		     Uploader.uploadUrl="http://10.64.20.165:8080/mmt-web/f/file/upload/knowledge";
 			function deleteissue(id) {
-              console.log(id);
              $('#imagetable').bootstrapTable('removeByUniqueId', id);
              }
-
-
 			</script>
 	</form>
 
