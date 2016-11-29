@@ -1,5 +1,5 @@
-<template name="knowledgeindex">  
-<script>
+<template name="knowledgeindex">
+  <script>
  function queryParams(params) {  //配置参数
 		var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 		 title: "",
@@ -13,31 +13,28 @@
 		return temp;
 	}
 </script>
-<div class="tab-content">
-  <div class="tab-pane active"><ul id="mylist" class="nav nav-pills">
- <li ><a id="1">DMS</a></li>
-  <li><a  id="2">SAP</a></li> 
-  <li><a  id="3">EP</a></li>
-  <li><a  id="4">FDAPP</a></li>
-  <li><a id="5">同行</a></li>
-  <li><a id="6">Portal站点</a></li>
-  <li><a  id="7">TCE</a></li>
-</ul> </div>
-</div>
+  <div class="tab-content">
+    <div data-role='listview' class="tab-pane active">
+      <ul id="mylist" class="nav nav-pills">
+      </ul>
+    </div>
+  </div>
   <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#knowledgeList">
 +
 </button>
-<div id="knowledgeList" class="collapse">
-    
-</div>
+  <div id="knowledgeList" class="collapse">
 
-<div>
-<table id="KMtable" style=" overflow:outo">
-</table>
-</div>
+  </div>
+
+  <div>
+    <table id="KMtable" style=" overflow:outo">
+    </table>
+  </div>
 </template>
 
 <template name="knowledgedetail">
-    <header><h2 id="title" style="font-size:13pt;font-weight:bold"></h2></header>
-   <label id="detail" style="font-weight:normal"></label>
+  <header>
+    <h2 id="title" style="font-size:13pt;font-weight:bold"></h2>
+  </header>
+  <label id="detail" style="font-weight:normal"></label>
 </template>

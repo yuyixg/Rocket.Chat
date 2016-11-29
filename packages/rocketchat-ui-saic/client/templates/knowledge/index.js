@@ -1,11 +1,28 @@
-Template.knowledgeindex.onRendered(function () {     
+Template.knowledgeindex.onRendered(function () {   
+ var id;   
  $('.flex-tab-bar').css("width","0px");
   $('.main-content').css("right","0px");
-   var id; 
+
+
+Meteor.call("getcategorybyuserid", function (error, result) {
+    // 向用户显示错误信息并终止
+      if (error) {
+        return alert(error.reason);
+      }   
+
+       $.each(result,function(idx,item){ 
+          $('#mylist').append("<li><a id="+item.id+" >"+item.name+"</a></li>");          
+     }    
+     );
+     $("#mylist li:first-child").attr('class','active');
+      $("a").on("click", function() {  
+   $(this).parent("#mylist li").attr('class','active'); 
+   $(this).parent("li").siblings().attr('class','');
+   $("#KMtable").bootstrapTable('refresh');
+    });  
+});
+  
    
-
-
- $("#mylist li:first-child").attr('class','active');
     $('#KMtable').bootstrapTable({
             url:'/getknowledgeList',
             method:'post',
@@ -47,11 +64,7 @@ Template.knowledgeindex.onRendered(function () {
             }
         });
   
-   $("a").on("click", function() {  
-   $(this).parent("#mylist li").attr('class','active'); 
-   $(this).parent("li").siblings().attr('class','');
-  $("#KMtable").bootstrapTable('refresh');
-});   
+   
 
       Meteor.call("getallcategory", function (error, result) {
       // 向用户显示错误信息并终止
@@ -71,17 +84,59 @@ Template.knowledgeindex.onRendered(function () {
 
 
  })
-          $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>Save</span></button></div>");
-
-    });
-   // alert($("#save").value);
-$("#save").click( 
+     $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>Save</span></button></div>");
+     $('#knowledgeList').append("<div class='submit'><button id='delete' class='button delete'><i class='icon-floppy'></i><span>Delete</span></button></div>");
+  $("#save").click( 
     function(e){
-   // var arrChk=$("input[name='checkbox'][checked]");
-  //  $(arrChk).each(function(){
-       alert("a");                       
-    //});
+    var arrChk=$("input[type='checkbox']:checked");
+    var list=  new Array();
+    $(arrChk).each(function(){ 
+        list.push($(this).attr('id'));       
+        //alert(list.length);             
+    });
+     Meteor.call("addToFavorite",list, function (error, result) {
+        if (error) {
+        return alert(error.reason);
+        //$(".tab-content").load("index.html");
+        //$("#mylist").listview('refresh');
+       // $("a[data-role=content] ul li").listview("refresh");
+        Meteor.call("getcategorybyuserid", function (error, result) {
+          $.each(result,function(idx,item){ 
+          $('#mylist').append("<li><a id="+item.id+" >"+item.name+"</a></li>");          
+          });
+          $("#mylist li:first-child").attr('class','active');
+         });  
+      }   
+     });
 });
+
+  $("#delete").click( 
+    function(e){
+    var arrChk=$("input[type='checkbox']:checked");
+    var list=  new Array();
+    $(arrChk).each(function(){ 
+        list.push($(this).attr('id'));       
+        //alert(list.length);             
+    });
+   
+     Meteor.call("removeFromFavorite",list, function (error, result) {
+        if (error) {
+        return alert(error.reason);
+        $("#mylist").load(a());
+        //$("#mylist").listview('refresh');
+         function a(){
+        Meteor.call("getcategorybyuserid", function (error, result) {
+          $.each(result,function(idx,item){ 
+          $('#mylist').append("<li><a id="+item.id+" >"+item.name+"</a></li>");          
+          });
+          $("#mylist li:first-child").attr('class','active');
+         }); 
+         }
+      }   
+     });
+});
+    });
+
 
 });
         
@@ -120,6 +175,4 @@ Template.knowledgedetail.onDestroyed(function () {
        $('.main-content .fixed-title').css("height","");
 });
 
-//Template.knowledgeindex.events({
 
-//});
