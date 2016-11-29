@@ -168,6 +168,10 @@ Template.knowledgedetail.onRendered(function () {
     var getAttributes = {
         id: FlowRouter.getParam('_id')
     };
+    $("#back").click(function (e) {
+        e.preventDefault();
+        FlowRouter.go('knowledge-index');
+    });
     Meteor.call("getknowledgedetailbyid", getAttributes,
         function (error, result) {
             // 向用户显示错误信息并终止
