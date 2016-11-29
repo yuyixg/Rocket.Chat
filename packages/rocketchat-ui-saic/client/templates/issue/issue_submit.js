@@ -17,14 +17,11 @@ Template.issueSubmit.onRendered(function () {
       console.log(result);
 
       $('#category').tokenInput("add", { id: result.category.id, name: result.category.name });
-
       $('#issue-form').find('[name=title]').val(result.title);
       $('#issue-form').find('[name=description]').val(result.description);
 
-
       for (var att in result.attachUrlList) {
         var attach = result.attachUrlList[att];
-
         var file = { id: attach.id, name: attach.id, url: attach.attachUrl }
         $('#imagetable').bootstrapTable("append", file);
       }
