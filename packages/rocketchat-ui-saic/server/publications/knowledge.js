@@ -7,7 +7,12 @@ HTTP.methods(
           {
             data: data
           });
-        return result.data.rows;
+        if(result.data.total==0)
+        {
+           result.data.rows=[];
+           return result.data;
+        }else
+        return result.data;
       }
     }
   }
