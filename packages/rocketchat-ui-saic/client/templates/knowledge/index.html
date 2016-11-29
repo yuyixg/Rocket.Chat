@@ -1,40 +1,44 @@
 <template name="knowledgeindex">
-  <script>
- function queryParams(params) {  //配置参数
-		var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-		 title: "",
-     page:{
-    "pageNo": params.offset+2,
-    "pageSize":params.limit,
-    "orderBy": "update_date",
-    "category_id":$("#mylist li.active a").attr('id')
-  }
-		};
-		return temp;
-	}
-</script>
-  <div class="tab-content">
-    <div data-role='listview' class="tab-pane active">
-      <ul id="mylist" class="nav nav-pills">
-      </ul>
+
+    <div class="tab-content">
+        <div data-role='listview' class="tab-pane active">
+            <ul id="mylist" class="nav nav-pills">
+                <li class="active"><a id="">全部</a></li>
+            </ul>
+        </div>
     </div>
-  </div>
-  <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#knowledgeList">
-+
-</button>
-  <div id="knowledgeList" class="collapse">
+    <div>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#knowledgeList">
+        +
+    </button>
+ </div>
+    <div id="knowledgeList" class="collapse">
+    </div>
+    <div>
+        <table id="KMtable" style=" overflow:auto">
+        </table>
+        <script>
+        function queryParams(params) { //配置参数          
+            var queryParams = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的  
+                title:"",             
+                searchCatId: $("#mylist li.active a").attr('id'),
+                page: {
+                    "pageNo": params.offset / params.limit + 1,
+                    "pageSize": params.limit,
+                    "orderBy": "update_date"
+                }
+            };
+            return queryParams;
+        }
+    </script>
+    </div>
 
-  </div>
-
-  <div>
-    <table id="KMtable" style=" overflow:outo">
-    </table>
-  </div>
 </template>
-
 <template name="knowledgedetail">
-  <header>
-    <h2 id="title" style="font-size:13pt;font-weight:bold"></h2>
-  </header>
-  <label id="detail" style="font-weight:normal"></label>
+    <header>
+        <h2 id="title" style="font-size:13pt;font-weight:bold">
+        </h2>
+    </header>
+    <label id="detail" style="font-weight:normal">
+    </label>
 </template>

@@ -126,9 +126,8 @@ div.token-input-dropdown-facebook ul li.token-input-selected-dropdown-item-faceb
 }
 
 .submit{
-  margin:0 auto;
-    width: 80px;
-     vertical-align: middle;
+  text-align:center;
+margin:0 auto;
 }
 
 .pie-legend li{
