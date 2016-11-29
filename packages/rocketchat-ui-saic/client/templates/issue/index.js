@@ -6,15 +6,15 @@ Template.issueindex.onRendered(function () {
     if (_type) {
 
         switch (_type) {
-            case '0':
+            case '1':
                 $('#txt_status').val('处理中');
                 $("#txt_status").find("option[text='处理中']").attr("selected", true);
                 break;
-            case '1':
+            case '2':
                 $('#txt_status').val('已答复');
                 $("#txt_status").find("option[text='已答复']").attr("selected", true);
                 break;
-            case '2':
+            case '3':
                 $('#txt_status').val('已完成');
                 $("#txt_status").find("option[text='已完成']").attr("selected", true);
                 break;

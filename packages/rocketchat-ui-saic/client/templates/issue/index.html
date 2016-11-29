@@ -24,6 +24,7 @@
 		</div>
 		<script>
 			function queryParams(params) {  //配置参数  
+		var	processName= $('#txt_status').val();
 			   var querydata = {
           title: $('#txt_search').val(),
           page: {
@@ -32,7 +33,11 @@
             "orderBy": "update_date"
           }
         };
-
+    if(processName!='全部')
+	{
+		_.extend(querydata, { processName: processName });
+	}
+	console.log(querydata);
     return querydata;  
   }  
 		</script>
