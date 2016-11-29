@@ -17,7 +17,7 @@
 						<textarea name="description" class="form-control" placeholder="问题内容" id="url" rows="5"></textarea>
 					</div>
 				</div>
-				<div class="input-line">
+				<div class="input-line" style="display:none">
 					<div class="message-buttons">
 						<div class="mic">
 							<i class="icon-mic" style="font-size:20px" aria-label="{{_ " Record "}}"></i>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="input-line">
 
-					{{>upload_bootstrap multiple=true callbacks=imageuploadCallbacks}}
+					{{>upload_bootstrap multiple=false callbacks=imageuploadCallbacks}}
 
 				</div>
 				<table id="imagetable">

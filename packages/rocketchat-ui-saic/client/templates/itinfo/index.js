@@ -85,11 +85,6 @@ Template.itinfoindex.onRendered(function () {
               '</h4></div>';
             return e;
           }
-        },
-        {
-          field: 'updateDate',
-          title: '更新时间',
-          width: 160
         }
       ]
     });
@@ -172,7 +167,7 @@ Template.itinfoindex.onRendered(function () {
         else if(typeName == "已完成")
           typeid = 3;
 
-        FlowRouter.go('task-list-type', { _type: typeid });
+        FlowRouter.go('issue-indextype', { _type: typeid });
     }
 );  
 

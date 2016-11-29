@@ -1,7 +1,26 @@
 Template.issueindex.onRendered(function () {
     $('.flex-tab-bar').css("width", "0px");
     $('.main-content').css("right", "0px");
+    // $('.selectpicker').selectpicker('val','全部');
+    var _type = FlowRouter.getParam('_type');
+    if (_type) {
 
+        switch (_type) {
+            case '0':
+                $('#txt_status').val('处理中');
+                $("#txt_status").find("option[text='处理中']").attr("selected", true);
+                break;
+            case '1':
+                $('#txt_status').val('已答复');
+                $("#txt_status").find("option[text='已答复']").attr("selected", true);
+                break;
+            case '2':
+                $('#txt_status').val('已完成');
+                $("#txt_status").find("option[text='已完成']").attr("selected", true);
+                break;
+
+        }
+    }
     $("#btn_query").click(function () {
         $('#issuetable').bootstrapTable('refresh');
     });
@@ -34,31 +53,21 @@ Template.issueindex.onRendered(function () {
         columns: [{
             field: 'title',
             title: '标题'
-        }, {
-            field: 'description',
-            title: '说明'
-        }, {
-            field: 'keyWords',
-            title: '关键字'
         }
-            , {
-            field: 'answer',
-            title: '回答'
+        ],
+        onClickRow: function (value) {
+            console.log(value);
+            FlowRouter.go('issue-edit', { _id: value.id });
         }
-            , {
-            field: 'createDate',
-            title: '创建时间'
-        }, {
-            field: 'updateDate',
-            title: '更新时间'
-        }
-        ]
     });
 
 });
 Template.issueindex.onDestroyed(function () {
+    // $('.selectpicker').selectpicker('destroy');
     $('.main-content .content').empty();
+
     $('.flex-tab-bar').css("width", "40px");
     $('.main-content').css("right", "40px");
+
 })
 

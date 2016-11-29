@@ -4,15 +4,43 @@ Template.issueSubmit.onRendered(function () {
   $('.main-content').css("right", "0px");
 
   var _id = FlowRouter.getParam('_id');
-  //当点击分类时候弹出
-  $('#category').tokenInput('/issue/getcategory',{  
-        theme: "facebook",  
-        hintText: "请输入需要填写的系统。",//中文字时候需要输入空格。  
-        noResultsText: "没有结果。",  
-        searchingText: "查询中..." ,
-        tokenLimit:1  ,
-        method:'POST'     
+  if (_id) {
+    Meteor.call("issuefindOne", _id, function (error, result) {
+      // 向用户显示错误信息并终止
+      if (error) {
+        swal({
+          title: "加载失败",
+          type: 'error',
+          text: error.reason
+        });
+      }
+      console.log(result);
+
+      $('#category').tokenInput("add", { id: result.category.id, name: result.category.name });
+
+      $('#issue-form').find('[name=title]').val(result.title);
+      $('#issue-form').find('[name=description]').val(result.description);
+
+
+      for (var att in result.attachUrlList) {
+        var attach = result.attachUrlList[att];
+
+        var file = { id: attach.id, name: attach.id, url: attach.attachUrl }
+        $('#imagetable').bootstrapTable("append", file);
+      }
+
+
     });
+  }
+  //当点击分类时候弹出
+  $('#category').tokenInput('/issue/getcategory', {
+    theme: "facebook",
+    hintText: "请输入需要填写的系统。",//中文字时候需要输入空格。  
+    noResultsText: "没有结果。",
+    searchingText: "查询中...",
+    tokenLimit: 1,
+    method: 'POST'
+  });
 
 
   var hosturl = 'http://' + window.location.host;
@@ -41,14 +69,7 @@ Template.issueSubmit.onRendered(function () {
         title: '操作', formatter: function (value, row, index) {
           return '<a href="javascript:void(0)"  class="glyphicon glyphicon-remove"  onclick="deleteissue(&quot;' + value + '&quot;)" >删除</a>';
         }
-      }],
-    data: [{
-      name: 'Item 1',
-      url: 'http://lokeshdhakar.com/projects/lightbox2/images/image-2.jpg'
-    }, {
-      name: 'Item 2',
-      url: 'http://lokeshdhakar.com/projects/lightbox2/images/image-1.jpg'
-    }]
+      }]
   });
 })
 Template.issueSubmit.helpers({
@@ -56,15 +77,14 @@ Template.issueSubmit.helpers({
     return {
       finished: function (index, fileInfo, content) {
         if (!fileInfo.error) {
-          var url = Uploader.uploadUrl + fileInfo.path + fileInfo.name;
-          var file = { id: fileInfo.size, name: fileInfo.name, url: url }
+          console.log(fileInfo);
+          var file = { name: fileInfo.name, url: fileInfo.path }
           $('#imagetable').bootstrapTable("append", file);
         }
         else {
           swal({
             title: "上传出错",
             type: 'error',
-
             text: fileInfo.error
           });
         }
@@ -103,28 +123,48 @@ Template.issueSubmit.events({
   },
   'click button.save': function (e) {
     e.preventDefault();
-    console.log($('#imagetable').bootstrapTable("getData"));
+    var images = $('#imagetable').bootstrapTable("getData");
+
+    var imagearray = [];
+    for (i in images) {
+      image = images[i];
+      console.log(image);
+      if (image.id) {
+        imagearray.push({ attachUrl: image.url, id: image.id });
+      }
+      else {
+        imagearray.push({ attachUrl: image.url });
+      }
+
+    }
     var issueAttributes = {
       category: { id: $('#category').val() },
-      title: $(e.target).find('[name=title]').val(),
-      description:$(e.target).find('[name=description]').val(),
+      title: $('#issue-form').find('[name=title]').val(),
+      description: $('#issue-form').find('[name=description]').val(),
       processFlag: "0",
+      attachUrlList: imagearray,
       "remarks": ""
     };
     var _id = FlowRouter.getParam('_id');
     if (_id) {
-      FlowRouter.go('task-list');
+      _.extend(issueAttributes, { id: _id });
     }
-    else {
-      Meteor.call("issueInsert", issueAttributes, function (error, result) {
-        // 向用户显示错误信息并终止
-        if (error) {
-          console.log(error);
-          return alert(error.reason);
-        }
-        FlowRouter.go('task-list');
-      });
-    }
+
+    Meteor.call("issueInsert", issueAttributes, function (error, result) {
+      // 向用户显示错误信息并终止
+      if (error) {
+        swal({
+          title: "提交失败",
+          type: 'error',
+          text: error.reason
+        });
+      }
+      else {
+        FlowRouter.go('issue-index');
+      }
+
+    });
+
   },
   'click button.back'(e/*, instance*/) {
     e.preventDefault();

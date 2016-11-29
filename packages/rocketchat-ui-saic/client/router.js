@@ -59,6 +59,15 @@ AccountBox.addRoute({
     i18nPageTitle: '我的提问',
     pageTemplate: 'issueindex'
 }, saicManagerRoutes);
+
+AccountBox.addRoute({
+    name: 'issue-indextype',
+    path: '/issueindex/:_type',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '我的提问',
+    pageTemplate: 'issueindex'
+}, saicManagerRoutes);
+
 AccountBox.addRoute({
     name: 'issue-create',
     path: '/issuecreate',
