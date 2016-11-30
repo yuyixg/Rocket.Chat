@@ -22,7 +22,9 @@ Template.knowledgeindex.onRendered(function () {
                     $("#KMtable").bootstrapTable('refresh');
                 });
         });
-
+//$("#btn_query").click(function () {
+ //       $('#KMtable').bootstrapTable('refresh');
+ //   });
     $('#KMtable').bootstrapTable({
         url: '/getknowledgeList',
         method: 'post',
