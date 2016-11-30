@@ -1,4 +1,4 @@
-Template.itinfoindex.onRendered(function() {
+Template.itinfoindex.onRendered(function () {
 
     $('#itinfotable').bootstrapTable({
         url: '/itinfo/getlist',         //请求后台的URL（*）
@@ -51,7 +51,7 @@ Template.itinfoindex.onRendered(function() {
               }
             } */
             {
-                formatter: function(value, row, index) {
+                formatter: function (value, row, index) {
 
                     var detail = '/saic/itinfo/index/' + row.id;
                     var e =
@@ -60,11 +60,6 @@ Template.itinfoindex.onRendered(function() {
                         '</h4></div>';
                     return e;
                 }
-            },
-            {
-                field: 'updateDate',
-                title: '更新时间',
-                width: 160
             }
         ]
     });
@@ -72,7 +67,7 @@ Template.itinfoindex.onRendered(function() {
 
     var ctx = document.getElementById("myChart").getContext("2d");
 
-    Meteor.call("getQuestionCount", "", function(error, result) {
+    Meteor.call("getQuestionCount", "", function (error, result) {
         if (error) {
             console.log(error);
             return alert(error.reason);
@@ -124,7 +119,7 @@ Template.itinfoindex.onRendered(function() {
         $("#chartLegend").append(myChart.generateLegend());
 
         $("#myChart").click(
-            function(evt) {
+            function (evt) {
                 var activePoints = myChart.getSegmentsAtEvent(evt);
                 alert(activePoints[0]["label"] + ":" + activePoints[0]["value"]);
                 var typeName = activePoints[0]["label"];
@@ -141,25 +136,19 @@ Template.itinfoindex.onRendered(function() {
         );
     });
 
-
-
-
-    //$('#chartLegend').append(mychart.generateLegend());
-
-
-
+    FlowRouter.go('issue-indextype', { _type: typeid });
 });
-Template.itinfoindex.onDestroyed(function() {
+Template.itinfoindex.onDestroyed(function () {
     $('.main-content .content').empty();
 });
 
-Template.itinfodetail.onRendered(function() {
+Template.itinfodetail.onRendered(function () {
     var getAttributes = {
         id: FlowRouter.getParam('_id')
     };
 
 
-    Meteor.call("getitinfobyid", getAttributes, function(error, result) {
+    Meteor.call("getitinfobyid", getAttributes, function (error, result) {
         // 向用户显示错误信息并终止
         if (error) {
             console.log(error);
@@ -182,7 +171,7 @@ Template.itinfodetail.onRendered(function() {
     });
 });
 
-Template.itinfodetail.onDestroyed(function() {
+Template.itinfodetail.onDestroyed(function () {
     $('.main-content .content').empty();
     $('.main-content .content').css("margin-top", "60px");
     $('.main-content .fixed-title').css("height", "");
