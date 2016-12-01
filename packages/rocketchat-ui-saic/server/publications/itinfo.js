@@ -10,27 +10,40 @@ Meteor.methods(
 
             //console.log(result.data);
             return result.data;
+        },
+        'getQuestionCount': function (userId) {
+
+            var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/getQuestionCount",
+                {
+                    data: {
+                        userId: userId
+                    }
+                });
+
+                console.log(result.data);
+            return result.data;
         }
     }
 )
+
 
 HTTP.methods(
     {
         '/itinfo/getlist': {
             post: function (data) {
                 console.log(data);
-/*
-                var postdata = {
-                    title: data.search,
-                    page: {
-                        "pageNo": ,
-                        "pageSize": data.limit
-                        //"orderBy": data.orderBy
-                    }
-                };
-
-                // console.log(postdata);
-*/
+                /*
+                                var postdata = {
+                                    title: data.search,
+                                    page: {
+                                        "pageNo": ,
+                                        "pageSize": data.limit
+                                        //"orderBy": data.orderBy
+                                    }
+                                };
+                
+                                // console.log(postdata);
+                */
 
                 var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtAnnounce/queryMmtAnnounce",
                     {
