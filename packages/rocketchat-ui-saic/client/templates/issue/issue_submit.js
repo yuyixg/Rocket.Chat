@@ -30,7 +30,7 @@ Template.issueSubmit.onRendered(function () {
     });
   }
   //当点击分类时候弹出
-  $('#category').tokenInput('/issue/getcategory', {
+  $('#category').tokenInput(SAIC_URL + '/issue/getcategory', {
     theme: "facebook",
     hintText: "请输入需要填写的系统。",//中文字时候需要输入空格。  
     noResultsText: "没有结果。",
@@ -40,12 +40,12 @@ Template.issueSubmit.onRendered(function () {
   });
 
 
-  var hosturl = 'http://' + window.location.host;
-  console.log(hosturl);
+
+
   $('.jqUploadclass').fileupload(
     'option',
     'redirect',
-    hosturl + '/fileupoadresult?%s'
+    SAIC_URL + '/fileupoadresult?%s'
   );
 
   $('#imagetable').bootstrapTable({

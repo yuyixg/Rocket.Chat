@@ -25,7 +25,7 @@ Template.issueindex.onRendered(function () {
         $('#issuetable').bootstrapTable('refresh');
     });
     $('#issuetable').bootstrapTable({
-        url: '/issue/getlist',         //请求后台的URL（*）
+        url:SAIC_URL+ '/issue/getlist',         //请求后台的URL（*）
         method: 'post',                      //请求方式（*）
         toolbar: '#toolbar',                //工具按钮用哪个容器
         striped: true,                      //是否显示行间隔色
