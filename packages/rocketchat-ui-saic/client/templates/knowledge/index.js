@@ -22,7 +22,9 @@ Template.knowledgeindex.onRendered(function () {
                     $("#KMtable").bootstrapTable('refresh');
                 });
         });
-
+//$("#btn_query").click(function () {
+ //       $('#KMtable').bootstrapTable('refresh');
+ //   });
     $('#KMtable').bootstrapTable({
         url: '/getknowledgeList',
         method: 'post',
@@ -163,11 +165,18 @@ Template.knowledgeindex.onDestroyed(function () {
 });
 
 Template.knowledgedetail.onRendered(function () {
-    $('.main-content .content').css("margin-top", "0px");
-    $('.main-content .fixed-title').css("height", "0px");
+   // $('.main-content .content').css("margin-top", "0px");
+   // $('.main-content .fixed-title').css("height", "0px");
+    $('.flex-tab-bar').hide();
+    $('.main-content').css("right","0px");
+   
     var getAttributes = {
         id: FlowRouter.getParam('_id')
     };
+    $("#back").click(function (e) {
+        e.preventDefault();
+        FlowRouter.go('knowledge-index');
+    });
     Meteor.call("getknowledgedetailbyid", getAttributes,
         function (error, result) {
             // 向用户显示错误信息并终止
@@ -188,6 +197,8 @@ Template.knowledgedetail.onRendered(function () {
 
 Template.knowledgedetail.onDestroyed(function () {
     $('.main-content .content').empty();
-    $('.main-content .content').css("margin-top", "60px");
-    $('.main-content .fixed-title').css("height", "");
+   // $('.main-content .content').css("margin-top", "60px");
+//$('.main-content .fixed-title').css("height", "");
+$('.flex-tab-bar').show();
+    $('.main-content').css("right","40px");
 });

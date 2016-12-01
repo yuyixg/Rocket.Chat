@@ -141,3 +141,6 @@ margin:0 auto;
     margin-right: 5px;
 
 }
+img{
+max-width:100%;height:auto;
+} 
