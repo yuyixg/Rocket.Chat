@@ -58,7 +58,7 @@ HTTP.methods(
                 //{ "id": 5, "title": "sallency5", "description": "description description description description description", "updateDate": '2016-11-05' }];
 
                 //console.log(result);
-                //console.log(result.data.rows);
+                console.log(result.data);
                 return result.data;
             }
         }
