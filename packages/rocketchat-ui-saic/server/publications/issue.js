@@ -18,8 +18,25 @@ Meteor.methods(
       console.log(result);
       return result;
     },
-    'issueUpdate': function (Attributes) {
-      console.log(Attributes);
+    'issueList': function (data) {
+      console.log(data);
+      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
+        {
+          data: data,
+          headers:
+          {
+            server: 'test',
+            'signatureMethod': 'md5',
+            'format': 'json',
+            'version': 1,
+            'appKey': "DLM_SCW_APP_REQUEST_HANDLING"
+          }
+        });
+      if (result.data.total == 0) {
+        result.data.rows = [];
+      }
+      console.log(result);
+      return result.data;
 
     },
     'issueDelete': function (id) {

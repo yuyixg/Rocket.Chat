@@ -166,10 +166,10 @@ deepwell:bootstrap-datepicker2
 rocketchat:ui-saic
 reneberwanger:bootstrap-table
 cfs:http-methods
-wenzhixin:bootstrap-table
 cloudspider:icheck
 chart:chart
 czbaker:lightbox2
 saic:upload-jquery
 twbs:bootstrap
 jsep:jquery.tokeninput
+mars:bootstrap-table
