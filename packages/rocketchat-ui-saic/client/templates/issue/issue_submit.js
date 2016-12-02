@@ -47,7 +47,7 @@ Template.issueSubmit.onRendered(function () {
   $('.jqUploadclass').fileupload(
     'option',
     'redirect',
-    hosturl + '/fileupoadresult?%s'
+    'http://'+window.location.host + '/fileupoadresult?%s'
   );
 
   $('#imagetable').bootstrapTable({
