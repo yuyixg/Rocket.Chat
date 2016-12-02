@@ -144,3 +144,21 @@ margin:0 auto;
 img{
 max-width:100%;height:auto;
 } 
+#searchtext
+{
+width:40%;/*定义搜索框的宽度*/
+height:36px;/*定义搜索框的高度*/
+font-size:15px;/*定义搜索框文字大小*/
+font-family:"Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;/*定义搜索框的字体，妈蛋我不知道百度搜索框是什么字体，你们凑合看吧*/
+}
+#search
+{
+width:6%;/*提交按钮宽度*/
+height:36px;/*提交按钮高度*/
+background:#666666;/*提交按钮背景颜色*/
+color:#FFFFFF;/*提交按钮文字颜色。白色*/
+font-size:14px;/*提交按钮文字大小*/
+border:1px solid #4791ff;/*提交按钮边框定义，如果不定义就是默认的按钮效果，好难看的。*/
+text-align: center;
+}
+
