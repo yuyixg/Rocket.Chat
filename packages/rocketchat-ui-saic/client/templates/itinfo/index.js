@@ -39,6 +39,12 @@ Template.itinfoindex.onRendered(function () {
             '</h4></div>';
           return e;
         }
+      },
+      {
+        //field:'update_date'
+        formatter: function (value, row, index) {
+          return row.createDate.substr(0, 10);//;
+        }
       }
     ]
   });
@@ -52,7 +58,7 @@ Template.itinfoindex.onRendered(function () {
       return alert(error.reason);
     }
     console.log(result);
-     //myCount: 3, inProcessCount: 1, finishedCount
+    //myCount: 3, inProcessCount: 1, finishedCount
     var data = [
       {
         value: result.inProcessCount,
@@ -99,22 +105,22 @@ Template.itinfoindex.onRendered(function () {
     $("#chartLegend").append(myChart.generateLegend());
 
     $("#myChart").click(
-    function (evt) {
-      var activePoints = myChart.getSegmentsAtEvent(evt);
-      //alert(activePoints[0]["label"] + ":"+ activePoints[0]["value"]); 
-      var typeName = activePoints[0]["label"];
-      var typeid = 0;
-      if (typeName == "处理中")
-        typeid = 1;
-      else if (typeName == "已答复")
-        typeid = 2;
-      else if (typeName == "已完成")
-        typeid = 3;
+      function (evt) {
+        var activePoints = myChart.getSegmentsAtEvent(evt);
+        //alert(activePoints[0]["label"] + ":"+ activePoints[0]["value"]); 
+        var typeName = activePoints[0]["label"];
+        var typeid = 0;
+        if (typeName == "处理中")
+          typeid = 1;
+        else if (typeName == "已答复")
+          typeid = 2;
+        else if (typeName == "已完成")
+          typeid = 3;
 
-      FlowRouter.go('issue-indextype', { _type: typeid });
-    });
+        FlowRouter.go('issue-indextype', { _type: typeid });
+      });
 
-  });  
+  });
 
 });
 Template.itinfoindex.onDestroyed(function () {
