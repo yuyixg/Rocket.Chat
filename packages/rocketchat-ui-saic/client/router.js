@@ -1,3 +1,5 @@
+SAIC_URL = 'http://10.130.8.109:3000';
+//SAIC_URL = 'http://localhost:3000';
 saicManagerRoutes = FlowRouter.group({
     prefix: '/saic',
     name: 'task-manager'
@@ -95,9 +97,9 @@ AccountBox.addRoute({
 }, saicManagerRoutes);
 
 AccountBox.addRoute({
-	name: 'task-edit',
-	path: '/departments/:_id/edit',
-	sideNav: 'saicFlex',
-	i18nPageTitle: '修改任务',
-	pageTemplate: 'taskSubmit'
+    name: 'task-edit',
+    path: '/departments/:_id/edit',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '修改任务',
+    pageTemplate: 'taskSubmit'
 }, saicManagerRoutes);

@@ -3,7 +3,7 @@ Meteor.methods(
     'issueInsert': function (Attributes) {
       console.log(Attributes);
       var issue = _.extend(Attributes, {
-        createDate: '2016-11-24 16:08:17', updateDate: '2016-11-24 16:08:17', createBy: {
+        createDate: GetDateTime('yyyy-MM-dd hh:mm:ss'), updateDate: GetDateTime('yyyy-MM-dd hh:mm:ss'), createBy: {
           "id": "290704bc7e344d4aa67ebb1846cde567"
         },
         updateBy: {
@@ -11,7 +11,7 @@ Meteor.methods(
         }
       });
       console.log(issue);
-      var result = HTTP.call('POST', 'http://10.90.67.77:8081/mmt-web/f/mm/mmtQuestion/saveMmtQuestion',
+      var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/saveMmtQuestion',
         {
           data: issue
         });
@@ -27,7 +27,7 @@ Meteor.methods(
     },
     'issuefindOne': function (id) {
       console.log(id);
-      var issue = HTTP.call('GET', 'http://10.90.67.77:8081/mmt-web/f/mm/mmtQuestion/getMmtQuestion?id=' + id);
+      var issue = HTTP.call('GET', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/getMmtQuestion?id=' + id);
       return issue.data;
 
     }
@@ -40,9 +40,19 @@ HTTP.methods(
       post: function (data) {
         var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
           {
-            data: data
+            data: data,
+            headers:
+            {
+              server: 'test',
+              'signatureMethod': 'md5',
+              'format': 'json',
+              'version': 1,
+              'appKey': "DLM_SCW_APP_REQUEST_HANDLING"
+            }
           });
-
+        if (result.data.total == 0) {
+          result.data.rows = [];
+        }
         console.log(result);
         return result.data;
       }
