@@ -170,8 +170,9 @@ chart:chart
 czbaker:lightbox2
 saic:upload-jquery
 twbs:bootstrap
-jsep:jquery.tokeninput
 
 mars:bootstrap-table
 
 
+rocketchat:rocketchat-ui-dlm
+mars:tokeninput

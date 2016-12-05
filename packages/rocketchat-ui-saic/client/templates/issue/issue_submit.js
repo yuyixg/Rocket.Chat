@@ -30,15 +30,14 @@ Template.issueSubmit.onRendered(function () {
     });
   }
 
- var hosturl='http://10.130.8.109:3000';
+
   //当点击分类时候弹出
-  $('#category').tokenInput(hosturl + '/issue/getcategory', {
-    theme: "facebook",
+  $('#category').tokenInput('issuegetcategory', {
     hintText: "请输入需要填写的系统。",//中文字时候需要输入空格。  
     noResultsText: "没有结果。",
     searchingText: "查询中...",
     tokenLimit: 1,
-    method: 'POST'
+    method: 'meteor'
   });
 
 
@@ -47,7 +46,7 @@ Template.issueSubmit.onRendered(function () {
   $('.jqUploadclass').fileupload(
     'option',
     'redirect',
-    'http://'+window.location.host + '/fileupoadresult?%s'
+    'http://' + window.location.host + '/fileupoadresult?%s'
   );
 
   $('#imagetable').bootstrapTable({

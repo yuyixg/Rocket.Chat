@@ -39,8 +39,25 @@ Meteor.methods(
       return result.data;
 
     },
-    'issueDelete': function (id) {
-
+    'issuegetcategory': function (query) {
+      var data = {
+        name: query.q,
+        "parent": {
+          "id": ""
+        }
+      };
+      var category = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtCategory/queryMmtCategory",
+        {
+          data: data
+        });
+      var mycategory = new Array();
+      for (cat in category.data) {
+        var child = category.data[cat];
+        if (child.parentId != '0') {
+          mycategory.push(child);
+        }
+      }
+      return mycategory;
     },
     'issuefindOne': function (id) {
       console.log(id);
