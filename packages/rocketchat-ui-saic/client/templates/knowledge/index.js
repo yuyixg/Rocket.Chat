@@ -28,8 +28,8 @@ Template.knowledgeindex.onRendered(function () {
         $('#KMtable').bootstrapTable('refresh');
     });
     $('#KMtable').bootstrapTable({
-        url: '/getknowledgeList',
-        method: 'post',
+        url: 'getknowledgeList',
+        method: 'meteor',
         striped: true,
         //是否显示行间隔色
         cache: false,

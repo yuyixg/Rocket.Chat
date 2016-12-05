@@ -1,26 +1,23 @@
 
 HTTP.methods(
   {
-    '/getknowledgeList': {
-      post: function (data) {
-        var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtKnowledge/queryMmtKnowledge",
-          {
-            data: data
-          });
-        if(result.data.total==0)
-        {
-           result.data.rows=[];
-           return result.data;
-        }else
-        return result.data;
-      }
-    }
+
   }
 )
 
 
 Meteor.methods(
   {
+    'getknowledgeList': function (data) {
+      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtKnowledge/queryMmtKnowledge",
+        {
+          data: data
+        });
+      if (result.data.total == 0) {
+        result.data.rows = [];
+      } else
+        return result.data;
+    },
 
     'getallcategory': function (data) {
       var result = HTTP.call('GET', mmtServerURL + "mmt-web/f/mm/mmtCategory/getAllMmtCategory");

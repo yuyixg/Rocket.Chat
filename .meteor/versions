@@ -128,7 +128,6 @@ rate-limit@1.0.6
 reactive-dict@1.1.8
 reactive-var@1.0.11
 reload@1.1.11
-reneberwanger:bootstrap-table@1.0.1
 retry@1.0.9
 rocketchat:action-links@0.0.1
 rocketchat:api@0.0.1
@@ -185,7 +184,6 @@ rocketchat:otr@0.0.1
 rocketchat:piwik@0.0.1
 rocketchat:push-notifications@0.0.1
 rocketchat:reactions@0.0.1
-rocketchat:rocketchat-ui-dlm@0.0.1
 rocketchat:sandstorm@0.0.1
 rocketchat:slackbridge@0.0.1
 rocketchat:slashcommands-archive@0.0.1
