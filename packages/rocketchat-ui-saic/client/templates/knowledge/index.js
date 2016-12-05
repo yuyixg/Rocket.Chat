@@ -13,7 +13,6 @@ Template.knowledgeindex.onRendered(function () {
                 function (idx, item) {
                     $('#mylist').append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
                 });
-            //$("#mylist li:first-child").attr('class', 'active');
             $("a").on("click",
                 function () {
                     $(this).parent("#mylist li").attr('class', 'active');
@@ -94,22 +93,22 @@ Template.knowledgeindex.onRendered(function () {
                     $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' > " + Pitem.name + "</label><ul class='nav nav-pills' id=" + Pitem.id + ">");
                     $.each(Pitem.children,
                         function (idx, item) {
-                            $('#'+Pitem.id).append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
+                            $('#' + Pitem.id).append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
 
                         });
 
                     $('#knowledgeList').append("</ul>");
                     $("a").on("click",
                         function () {
-                           if($(this).parent("#" + Pitem.id + " li").attr("class")=='active')
-                           $(this).parent("#" + Pitem.id + " li").attr('class', '');
-                           else
-                            $(this).parent("#" + Pitem.id + " li").attr('class', 'active');
+                            if ($(this).parent("#" + Pitem.id + " li").attr("class") == 'active')
+                                $(this).parent("#" + Pitem.id + " li").attr('class', '');
+                            else
+                                $(this).parent("#" + Pitem.id + " li").attr('class', 'active');
                         })
                 });
             $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
             $("#save").click(function (e) {
-                 var arrChk =$("#knowledgeList  li.active a");
+                var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
                 $(arrChk).each(function () {
                     list.push($(this).attr('id'));
@@ -124,10 +123,10 @@ Template.knowledgeindex.onRendered(function () {
             });
 
             $("#remove").click(function (e) {
-                var arrChk =$("#knowledgeList  li.active a");                 
+                var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
                 $(arrChk).each(function () {
-                    list.push($(this).attr('id'));    
+                    list.push($(this).attr('id'));
                 });
                 Meteor.call("removeFromFavorite", list,
                     function (error, result) {
@@ -154,8 +153,7 @@ Template.knowledgeindex.onRendered(function () {
                                 $(this).parent("li").siblings().attr('class', '');
                                 $("#KMtable").bootstrapTable('refresh');
                             });
-                        $("#knowledgeList  li").attr('class','');
-
+                        $("#knowledgeList  li").attr('class', '');
                     });
             }
         });

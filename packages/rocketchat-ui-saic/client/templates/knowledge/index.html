@@ -2,10 +2,9 @@
     <div style="background-color:#3b5998;height:105px; text-align:center;">
         <br/>
         <div><span style="color:white;font-size:20px;">我们随时提供服务</span></div>
-<br/>
-        <div> <input type="text" id="searchtext"  placeholder="输入要搜索的内容" autocomplete="off">
-            <input type="button" id="search" value="搜索">
-           &nbsp; &nbsp; <a id="link" href="/saic/issuecreate" style="color:white;text-decoration:underline;">没答案？点击进行提问</a></div>
+        <br/>
+        <div> <input type="text" id="searchtext" placeholder="搜索内容" autocomplete="off">
+            <input type="button" id="search" value="搜索">  <a id="link" href="/saic/issuecreate" style="color:white;text-decoration:underline;margin-left:5px">点击提问</a></div>
 
 
     </div>
@@ -18,24 +17,14 @@
         </div>
     </div>
 
-      <div>应用推荐<span style="color:#666666">(+号进行选择)</span></div>
+    <div>应用推荐<span style="color:#666666">(+号进行选择)</span></div>
     <div>
         <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#knowledgeList">
         +
     </button>
-      <div id="knowledgeList" class="collapse">
+        <div id="knowledgeList" class="collapse">
+        </div>
     </div>
-    </div>
-    <!--
- <div class="form-group" style="margin-top:0px;margin-bottom:0px">
- <div class="col-sm-3">
-				<input type="text" class="form-control" id="txt_search" placeholder="输入要搜索的内容">
-			</div>
-			<div class="col-sm-4" style="text-align:left;">
-				<button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
-			</div></div>
-            -->
-  
     <div>
         <table id="KMtable" style=" overflow:auto">
         </table>
@@ -65,9 +54,6 @@
         </h2>
     </header>
     <div id="detail" style="font-weight:normal;width:100%;"></div>
-    <!--
-    <label id="detail" style="font-weight:normal">
-    </label>-->
     <div class='submit'>
         <button type="button" id="back" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
     </div>
