@@ -11,7 +11,6 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.4.2');
   api.use(['webapp', 'autoupdate'], 'server');
   api.use('ecmascript');
   api.use('underscorestring:underscore.string');
