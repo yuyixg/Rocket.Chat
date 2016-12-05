@@ -20,7 +20,18 @@ Meteor.methods(
                     }
                 });
 
-                console.log(result.data);
+            //console.log(result.data);
+            return result.data;
+        },
+        'getlist': function (data) {
+            var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtAnnounce/queryMmtAnnounce",
+                {
+                    data: data
+                });
+            //if (result.data.total == 0) {
+            //    result.data.rows = [];
+            //}
+            //console.log(result.data);
             return result.data;
         }
     }
