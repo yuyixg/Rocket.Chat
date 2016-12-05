@@ -165,3 +165,9 @@ text-align: center;
 {
     width:30%;
 }
+.test li{
+float:left;list-style:none;
+}
+.test {
+float:left;
+}

@@ -90,28 +90,26 @@ Template.knowledgeindex.onRendered(function () {
 
             $.each(result,
                 function (idx, Pitem) {
-                    $('#knowledgeList').append("<div>");
-                   /*
-                    $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' id=" + item.id + "> " + item.name + "</label>");
-                    $.each(item.children,
-                        function (idx, item) {
-                            $('#knowledgeList').append("<label style='margin-right:12px'>  <input type='checkbox' id=" + item.id + "> " + item.name + "</label>");
-
-                        });
-                    */
-                    $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' id=" + item.id + "> " + item.name + "</label><ul id="+Pitem.id+">");
+                    var html = "";
+                    $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' > " + Pitem.name + "</label><ul class='nav nav-pills' id=" + Pitem.id + ">");
                     $.each(Pitem.children,
                         function (idx, item) {
-                            //alert('#'+Pitem.id);
                             $('#'+Pitem.id).append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
 
                         });
-                    $('#knowledgeList').append("</ul></div>");
 
-                })
+                    $('#knowledgeList').append("</ul>");
+                    $("a").on("click",
+                        function () {
+                           if($(this).parent("#" + Pitem.id + " li").attr("class")=='active')
+                           $(this).parent("#" + Pitem.id + " li").attr('class', '');
+                           else
+                            $(this).parent("#" + Pitem.id + " li").attr('class', 'active');
+                        })
+                });
             $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
             $("#save").click(function (e) {
-                var arrChk = $("input[type='checkbox']:checked");
+                 var arrChk =$("#knowledgeList  li.active a");
                 var list = new Array();
                 $(arrChk).each(function () {
                     list.push($(this).attr('id'));
@@ -126,13 +124,11 @@ Template.knowledgeindex.onRendered(function () {
             });
 
             $("#remove").click(function (e) {
-                var arrChk = $("input[type='checkbox']:checked");
+                var arrChk =$("#knowledgeList  li.active a");                 
                 var list = new Array();
                 $(arrChk).each(function () {
-                    list.push($(this).attr('id'));
-                    //alert(list.length);             
+                    list.push($(this).attr('id'));    
                 });
-
                 Meteor.call("removeFromFavorite", list,
                     function (error, result) {
                         if (error) {
@@ -152,14 +148,13 @@ Template.knowledgeindex.onRendered(function () {
                             function (idx, item) {
                                 $('#mylist').append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
                             });
-                        // $("#mylist li:first-child").attr('class', 'active');
                         $("a").on("click",
                             function () {
                                 $(this).parent("#mylist li").attr('class', 'active');
                                 $(this).parent("li").siblings().attr('class', '');
                                 $("#KMtable").bootstrapTable('refresh');
                             });
-                        $("[type='checkbox']").removeAttr("checked");
+                        $("#knowledgeList  li").attr('class','');
 
                     });
             }
