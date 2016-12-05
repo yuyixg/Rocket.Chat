@@ -11,6 +11,10 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
+<<<<<<< HEAD
+=======
+  //api.versionsFrom('1.4.2');
+>>>>>>> 5ec531a4a7e71d0c60221fd92e53c1fd8bc69d7c
   api.use(['webapp', 'autoupdate'], 'server');
   api.use('ecmascript');
   api.use('underscorestring:underscore.string');

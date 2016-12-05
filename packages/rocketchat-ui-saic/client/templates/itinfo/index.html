@@ -18,15 +18,15 @@
 
  //width="200" height="200" 
 			function queryParams(params) {  //配置参数  
-			   var querydata = {
+			   var queryParams = {
           page: {
             "pageNo": params.offset/params.limit+1,
-            "pageSize":params.limit,
+            "pageSize":params.limit,            
             "orderBy": "update_date"
           }
         };
 
-    return querydata;  
+    return queryParams;  
   }  
 		</script>
 </template>
