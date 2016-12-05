@@ -1681,6 +1681,7 @@
             request;
 
         if (!this.options.url && !this.options.ajax) {
+             that.$tableLoading.hide();
             return;
         }
 
@@ -1708,6 +1709,7 @@
 
         // false to stop request
         if (data === false) {
+            that.$tableLoading.hide();
             return;
         }
 
@@ -1717,14 +1719,12 @@
         if (this.options.method === 'meteor') {
             Meteor.call(this.options.url, data, function (error, result) {
                 if (error) {
-                    console.log('error');
-                    console.log(error);
+
                     that.trigger('load-error', error.status, error);
                 }
-                console.log('resutl');
-                console.log(result);
+
                 var res = calculateObjectValue(that.options, that.options.responseHandler, [result], result);
-                console.log(res);
+
                 that.load(res);
                 that.trigger('load-success', res);
                 if (!silent) {

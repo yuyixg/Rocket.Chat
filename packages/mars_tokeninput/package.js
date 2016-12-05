@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'mars:bootstrap-table',
+  name: 'mars:tokeninput',
   version: '0.0.1',
   // Brief, one-line summary of the package.
   summary: '',
@@ -10,10 +10,12 @@ Package.describe({
   documentation: 'README.md'
 });
 
-Package.onUse(function(api) {
+Package.onUse(function (api) {
   api.use('ecmascript');
   api.addFiles([
-    'bootstrap-table.js',
+    'jquery.tokeninput.js',
+    'styles/token-input.css',
+    'styles/token-input-facebook.css',
+    'styles/token-input-mac.css'
   ], ['client']);
-
 });
