@@ -158,7 +158,10 @@ height:36px;/*提交按钮高度*/
 background:#666666;/*提交按钮背景颜色*/
 color:#FFFFFF;/*提交按钮文字颜色。白色*/
 font-size:14px;/*提交按钮文字大小*/
-border:1px solid #4791ff;/*提交按钮边框定义，如果不定义就是默认的按钮效果，好难看的。*/
+border:1px solid #4791ff;/*提交按钮边框定义*/
 text-align: center;
 }
-
+#link
+{
+    width:30%;
+}

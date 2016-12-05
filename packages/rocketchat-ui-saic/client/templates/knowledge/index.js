@@ -2,9 +2,6 @@ Template.knowledgeindex.onRendered(function () {
     var id;
     $('.flex-tab-bar').css("width", "0px");
     $('.main-content').css("right", "0px");
-    //alert(Meteor.absoluteUrl());
-    //Meteor.absoluteUrl.defaultOptions.rootUrl="http://10.130.8.109:3000";
-    //alert(Meteor.absoluteUrl());
     Meteor.call("getcategorybyuserid",
         function (error, result) {
             // 向用户显示错误信息并终止
@@ -28,8 +25,8 @@ Template.knowledgeindex.onRendered(function () {
         $('#KMtable').bootstrapTable('refresh');
     });
     $('#KMtable').bootstrapTable({
-        url: '/getknowledgeList',
-        method: 'post',
+        url: 'getknowledgeList',
+        method: 'meteor',
         striped: true,
         //是否显示行间隔色
         cache: false,
@@ -92,15 +89,24 @@ Template.knowledgeindex.onRendered(function () {
             }
 
             $.each(result,
-                function (idx, item) {
+                function (idx, Pitem) {
                     $('#knowledgeList').append("<div>");
+                   /*
                     $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' id=" + item.id + "> " + item.name + "</label>");
                     $.each(item.children,
                         function (idx, item) {
                             $('#knowledgeList').append("<label style='margin-right:12px'>  <input type='checkbox' id=" + item.id + "> " + item.name + "</label>");
 
                         });
-                    $('#knowledgeList').append("</div>");
+                    */
+                    $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' id=" + item.id + "> " + item.name + "</label><ul id="+Pitem.id+">");
+                    $.each(Pitem.children,
+                        function (idx, item) {
+                            //alert('#'+Pitem.id);
+                            $('#'+Pitem.id).append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
+
+                        });
+                    $('#knowledgeList').append("</ul></div>");
 
                 })
             $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
