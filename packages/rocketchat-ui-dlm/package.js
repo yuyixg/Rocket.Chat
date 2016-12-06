@@ -45,6 +45,9 @@ Package.onUse(function(api) {
   api.addFiles('client/templates/salecheck/index.js', 'client');
   api.addFiles('client/templates/report/index.html', 'client');
   api.addFiles('client/templates/report/index.js', 'client');
+  //api.addFiles('server/mac.js', 'server');
+
+  api.addFiles('server/mac.js', 'server');
 });
 
 

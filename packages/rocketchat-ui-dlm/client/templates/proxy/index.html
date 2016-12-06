@@ -1,2 +1,22 @@
 <template name="proxy">
+    <h4>经销商：
+        <select style="float:left" id="salsCompany"></select>
+    </h4>
+    <br />
+    <table id="usersTable">
+    </table>
+
+    <script>
+
+ //width="200" height="200" 
+			function queryParams(params) {  //配置参数  
+			   var queryParams = {
+          companyid: 
+            $('#salsCompany').val()
+    
+        };
+
+    return queryParams;  
+  }  
+		</script>
 </template>
