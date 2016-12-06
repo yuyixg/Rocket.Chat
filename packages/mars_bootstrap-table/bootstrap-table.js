@@ -1681,7 +1681,7 @@
             request;
 
         if (!this.options.url && !this.options.ajax) {
-             that.$tableLoading.hide();
+            that.$tableLoading.hide();
             return;
         }
 
@@ -1721,15 +1721,15 @@
                 if (error) {
 
                     that.trigger('load-error', error.status, error);
-                }
-
-                var res = calculateObjectValue(that.options, that.options.responseHandler, [result], result);
-
-                that.load(res);
-                that.trigger('load-success', res);
-                if (!silent) {
                     that.$tableLoading.hide();
                 }
+                 console.log(result);
+                var res = calculateObjectValue(that.options, that.options.responseHandler, [result], result);
+                that.load(res);
+                that.trigger('load-success', res);
+
+                that.$tableLoading.hide();
+
             });
         }
         else {

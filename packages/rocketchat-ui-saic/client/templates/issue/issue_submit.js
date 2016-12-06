@@ -1,7 +1,8 @@
 
 Template.issueSubmit.onRendered(function () {
 
-  $('.main-content').css("right", "0px");
+      $('.flex-tab-bar').css("width", "0px");
+    $('.main-content').css("right", "0px");
 
   var _id = FlowRouter.getParam('_id');
   if (_id) {
@@ -15,8 +16,9 @@ Template.issueSubmit.onRendered(function () {
         });
       }
       console.log(result);
-
-      $('#category').tokenInput("add", { id: result.category.id, name: result.category.name });
+      if (result.category.id) {
+        $('#category').tokenInput("add", { id: result.category.id, name: result.category.name });
+      }
       $('#issue-form').find('[name=title]').val(result.title);
       $('#issue-form').find('[name=description]').val(result.description);
 
@@ -37,7 +39,8 @@ Template.issueSubmit.onRendered(function () {
     noResultsText: "没有结果。",
     searchingText: "查询中...",
     tokenLimit: 1,
-    method: 'meteor'
+    method: 'meteor',
+    theme:'facebook'
   });
 
 
@@ -92,8 +95,10 @@ Template.issueSubmit.helpers({
   }
 })
 Template.issueSubmit.onDestroyed(function () {
-  $('.main-content .content').empty();
-  $('.main-content').css("right", "40px");
+    $('.main-content .content').empty();
+
+    $('.flex-tab-bar').css("width", "40px");
+    $('.main-content').css("right", "40px");
 })
 
 Template.issueSubmit.events({
