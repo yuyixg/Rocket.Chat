@@ -1,2 +1,38 @@
 <template name="salecheck">
+    <div id="tagsarea">
+        <ul id="tags">
+            <li class="selectTag"><a onClick="selectTag('tagContent0',this)" href="javascript:void(0)">发票变更</a></li>
+            <li><a onClick="selectTag('tagContent1',this)" href="javascript:void(0)">三包变更</a></li>
+        </ul>
+        <div id="tagContent">
+            <div class="tagContent selectTag" id="tagContent0">
+                <table id="InvoiceTable">
+                </table>
+            </div>
+            <div class="tagContent" id="tagContent1">
+                <table id="TreeeTable">
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class='submit'>
+        <button id='save' class='button save'><span>通过</span></button>&nbsp;&nbsp;
+        <button id='back' class='button remove'><span>驳回</span></button>
+    </div>
+    <script>
+function selectTag(showContent,selfObj){   
+    // 操作标签   
+    var tag = document.getElementById("tags").getElementsByTagName("li");   
+    var taglength = tag.length;   
+    for(i=0; i<taglength; i++){   
+        tag[i].className = "";   
+    }   
+    selfObj.parentNode.className = "selectTag";   
+    // 操作内容   
+    for(i=0; j=document.getElementById("tagContent"+i); i++){   
+        j.style.display = "none";   
+    }   
+    document.getElementById(showContent).style.display = "block";   
+}   
+</script>
 </template>
