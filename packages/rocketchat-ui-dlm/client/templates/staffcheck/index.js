@@ -86,7 +86,7 @@ Template.staffdetail.onRendered(function () {
         //               position: [
         //                   { "position": "展厅销售顾问", unit: "展厅销售" },
         //                   { "position": "前台", unit: "展厅销售" }]
-        alert(result.rows[0].position);
+        
         var html = "";
         $.each(result.rows[0].position,
             function (idx, item) {
@@ -95,7 +95,6 @@ Template.staffdetail.onRendered(function () {
                     + '<br /><br />所属组织：' + item.unit
                     + '</h4>';
             });
-        alert(html);
         $("#positiondiv").html(html);
     });
 });

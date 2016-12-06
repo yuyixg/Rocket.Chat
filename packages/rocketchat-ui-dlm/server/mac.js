@@ -87,7 +87,7 @@ Meteor.methods(
 
             //console.log(result.data);
             //return result.data;
-            console.log('getUsersCheckbyUseridDLM');
+            //console.log('getUsersCheckbyUseridDLM');
 
             dataResult = {
                 pageNo: 1,
@@ -107,7 +107,6 @@ Meteor.methods(
             var postdata = {
                 id: data.id
             };
-            console.log(postdata);
 
             //var result = HTTP.call('POST', mmtServerURL + "getUsersbyCompanyDLM",
             //    {
