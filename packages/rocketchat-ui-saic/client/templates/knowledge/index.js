@@ -1,30 +1,26 @@
-Template.knowledgeindex.onRendered(function () {
+Template.knowledgeindex.onRendered(function() {
     var id;
     $('.flex-tab-bar').css("width", "0px");
     $('.main-content').css("right", "0px");
-    //alert(Meteor.absoluteUrl());
-    //Meteor.absoluteUrl.defaultOptions.rootUrl="http://10.130.8.109:3000";
-    //alert(Meteor.absoluteUrl());
     Meteor.call("getcategorybyuserid",
-        function (error, result) {
+        function(error, result) {
             // 向用户显示错误信息并终止
             if (error) {
                 return alert(error.reason);
             }
 
             $.each(result,
-                function (idx, item) {
+                function(idx, item) {
                     $('#mylist').append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
                 });
-            //$("#mylist li:first-child").attr('class', 'active');
             $("a").on("click",
-                function () {
+                function() {
                     $(this).parent("#mylist li").attr('class', 'active');
                     $(this).parent("li").siblings().attr('class', '');
                     $("#KMtable").bootstrapTable('refresh');
                 });
         });
-    $("#search").click(function () {
+    $("#search").click(function() {
         $('#KMtable').bootstrapTable('refresh');
     });
     $('#KMtable').bootstrapTable({
@@ -74,100 +70,172 @@ Template.knowledgeindex.onRendered(function () {
         //是否显示父子表  
         columns: [{
             field: 'id',
-            formatter: function (value, row, index) {
+            formatter: function(value, row, index) {
                 var e = '<a href="/saic/knowledge/index/' + row.id + '">' + row.title + '</a>';
                 return e;
             }
         }],
-        formatLoadingMessage: function () {
+        formatLoadingMessage: function() {
             return "请稍等，正在加载中...";
         }
     });
 
     Meteor.call("getallcategory",
-        function (error, result) {
+        function(error, result) {
             // 向用户显示错误信息并终止
             if (error) {
                 return alert(error.reason);
             }
 
             $.each(result,
-                function (idx, item) {
-                    $('#knowledgeList').append("<div>");
-                    $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' id=" + item.id + "> " + item.name + "</label>");
-                    $.each(item.children,
-                        function (idx, item) {
-                            $('#knowledgeList').append("<label style='margin-right:12px'>  <input type='checkbox' id=" + item.id + "> " + item.name + "</label>");
+                function(idx, Pitem) {
+                    var html = "";
+                    $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' > " + Pitem.name + "</label><ul class='nav nav-pills' id=" + Pitem.id + ">");
+                    $.each(Pitem.children,
+                        function(idx, item) {
+                            $('#' + Pitem.id).append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
 
                         });
-                    $('#knowledgeList').append("</div>");
 
-                })
+                    $('#knowledgeList').append("</ul>");
+                    $("a").on("click",
+                        function() {
+                            // alert(Pitem.id);
+                            // alert($(this).parent("#knowledgeList #" + Pitem.id + " li").attr("class"));
+                            if ($(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class') === 'active')
+                                $(this).parent("#knowledgeList #" + Pitem.id + " li").removeClass();
+                            else
+                                $(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class', 'active');
+                        })
+                });
             $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
-            $("#save").click(function (e) {
-                var arrChk = $("input[type='checkbox']:checked");
+            $("#save").click(function(e) {
+                var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
-                $(arrChk).each(function () {
+                $(arrChk).each(function() {
                     list.push($(this).attr('id'));
                 });
                 Meteor.call("addToFavorite", list,
-                    function (error, result) {
+                    function(error, result) {
                         if (error) {
                             return alert(error.reason);
                         }
                         refresh_li();
+                        //location.reload();
                     });
             });
 
-            $("#remove").click(function (e) {
-                var arrChk = $("input[type='checkbox']:checked");
+            $("#remove").click(function(e) {
+                var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
-                $(arrChk).each(function () {
+                $(arrChk).each(function() {
                     list.push($(this).attr('id'));
-                    //alert(list.length);             
                 });
-
                 Meteor.call("removeFromFavorite", list,
-                    function (error, result) {
+                    function(error, result) {
                         if (error) {
                             return alert(error.reason);
                         }
                         refresh_li();
+                        // location.reload();
                     });
             });
 
 
-            function refresh_li() {
-                $("#mylist").find("li").remove();
-                Meteor.call("getcategorybyuserid",
-                    function (error, result) {
-                        $('#mylist').append("<li class='active'><a id=''>全部</a></li>");
-                        $.each(result,
-                            function (idx, item) {
-                                $('#mylist').append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
-                            });
-                        // $("#mylist li:first-child").attr('class', 'active');
-                        $("a").on("click",
-                            function () {
-                                $(this).parent("#mylist li").attr('class', 'active');
-                                $(this).parent("li").siblings().attr('class', '');
-                                $("#KMtable").bootstrapTable('refresh');
-                            });
-                        $("[type='checkbox']").removeAttr("checked");
 
-                    });
-            }
         });
 
 });
+//局部刷新
+function refresh_li() {
+    $("#mylist").find("li").remove();
+    Meteor.call("getcategorybyuserid",
+        function(error, result) {
+            $('#mylist').append("<li class='active'><a id=''>全部</a></li>");
+            $.each(result,
+                function(idx, item) {
+                    $('#mylist').append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
+                });
+            $("a").on("click",
+                function() {
+                    $(this).parent("#mylist li").attr('class', 'active');
+                    $(this).parent("li").siblings().attr('class', '');
+                    $("#KMtable").bootstrapTable('refresh');
+                });
+            //$("#knowledgeList  li").attr('class', '');
+        });
+    $("#knowledgeList").empty();
+    Meteor.call("getallcategory",
+        function(error, result) {
+            // 向用户显示错误信息并终止
+            if (error) {
+                return alert(error.reason);
+            }
 
-Template.knowledgeindex.onDestroyed(function () {
+            $.each(result,
+                function(idx, Pitem) {
+                    var html = "";
+                    $('#knowledgeList').append("<label style='margin-right:12px;color:#54b4dd' > " + Pitem.name + "</label><ul class='nav nav-pills' id=" + Pitem.id + ">");
+                    $.each(Pitem.children,
+                        function(idx, item) {
+                            $('#' + Pitem.id).append("<li><a id=" + item.id + " >" + item.name + "</a></li>");
+
+                        });
+
+                    $('#knowledgeList').append("</ul>");
+
+                    $("a").on("click",
+                        function() {
+                            // alert(Pitem.id);
+                            // alert($(this).parent("#knowledgeList #" + Pitem.id + " li").attr("class"));
+                            if ($(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class') === 'active')
+                                $(this).parent("#knowledgeList #" + Pitem.id + " li").removeClass();
+                            else
+                                $(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class', 'active');
+                        })
+                });
+            $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
+            $("#save").click(function(e) {
+                var arrChk = $("#knowledgeList  li.active a");
+                var list = new Array();
+                $(arrChk).each(function() {
+                    list.push($(this).attr('id'));
+                });
+                Meteor.call("addToFavorite", list,
+                    function(error, result) {
+                        if (error) {
+                            return alert(error.reason);
+                        }
+                        refresh_li();
+                    });
+            });
+
+            $("#remove").click(function(e) {
+                var arrChk = $("#knowledgeList  li.active a");
+                var list = new Array();
+                $(arrChk).each(function() {
+                    list.push($(this).attr('id'));
+                });
+                Meteor.call("removeFromFavorite", list,
+                    function(error, result) {
+                        if (error) {
+                            return alert(error.reason);
+                        }
+                        refresh_li();
+                        // location.reload();
+                    });
+            });
+
+        });
+
+}
+Template.knowledgeindex.onDestroyed(function() {
     $('.main-content .content').empty();
     $('.flex-tab-bar').css("width", "40px");
     $('.main-content').css("right", "40px");
 });
 
-Template.knowledgedetail.onRendered(function () {
+Template.knowledgedetail.onRendered(function() {
     // $('.main-content .content').css("margin-top", "0px");
     // $('.main-content .fixed-title').css("height", "0px");
     $('.flex-tab-bar').hide();
@@ -177,13 +245,13 @@ Template.knowledgedetail.onRendered(function () {
         id: FlowRouter.getParam('_id')
     };
 
-    $("#back").click(function (e) {
+    $("#back").click(function(e) {
         e.preventDefault();
         FlowRouter.go('knowledge-index');
     });
 
     Meteor.call("getknowledgedetailbyid", getAttributes,
-        function (error, result) {
+        function(error, result) {
             // 向用户显示错误信息并终止
             if (error) {
                 console.log(error);
@@ -191,7 +259,7 @@ Template.knowledgedetail.onRendered(function () {
             }
 
             $.each(result,
-                function (idx, item) {
+                function(idx, item) {
                     $('#detail').html(item.description);
                     $('#title').text(item.title);
                 })
@@ -200,7 +268,7 @@ Template.knowledgedetail.onRendered(function () {
 
 });
 
-Template.knowledgedetail.onDestroyed(function () {
+Template.knowledgedetail.onDestroyed(function() {
     $('.main-content .content').empty();
     // $('.main-content .content').css("margin-top", "60px");
     //$('.main-content .fixed-title').css("height", "");
