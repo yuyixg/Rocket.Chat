@@ -5,9 +5,9 @@ Meteor.methods(
         {
           data: data
         });
-      if (result.data.total == 0) {
-        result.data.rows = [];
-      } else
+      if (result.data.total === 0) {
+             result.data = _.extend( result.data, { rows:[]});
+          } 
         return result.data;
     },
 
