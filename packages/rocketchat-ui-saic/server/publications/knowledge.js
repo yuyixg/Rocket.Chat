@@ -18,14 +18,9 @@ Meteor.methods(
         },
 
         'getcategorybyuserid': function (data) {
-            //var postdata={
-            //       id: data
-            //  };
-            var result = HTTP.call('GET', mmtServerURL + "mmt-web/f/mm/mmtCategory/queryMyMmtCategory");
-            //    {
-            //     data: postdata
-            //   }); 
-            //  console.log(result.data);
+            var result = HTTP.call('GET', mmtServerURL + "mmt-web/f/mm/mmtCategory/queryMyMmtCategory", {
+                params: GetUser()
+            });
             return result.data;
         },
 
