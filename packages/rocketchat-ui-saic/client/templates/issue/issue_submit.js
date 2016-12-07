@@ -34,16 +34,6 @@ Template.issueSubmit.onRendered(function () {
 
 
   //当点击分类时候弹出
-  $('#category').tokenInput('issuegetcategory', {
-    hintText: "请输入需要填写的系统。",//中文字时候需要输入空格。  
-    noResultsText: "没有结果。",
-    searchingText: "查询中...",
-    tokenLimit: 1,
-    method: 'meteor',
-    theme:'facebook'
-  });
-
-
 
 
   $('.jqUploadclass').fileupload(
@@ -131,7 +121,6 @@ Template.issueSubmit.events({
     var imagearray = [];
     for (i in images) {
       image = images[i];
-      console.log(image);
       if (image.id) {
         imagearray.push({ attachUrl: image.url, id: image.id });
       }
@@ -148,6 +137,7 @@ Template.issueSubmit.events({
       attachUrlList: imagearray,
       "remarks": ""
     };
+    console.log(issueAttributes);
     var _id = FlowRouter.getParam('_id');
     if (_id) {
       _.extend(issueAttributes, { id: _id });

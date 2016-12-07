@@ -27,6 +27,35 @@ Meteor.methods(
       return result.data;
 
     },
+    'getOptions': function (options) {
+      console.log(options);
+      check(options, Object);
+
+      var data = {
+        name: options.searchText,
+        "parent": {
+          "id": ""
+        }
+      };
+      console.log(data);
+      var category = HTTP.call('POST', "http://10.64.20.165:8080/mmt-web/f/mm/mmtCategory/queryMmtCategory",
+        {
+          data: data,
+          params: {
+            userid: 'taplc'
+          }
+        });
+      var mycategory = new Array();
+      console.log(category);
+      for (cat in category.data) {
+        var child = category.data[cat];
+        if (child.parentId != '0') {
+          mycategory.push({ label: child.name, value: child.id });
+        }
+      }
+      console.log(mycategory);
+      return mycategory;
+    },
     'issuegetcategory': function (query) {
       var data = {
         name: query.q,
