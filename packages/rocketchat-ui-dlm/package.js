@@ -34,7 +34,7 @@ Package.onUse(function(api) {
   api.addFiles('client/templates/includes/saicDLM.js', 'client');
 
   api.addFiles('client/router.js', 'client');
-
+ api.addFiles('client/main.css', 'client');
   api.addFiles('client/templates/positionchoice/index.html', 'client');
   api.addFiles('client/templates/positionchoice/index.js', 'client');
   api.addFiles('client/templates/proxy/index.html', 'client');

@@ -137,6 +137,55 @@ Meteor.methods(
             return dataResult;
         },
 
+ 'getinvoicechangelist': function(data) {
+            //var result = HTTP.call('POST', mmtServerURL + "getUsersbyCompanyDLM",
+            //    {
+            //        data: {
+            //            userId: userId
+            //       }
+            //    });
 
+            //console.log(result.data);
+            //return result.data;
+            //console.log('getUsersCheckbyUseridDLM');
+
+            dataResult = {
+                pageNo: 1,
+                pageSize: -1,
+                total: 0,
+                rows: [
+                    { "id": 1, carno: "LSJA24U65GS069252", carbrand: "荣威RX5",vehicleconfiguration: "RX5-1.5T-A-5-16-C-2驱-手动尾门-阿里OS-深-约克白", "ownname": "张继", "deliverydate": "2016-8-18", submitdate: "2016-8-19", invoiceno: "0613452", billingdate: "2016-8-29", changereason: "XXXXXXXX" },
+                    { "id": 2, carno: "LSJA24U65GS069253", carbrand: "荣威360",vehicleconfiguration: "360-1.5T-A-5-16-C-2驱-手动尾门-阿里OS-深-约克白", "ownname": "吴刚", "deliverydate": "2016-8-29", submitdate: "2016-8-27", invoiceno: "0613453", billingdate: "2016-8-29", changereason: "XXXXXXXX"  },
+                    { "id": 3, carno: "LSJA24U65GS069254", carbrand: "荣威RX5",vehicleconfiguration: "RX5-1.5T-A-5-16-C-2驱-手动尾门-阿里OS-深-约克白", "ownname": "赵斌", "deliverydate": "2016-8-29", submitdate: "2016-8-20", invoiceno: "0613454", billingdate: "2016-8-29", changereason: "XXXXXXXX"  },
+                    { "id": 4, carno: "LSJA24U65GS069255", carbrand: "荣威360",vehicleconfiguration: "360-1.5T-A-5-16-C-2驱-手动尾门-阿里OS-深-约克白", "ownname": "徐倩", "deliverydate": "2016-8-29", submitdate: "2016-8-27", invoiceno: "0613455", billingdate: "2016-8-29", changereason: "XXXXXXXX"  }]
+            };
+
+            return dataResult;
+        },
+        'getthreechangelist': function(data) {
+            //var result = HTTP.call('POST', mmtServerURL + "getUsersbyCompanyDLM",
+            //    {
+            //        data: {
+            //            userId: userId
+            //       }
+            //    });
+
+            //console.log(result.data);
+            //return result.data;
+            //console.log('getUsersCheckbyUseridDLM');
+
+            dataResult = {
+                pageNo: 1,
+                pageSize: -1,
+                total: 0,
+                rows: [
+                    { "id": 1, carno: "LSJA24U65GS069252", carbrand: "荣威RX5",vehicleconfiguration: "RX5-1.5T-A-5-16-C-2驱-手动尾门-阿里OS-深-约克白", "ownname": "张继", "deliverydate": "2016-8-18", submitdate: "2016-8-19", invoiceno: "0613452", billingdate: "2016-8-29",status:"是",applydate:"2016-8-29", changereason: "XXXXXXXX" },
+                    { "id": 2, carno: "LSJA24U65GS069253", carbrand: "荣威360",vehicleconfiguration: "360-1.5T-A-5-16-C-2驱-手动尾门-阿里OS-深-约克白", "ownname": "吴刚", "deliverydate": "2016-8-29", submitdate: "2016-8-27", invoiceno: "0613453", billingdate: "2016-8-29",status:"是",applydate:"2016-8-29", changereason: "XXXXXXXX"  },
+                    { "id": 3, carno: "LSJA24U65GS069254", carbrand: "荣威RX5",vehicleconfiguration: "RX5-1.5T-A-5-16-C-2驱-手动尾门-阿里OS-深-约克白", "ownname": "赵斌", "deliverydate": "2016-8-29", submitdate: "2016-8-20", invoiceno: "0613454", billingdate: "2016-8-29",status:"是",applydate:"2016-8-29", changereason: "XXXXXXXX"  },
+                    { "id": 4, carno: "LSJA24U65GS069255", carbrand: "荣威360",vehicleconfiguration: "360-1.5T-A-5-16-C-2驱-手动尾门-阿里OS-深-约克白", "ownname": "徐倩", "deliverydate": "2016-8-29", submitdate: "2016-8-27", invoiceno: "0613455", billingdate: "2016-8-29",status:"是",applydate:"2016-8-29", changereason: "XXXXXXXX"  }]
+            };
+
+            return dataResult;
+        },
     }
 )
