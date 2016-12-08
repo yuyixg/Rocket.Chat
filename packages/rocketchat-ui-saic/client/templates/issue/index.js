@@ -53,6 +53,10 @@ Template.issueindex.onRendered(function () {
         columns: [{
             field: 'title',
             title: '标题'
+        },
+        {
+            field:'processName',
+            title:'状态'
         }
         ],
         onClickRow: function (value) {

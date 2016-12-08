@@ -24,8 +24,7 @@ GetDateTime = function (format) {
 }
 GetUser = function () {
   var user = Meteor.user();
-  console.log(user);
-  return { __sid: user.username, userid: user.username }
+  return {userid: user.username }
 }
 
 
