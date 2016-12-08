@@ -1,7 +1,7 @@
 Meteor.methods(
     {
-        'acceptbyid': function (data) {
-            var result = HTTP.call('POST',  "http://10.90.67.77:8081/mmt-web/f/mm/mmtQuestion/claimQuestion",
+        'acceptbyid': function(data) {
+            var result = HTTP.call('POST', mmtServerURL + "/mmt-web/f/mm/mmtQuestion/claimQuestion",
                 {
                     data: data,
                     params: GetUser()
@@ -11,6 +11,6 @@ Meteor.methods(
             }
 
             return result.data;
-        }    
+        }
     }
 )
