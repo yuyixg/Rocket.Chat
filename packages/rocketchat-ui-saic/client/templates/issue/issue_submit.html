@@ -4,7 +4,7 @@
 			<fieldset>
 				<div class="input-line">
 					<div>
-						<input type="text" name="category" id="category" placeholder="问题类别" />
+						  {{> universeSelectize name="category" id="category" options=options placeholder='请输入要查找的系统' optionsMethod="getOptions" multiple=false create=false remove=true}}
 					</div>
 				</div>
 				<div class="input-line">
