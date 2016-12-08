@@ -4,7 +4,9 @@
 			<fieldset>
 				<div class="input-line">
 					<div>
-						  {{> universeSelectize name="category" id="category" options=options placeholder='请输入要查找的系统' optionsMethod="getOptions" multiple=false create=false remove=true}}
+						<select class="form-control" id="txt_category" placeholder="请选择系统">
+							<option value="0">请选择系统</option>
+			        	</select>
 					</div>
 				</div>
 				<div class="input-line">
@@ -45,7 +47,8 @@
 
 			<button type="button" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
 			<button class="button save"><i class="icon-floppy"></i><span>{{_ "Save"}}</span></button>
-
+			<button class="button delete"><i class="icon-floppy"></i><span>关闭此问题</span></button>
+			<button class="button delete"><i class="icon-floppy"></i><span>{{_ "Delete"}}</span></button>
 
 		</div>
 		<script>

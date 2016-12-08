@@ -1,23 +1,32 @@
 
 Template.issueSubmit.onRendered(function () {
 
-      $('.flex-tab-bar').css("width", "0px");
-    $('.main-content').css("right", "0px");
+  $('.flex-tab-bar').css("width", "0px");
+  $('.main-content').css("right", "0px");
+  //设置下拉框系统
+  Meteor.call("issuegetcategory", '', function (error, result) {
+    // 向用户显示错误信息并终止
+    if (error) {
+      console.log(error);
+    }
+    else {
+      $.each(result, function (index, value) {
+        $("#txt_category").prepend("<option value='" + value.value + "'>" + value.label + "</option>");
+      });
+
+    }
+  });
 
   var _id = FlowRouter.getParam('_id');
   if (_id) {
     Meteor.call("issuefindOne", _id, function (error, result) {
       // 向用户显示错误信息并终止
       if (error) {
-        swal({
-          title: "加载失败",
-          type: 'error',
-          text: error.reason
-        });
+        console.log(error);
+        return;
       }
-      console.log(result);
       if (result.category.id) {
-        $('#category').tokenInput("add", { id: result.category.id, name: result.category.name });
+        $('#txt_category').val(result.category.id);
       }
       $('#issue-form').find('[name=title]').val(result.title);
       $('#issue-form').find('[name=description]').val(result.description);
@@ -27,15 +36,10 @@ Template.issueSubmit.onRendered(function () {
         var file = { id: attach.id, name: attach.id, url: attach.attachUrl }
         $('#imagetable').bootstrapTable("append", file);
       }
-
-
     });
   }
 
-
   //当点击分类时候弹出
-
-
   $('.jqUploadclass').fileupload(
     'option',
     'redirect',
@@ -85,10 +89,10 @@ Template.issueSubmit.helpers({
   }
 })
 Template.issueSubmit.onDestroyed(function () {
-    $('.main-content .content').empty();
+  $('.main-content .content').empty();
 
-    $('.flex-tab-bar').css("width", "40px");
-    $('.main-content').css("right", "40px");
+  $('.flex-tab-bar').css("width", "40px");
+  $('.main-content').css("right", "40px");
 })
 
 Template.issueSubmit.events({
@@ -130,7 +134,7 @@ Template.issueSubmit.events({
 
     }
     var issueAttributes = {
-      category: { id: $('#category').val() },
+      category: { id: $('#txt_category').val() },
       title: $('#issue-form').find('[name=title]').val(),
       description: $('#issue-form').find('[name=description]').val(),
       processFlag: "0",

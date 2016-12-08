@@ -4,13 +4,13 @@ Meteor.methods(
       var issue = _.extend(Attributes, {
         createDate: GetDateTime('yyyy-MM-dd hh:mm:ss'), updateDate: GetDateTime('yyyy-MM-dd hh:mm:ss'),
       });
-
+      console.log(issue);
       var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/saveMmtQuestion',
         {
           data: issue,
           params: GetUser()
         });
-
+      console.log(result);
       return result;
     },
     'issueList': function (data) {
@@ -28,38 +28,9 @@ Meteor.methods(
       return result.data;
 
     },
-    'getOptions': function (options) {
-      console.log(options);
-      check(options, Object);
-
+    'issuegetcategory': function (options) {
       var data = {
-        name: options.searchText,
-        "parent": {
-          "id": ""
-        }
-      };
-      console.log(data);
-      var category = HTTP.call('POST', "http://10.64.20.165:8080/mmt-web/f/mm/mmtCategory/queryMmtCategory",
-        {
-          data: data,
-          params: {
-            userid: 'taplc'
-          }
-        });
-      var mycategory = new Array();
-      console.log(category);
-      for (cat in category.data) {
-        var child = category.data[cat];
-        if (child.parentId != '0') {
-          mycategory.push({ label: child.name, value: child.id });
-        }
-      }
-      console.log(mycategory);
-      return mycategory;
-    },
-    'issuegetcategory': function (query) {
-      var data = {
-        name: query.q,
+        name: options,
         "parent": {
           "id": ""
         }
@@ -73,18 +44,29 @@ Meteor.methods(
       for (cat in category.data) {
         var child = category.data[cat];
         if (child.parentId != '0') {
-          mycategory.push(child);
+          mycategory.push({ label: child.name, value: child.id });
         }
       }
+
       return mycategory;
     },
     'issuefindOne': function (id) {
       console.log(id);
-      var issue = HTTP.call('GET', 'http://10.90.67.77:8081/mmt-web/f/mm/mmtQuestion/getMmtQuestion?id=' + id, {
+      var issue = HTTP.call('GET', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/getMmtQuestion?id=' + id, {
+
         params: GetUser()
       });
       return issue.data;
+    },
+    'issuedelete': function (id) {
+      var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/deleteMmtQuestion', {
+        data:{id:id},
+        params: GetUser()
+      });
+      console.log(result);
+      return result;
 
     }
+
   }
 );
