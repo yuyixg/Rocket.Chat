@@ -194,7 +194,9 @@ function refresh_li() {
                                 $(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class', 'active');
                         })
                 });
-            $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
+            $('#knowledgeList').append("<br/><div class='submit'>"+
+            "<button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>"+
+            "&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
             $("#save").click(function(e) {
                 var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
