@@ -14,7 +14,6 @@ Meteor.methods(
       return result;
     },
     'issueList': function (data) {
-     // console.log(data);
       var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
         {
           data: data,
@@ -25,7 +24,6 @@ Meteor.methods(
           rows: []
         });
       }
-      console.log(result.data);
       return result.data;
 
     },
@@ -52,12 +50,10 @@ Meteor.methods(
       return mycategory;
     },
     'issuefindOne': function (id) {
-      //console.log(id);
       var issue = HTTP.call('GET', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/getMmtQuestion?id=' + id, {
 
         params: GetUser()
       });
-      console.log(issue.data);
       return issue.data;
     },
     'issuedelete': function (id) {
