@@ -25,6 +25,7 @@ Template.issueSubmit.onRendered(function () {
         console.log(error);
         return;
       }
+      console.log(result);
       if (result.category.id) {
         $('#txt_category').val(result.category.id);
       }
@@ -36,7 +37,34 @@ Template.issueSubmit.onRendered(function () {
         var file = { id: attach.id, name: attach.id, url: attach.attachUrl }
         $('#imagetable').bootstrapTable("append", file);
       }
+
+      if (result.mmtQuestionAnswer) {
+        var answer = [result.mmtQuestionAnswer];
+        $('#answers').bootstrapTable({
+          uniqueId: 'id',
+          showHeader: true,
+          columns: [
+            {
+              field: 'answer',
+              title: '答复详情'
+            },
+            {
+              field: 'createDate',
+              title: '答复日期'
+            }
+          ],
+          data: answer
+        });
+      }
+
     });
+    //显示回答问题情况
+  }
+  else {
+    $('#backbutton').hide();
+    $('#closebutton').hide();
+    $('#deletebutton').hide();
+
   }
 
   //当点击分类时候弹出
@@ -157,14 +185,73 @@ Template.issueSubmit.events({
         });
       }
       else {
+        if (result.flag === 1) {
+          swal({
+            title: "提交失败",
+            type: 'error',
+            text: result.errorMsg
+          });
+          return;
+        }
         FlowRouter.go('issue-index');
       }
 
     });
 
   },
-  'click button.back'(e/*, instance*/) {
+  'click #gotobackbutton'(e/*, instance*/) {
     e.preventDefault();
     FlowRouter.go('issue-index');
+  },
+
+  'click #deletebutton'(e/*, instance*/) {
+    e.preventDefault();
+    Meteor.call("issuedelete", FlowRouter.getParam('_id'), function (error, result) {
+      // 向用户显示错误信息并终止
+      if (error) {
+        swal({
+          title: "删除",
+          type: 'error',
+          text: error.reason
+        });
+      }
+      else {
+        if (result.flag === 1) {
+          swal({
+            title: "删除错误",
+            type: 'error',
+            text: result.errorMsg
+          });
+          return;
+        }
+        FlowRouter.go('issue-index');
+      }
+
+    });
+  },
+  'click #closebutton'(e/*, instance*/) {
+    e.preventDefault();
+    Meteor.call("issueclose", FlowRouter.getParam('_id'), function (error, result) {
+      // 向用户显示错误信息并终止
+      if (error) {
+        swal({
+          title: "关闭失败",
+          type: 'error',
+          text: error.reason
+        });
+      }
+
+      else {
+ if (result.flag === 1) {
+          swal({
+            title: "关闭失败",
+            type: 'error',
+            text: result.errorMsg
+          });
+          return;
+        }
+        FlowRouter.go('issue-index');
+      }
+    });
   },
 });

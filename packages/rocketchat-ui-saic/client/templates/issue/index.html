@@ -28,8 +28,8 @@
 			   var querydata = {
           title: $('#txt_search').val(),
           page: {
-            "pageNo": params.offset+1,
-            "pageSize":params.limit,
+              "pageNo": params.offset / params.limit + 1,
+                    "pageSize": params.limit,
             "orderBy": "update_date"
           }
         };
