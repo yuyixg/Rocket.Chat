@@ -54,17 +54,22 @@ Template.pendingindex.onRendered(function () {
             {
                 field: 'title'
             },
-
             {
-                field: 'id',
-                align: 'right',
                 formatter: function (value, row, index) {
-                    var e = '<a  class=" gray small" id=del' + row.id + '>领取</a>&nbsp;' +
-                        '<a  class=" gray small" id=deal' + row.id + ' href="/saic/pending/index/' + row.id + '">回复</a>';
-                    return e;
-
+                    return row.createDate.substr(0, 10);
                 }
             }
+            /*
+                        {
+                            field: 'id',
+                            align: 'right',
+                            formatter: function (value, row, index) {
+                                var e = '<a  class=" gray small" id=del' + row.id + '>领取</a>&nbsp;' +
+                                    '<a  class=" gray small" id=deal' + row.id + ' href="/saic/pending/index/' + row.id + '">回复</a>';
+                                return e;
+            
+                            }
+                        }*/
         ],
         onClickRow: function (value) {
             FlowRouter.go('pending-reply', { _id: value.id });
@@ -72,7 +77,7 @@ Template.pendingindex.onRendered(function () {
         formatLoadingMessage: function () {
             return "请稍等，正在加载中...";
         }
-    });    
+    });
 });
 
 Template.pendingindex.onDestroyed(function () {
