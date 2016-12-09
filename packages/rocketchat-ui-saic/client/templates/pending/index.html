@@ -1,0 +1,33 @@
+<template name="pendingindex">
+    <div>
+        <input type="text" id="searchtext" placeholder="问题标题" autocomplete="off">
+        <input type="button" id="search" value="搜索">
+    </div>
+    <div>
+        <table id="pendingtable">
+        </table>
+      <!--
+        <div class='submit'>
+            <button id='close' class='button save'><span>关闭</span></button>&nbsp;&nbsp;
+            <button id='back' class='button remove'><span>删除</span></button>
+        </div>
+        -->
+        <script>
+        function queryParams(params) { //配置参数       
+            var queryParams = {
+                title: $('#searchtext').val(),  
+                page: {
+                    "pageNo": params.offset / params.limit + 1,
+                    "pageSize": params.limit,
+                    "orderBy": "update_date "
+                }
+            };
+            _.extend(queryParams, { processName: "处理中" });
+            return queryParams;
+        }
+    </script>
+    </div>
+
+</template>
+<template name="pendingdeal ">
+</template>

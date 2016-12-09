@@ -30,12 +30,26 @@ AccountBox.addRoute({
     pageTemplate: 'knowledgeindex'
 }, saicManagerRoutes);
 
+AccountBox.addRoute({
+    name: 'pending-index',
+    path: '/pending/index',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '待处理问题',
+    pageTemplate: 'pendingindex'
+}, saicManagerRoutes);
 
 AccountBox.addRoute({
     name: 'knowledge-index',
     path: '/knowledge/index/:_id',
     sideNav: 'saicFlex',
     pageTemplate: 'knowledgedetail'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
+    name: 'pending-index',
+    path: '/pending/index/:_id',
+    sideNav: 'saicFlex',
+    pageTemplate: 'pendingdeal'
 }, saicManagerRoutes);
 
 AccountBox.addRoute({
@@ -84,6 +98,14 @@ AccountBox.addRoute({
     sideNav: 'saicFlex',
     i18nPageTitle: '编辑问题',
     pageTemplate: 'issueSubmit'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
+    name: 'pending-reply',
+    path: '/pendingreply/:_id',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '处理问题',
+    pageTemplate: 'pendingreply'
 }, saicManagerRoutes);
 
 
