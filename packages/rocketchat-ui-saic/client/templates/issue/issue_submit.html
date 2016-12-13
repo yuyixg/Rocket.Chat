@@ -7,7 +7,7 @@
 						<select class="form-control" id="txt_category" placeholder="请选择系统">
 							<option value="0">请选择系统</option>
 			        	</select>
-						<input class="input-medium search-query" id="selecttext_catgory" type="text" />
+						<input class="input-medium search-query" readonly="true" placeholder="请选择系统" id="selecttext_catgory" type="text" />
 
 						<div class="box" id="boxselectcategory">
 							<div class="box-header with-border">
@@ -20,6 +20,7 @@
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
+								<input type="text" id="seach" placeholder="输入要查找的系统" />
 								<div id="select_category">
 								</div>
 							</div>
@@ -83,19 +84,15 @@
 
 	<script>
 			function queryParams(params) {  //配置参数  
-		var	processName= $('#txt_status').val();
 			   var querydata = {
-          title: $('#txt_search').val(),
+          title: $('#seach').val(),
           page: {
               "pageNo": params.offset / params.limit + 1,
                     "pageSize": params.limit,
             "orderBy": "update_date"
           }
         };
-    if(processName!='全部')
-	{
-		_.extend(querydata, { processName: processName });
-	}
+  
 	console.log(querydata);
     return querydata;  
   }  

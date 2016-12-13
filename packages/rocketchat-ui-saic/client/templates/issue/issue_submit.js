@@ -6,7 +6,7 @@ Template.issueSubmit.onRendered(function () {
   $('#selecttext_catgory').click(function () {
     $('#boxselectcategory').show();
     $('#select_category').bootstrapTable({
-      url: 'categorylist',         //请求后台的URL（*）
+      url: 'issueList',         //请求后台的URL（*）
       method: 'meteor',
       striped: true,                      //是否显示行间隔色
       cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -33,15 +33,13 @@ Template.issueSubmit.onRendered(function () {
       columns: [{
         field: 'title',
         title: '标题'
-      },
-      {
-        field: 'processName',
-        title: '状态'
       }
       ],
       onClickRow: function (value) {
         console.log(value);
-        FlowRouter.go('issue-edit', { _id: value.id });
+        
+        $('#selecttext_catgory').val(value.title);
+        $('#boxselectcategory').hide();
       }
     });
     //加载数据
