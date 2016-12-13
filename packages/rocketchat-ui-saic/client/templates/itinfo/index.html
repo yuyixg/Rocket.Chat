@@ -1,19 +1,33 @@
 <template name="itinfoindex">
-
-    <table id="itinfotable">
-    </table>
-
-    <br />
-    <header>
-        <h2 style="font-size:13pt;font-weight:bold">
-            我的提问
-        </h2>
-    </header>
-    <canvas id="myChart" style="float:left"></canvas>
-    <div id="chartLegend"></div>
-    <div>
+    <div class="box box-solid box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">IT公告</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="itinfotable">
+            </table>
+        </div>
     </div>
 
+    <div class="box box-solid box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">我的提问</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <canvas id="myChart" style="float:left"></canvas>
+            <div id="chartLegend"></div>
+        </div>
+    </div>
     <script>
 
  //width="200" height="200" 

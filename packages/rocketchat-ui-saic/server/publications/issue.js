@@ -49,6 +49,19 @@ Meteor.methods(
 
       return mycategory;
     },
+    'categorylist': function (data) {
+      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtCategory",
+        {
+          data: data,
+          params: GetUser()
+        });
+      if (result.data.total == 0) {
+        result.data = _.extend(result.data, {
+          rows: []
+        });
+      }
+      return result.data;
+    },
     'issuefindOne': function (id) {
       var issue = HTTP.call('GET', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/getMmtQuestion?id=' + id, {
 
@@ -61,7 +74,7 @@ Meteor.methods(
         data: { id: id },
         params: GetUser()
       });
-   
+
       return result.data;
 
     },
