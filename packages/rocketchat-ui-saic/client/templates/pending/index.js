@@ -1,5 +1,7 @@
 
 Template.pendingindex.onRendered(function () {
+      var self = this;
+  saicRendered(self);
     $('.flex-tab-bar').css("width", "0px");
     $('.main-content').css("right", "0px");
     $("#search").click(function () {

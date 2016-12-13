@@ -1,18 +1,22 @@
 <template name="pendingindex">
-    <div>
-        <input type="text" id="searchtext" placeholder="问题标题" autocomplete="off">
-        <input type="button" id="search" value="搜索">
-    </div>
-    <div>
-        <table id="pendingtable">
-        </table>
-      <!--
-        <div class='submit'>
-            <button id='close' class='button save'><span>关闭</span></button>&nbsp;&nbsp;
-            <button id='back' class='button remove'><span>删除</span></button>
+    <div class="box box-solid box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">待处理问题</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+            </div>
+            <!-- /.box-tools -->
         </div>
-        -->
-        <script>
+        <div class="box-body">
+            <div>
+                <input type="text" id="searchtext" placeholder="问题标题" autocomplete="off">
+                <input type="button" id="search" value="搜索">
+            </div>
+            <div>
+                <table id="pendingtable">
+                </table>
+                <script>
         function queryParams(params) { //配置参数       
             var queryParams = {
                 title: $('#searchtext').val(),  
@@ -26,8 +30,9 @@
             return queryParams;
         }
     </script>
+            </div>
+        </div>
     </div>
-
 </template>
 <template name="pendingdeal ">
 </template>

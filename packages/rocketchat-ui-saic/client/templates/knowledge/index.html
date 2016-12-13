@@ -4,31 +4,56 @@
         <div><span style="color:white;font-size:20px;">我们随时提供服务</span></div>
         <br/>
         <div> <input type="text" id="searchtext" placeholder="搜索内容" autocomplete="off">
-            <input type="button" id="search" value="搜索">  <a id="link" href="/saic/issuecreate" style="color:white;text-decoration:underline;margin-left:5px">点击提问</a></div>
+            <input type="button" id="search" value="搜索"> <a id="link" href="/saic/issuecreate" style="color:white;text-decoration:underline;margin-left:5px">点击提问</a></div>
 
 
     </div>
-    <div>我的应用<span style="color:#666666">(点击具体应用可获取精确解决方案)</span></div>
+    <!--<div>我的应用<span style="color:#666666">(点击具体应用可获取精确解决方案)</span></div>-->
+    <div class="box box-solid box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="font-size:14px">我的应用(点击具体应用可获取精确解决方案)</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+            </div>
+            <!-- /.box-tools -->
+        </div>
+         <div class="box-body">
     <div class="tab-content">
         <div data-role='listview' class="tab-pane active">
             <ul id="mylist" class="nav nav-pills">
                 <li class="active"><a id="">全部</a></li>
             </ul>
         </div>
+    </div></div>
     </div>
+   <!-- <div>应用推荐<span style="color:#666666">(+号进行选择)</span></div>-->
+    <div class="box box-solid box-warning  collapsed-box">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="font-size:14px">应用推荐(+号进行选择)</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
 
-    <div>应用推荐<span style="color:#666666">(+号进行选择)</span></div>
-    <div>
-        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#knowledgeList">
-        +
-    </button>
-        <div id="knowledgeList" class="collapse">
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <div class="box-body" id="knowledgeList">
+
         </div>
     </div>
-    <div>
-        <table id="KMtable" style=" overflow:auto">
-        </table>
-        <script>
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="font-size:14px"></h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <div class="box-body">
+            <table id="KMtable" style=" overflow:auto">
+            </table>
+            <script>
         function queryParams(params) { //配置参数          
             var queryParams = {
 
@@ -45,15 +70,17 @@
             return queryParams;
         }
     </script>
+        </div>
     </div>
 
 </template>
-<template name="knowledgedetail">
-    <header>
-        <h2 id="title" style="font-size:13pt;font-weight:bold">
-        </h2>
-    </header>
-    <div id="detail" style="font-weight:normal;width:100%;"></div>
+<template name="knowledgedetail">  
+    <div class="box box-solid box-primary">
+        <div class="box-header with-border">
+            <h3 id='title' class="box-title"></h3>
+            <!-- /.box-tools -->
+        </div>
+    <div class="box-body" id="detail" style="font-weight:normal;width:100%;"></div></div>
     <div class='submit'>
         <button type="button" id="back" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
     </div>
