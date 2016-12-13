@@ -50,7 +50,7 @@ Meteor.methods(
       return mycategory;
     },
     'categorylist': function (data) {
-      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtCategory",
+      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtCategory/queryChildMmtCategory",
         {
           data: data,
           params: GetUser()
