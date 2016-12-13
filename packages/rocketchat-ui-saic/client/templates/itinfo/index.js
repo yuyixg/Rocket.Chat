@@ -1,5 +1,7 @@
 Template.itinfoindex.onRendered(function () {
-  saicRendered();
+    var self = this;
+  saicRendered(self);
+
   $('#itinfotable').bootstrapTable({
     url: 'getlist',         //请求后台的URL（*）
     method: 'meteor',                      //请求方式（*）
