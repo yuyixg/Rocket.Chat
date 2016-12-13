@@ -1,7 +1,5 @@
 Template.issueindex.onRendered(function () {
-    $('.flex-tab-bar').css("width", "0px");
-    $('.main-content').css("right", "0px");
-    // $('.selectpicker').selectpicker('val','全部');
+    saicRendered();
     var _type = FlowRouter.getParam('_type');
     if (_type) {
 
@@ -44,7 +42,7 @@ Template.issueindex.onRendered(function () {
         showRefresh: false,                  //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
-        height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+       // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",                     //每一行的唯一标识pagination，一般为主键列
         showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
@@ -55,8 +53,8 @@ Template.issueindex.onRendered(function () {
             title: '标题'
         },
         {
-            field:'processName',
-            title:'状态'
+            field: 'processName',
+            title: '状态'
         }
         ],
         onClickRow: function (value) {

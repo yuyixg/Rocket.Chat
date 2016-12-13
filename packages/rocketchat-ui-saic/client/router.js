@@ -73,6 +73,7 @@ AccountBox.addRoute({
     path: '/issueindex',
     sideNav: 'saicFlex',
     i18nPageTitle: '我的提问',
+    titleTemplate:'saictitleTemplate',
     pageTemplate: 'issueindex'
 }, saicManagerRoutes);
 

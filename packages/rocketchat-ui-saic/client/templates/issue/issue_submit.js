@@ -1,6 +1,6 @@
 
 Template.issueSubmit.onRendered(function () {
-
+$('.dept_select').chosen();
   $('.flex-tab-bar').css("width", "0px");
   $('.main-content').css("right", "0px");
   //设置下拉框系统

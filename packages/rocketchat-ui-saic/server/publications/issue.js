@@ -14,12 +14,7 @@ Meteor.methods(
       return result;
     },
     'issueList': function (data) {
-<<<<<<< HEAD
       var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMyQuestion",
-=======
-      console.log(data);
-      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
->>>>>>> 5d2e56c896419c301bc69ab60b6d59e8d43643ef
         {
           data: data,
           params: GetUser()
