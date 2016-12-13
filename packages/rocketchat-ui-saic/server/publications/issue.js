@@ -14,7 +14,7 @@ Meteor.methods(
       return result;
     },
     'issueList': function (data) {
-      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
+      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMyQuestion",
         {
           data: data,
           params: GetUser()
@@ -58,13 +58,24 @@ Meteor.methods(
     },
     'issuedelete': function (id) {
       var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/deleteMmtQuestion', {
-        data:{id:id},
+        data: { id: id },
         params: GetUser()
       });
-      console.log(result);
-      return result;
+   
+      return result.data;
+
+    },
+    'issueclose': function (id) {
+      console.log(id);
+      var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/closeMmtQuestion', {
+        data: { id: id },
+        params: GetUser()
+      });
+
+      return result.data;
 
     }
+
 
   }
 );

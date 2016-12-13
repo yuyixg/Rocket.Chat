@@ -1,5 +1,5 @@
 import { HTTP } from 'meteor/http';
-mmtServerURL = 'http://10.90.67.77:8081/';
+mmtServerURL = 'http://10.64.20.165:8080/';
 GetDateTime = function (format) {
   var d = new Date();
   var date = {
@@ -24,8 +24,6 @@ GetDateTime = function (format) {
 }
 GetUser = function () {
   var user = Meteor.user();
-  //console.log(user);
-  return { __sid: user.username, userid: user.username }
   return {userid: user.username }
 }
 

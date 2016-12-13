@@ -20,3 +20,10 @@ Template.saicFlex.events({
 		SideNav.closeFlex();
 	}
 });
+
+saicRendered = function () {
+    $('.fixed-title').css("display", "none");
+    $('.flex-tab-bar').css("width", "0px");
+    $('.main-content').css("right", "0px");
+    $('.page-container .content').css('margin-top','0px');
+}

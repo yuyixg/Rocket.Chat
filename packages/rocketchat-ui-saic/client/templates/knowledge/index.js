@@ -1,7 +1,6 @@
 Template.knowledgeindex.onRendered(function() {
     var id;
-    $('.flex-tab-bar').css("width", "0px");
-    $('.main-content').css("right", "0px");
+      saicRendered();
     Meteor.call("getcategorybyuserid",
         function(error, result) {
             // 向用户显示错误信息并终止

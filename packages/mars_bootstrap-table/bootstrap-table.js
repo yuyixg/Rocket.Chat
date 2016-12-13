@@ -1723,7 +1723,6 @@
                     that.trigger('load-error', error.status, error);
                     that.$tableLoading.hide();
                 }
-                 console.log(result);
                 var res = calculateObjectValue(that.options, that.options.responseHandler, [result], result);
                 that.load(res);
                 that.trigger('load-success', res);
