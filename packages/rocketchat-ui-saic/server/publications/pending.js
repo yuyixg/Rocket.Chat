@@ -1,16 +1,25 @@
 Meteor.methods(
     {
-        'acceptbyid': function(data) {
+        'acceptbyid': function (data) {
+           
             var result = HTTP.call('POST', mmtServerURL + "/mmt-web/f/mm/mmtQuestion/claimQuestion",
                 {
                     data: data,
                     params: GetUser()
                 });
-            if (result.data.total === 0) {
-                result.data = _.extend(result.data, { rows: [] });
-            }
+            console.log(result);
+            return result;
+        },
 
-            return result.data;
+        'replyquestion': function (data) {
+           
+            var result = HTTP.call('POST', mmtServerURL + "/mmt-web/f/mm/mmtQuestionAnswer/saveAnswer",
+                {
+                    data: data,
+                    params: GetUser()
+                });
+                
+            return result;
         }
     }
 )

@@ -14,7 +14,11 @@ Meteor.methods(
       return result;
     },
     'issueList': function (data) {
+<<<<<<< HEAD
       var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMyQuestion",
+=======
+      var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
+>>>>>>> bade6cefdbb2692276aeb5a8b7bd0356b3fdbb94
         {
           data: data,
           params: GetUser()
@@ -50,7 +54,6 @@ Meteor.methods(
       return mycategory;
     },
     'issuefindOne': function (id) {
-      console.log(id);
       var issue = HTTP.call('GET', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/getMmtQuestion?id=' + id, {
 
         params: GetUser()

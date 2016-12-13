@@ -29,7 +29,7 @@ height:36px;/*定义搜索框的高度*/
 font-family:"Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;/*定义搜索框的字体，妈蛋我不知道百度搜索框是什么字体，你们凑合看吧*/
 font-size: 14px;
 }
-#search
+#search 
 {
 width:18%;/*提交按钮宽度*/
 height:36px;/*提交按钮高度*/
