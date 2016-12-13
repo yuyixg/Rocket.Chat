@@ -1,12 +1,14 @@
 
-Template.pendingindex.onRendered(function () {
+Template.stafflist.onRendered(function () {
+
     $('.flex-tab-bar').css("width", "0px");
     $('.main-content').css("right", "0px");
+    var _id = FlowRouter.getParam('_id');
     $("#search").click(function () {
-        $('#pendingtable').bootstrapTable('refresh');
+        $('#stafftable').bootstrapTable('refresh');
     });
-    $('#pendingtable').bootstrapTable({
-        url: 'issueList',
+    $('#stafftable').bootstrapTable({
+        url: 'getknowledgeList',
         method: 'meteor',
         striped: true,
         //是否显示行间隔色
@@ -47,32 +49,16 @@ Template.pendingindex.onRendered(function () {
         //是否显示详细视图
         detailView: false,
         //是否显示父子表
-        showHeader: true,
+        showHeader: false,
         search: false,
         //是否显示父子表  
-        columns: [
-            {
-                field: 'title'
-            },
-            {
-                formatter: function (value, row, index) {
-                    return row.createDate.substr(0, 10);
-                }
-            }
-            /*
-                        {
-                            field: 'id',
-                            align: 'right',
-                            formatter: function (value, row, index) {
-                                var e = '<a  class=" gray small" id=del' + row.id + '>领取</a>&nbsp;' +
-                                    '<a  class=" gray small" id=deal' + row.id + ' href="/saic/pending/index/' + row.id + '">回复</a>';
-                                return e;
-            
-                            }
-                        }*/
+        columns: [{
+            field: 'id'
+        }, 
+        { field: 'title' }
         ],
         onClickRow: function (value) {
-            FlowRouter.go('pending-reply', { _id: value.id});
+            FlowRouter.go('pending-reply', {_id:_id, _userid: value.id,_username:value.title });
         },
         formatLoadingMessage: function () {
             return "请稍等，正在加载中...";
@@ -80,8 +66,8 @@ Template.pendingindex.onRendered(function () {
     });
 });
 
-Template.pendingindex.onDestroyed(function () {
+Template.stafflist.onDestroyed(function () {
     $('.main-content .content').empty();
     $('.flex-tab-bar').css("width", "40px");
     $('.main-content').css("right", "40px");
-});
+})

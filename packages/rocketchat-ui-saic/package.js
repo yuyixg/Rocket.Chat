@@ -72,8 +72,10 @@ Package.onUse(function (api) {
 
   api.addFiles('client/templates/pending/index.html', 'client');
   api.addFiles('client/templates/pending/index.js', 'client');
-    api.addFiles('client/templates/pending/pending_reply.html', 'client');
+  api.addFiles('client/templates/pending/pending_reply.html', 'client');
   api.addFiles('client/templates/pending/pending_reply.js', 'client');
+  api.addFiles('client/templates/pending/staff.html', 'client');
+  api.addFiles('client/templates/pending/staff.js', 'client');
 
   api.addFiles('client/templates/issue/index.html', 'client');
   api.addFiles('client/templates/issue/index.js', 'client');
@@ -95,7 +97,7 @@ Package.onUse(function (api) {
   api.addFiles('server/publications/tasks.js', 'server');
   api.addFiles('server/publications/knowledge.js', 'server');
   api.addFiles('server/publications/issue.js', 'server');
-   api.addFiles('server/publications/pending.js', 'server');
+  api.addFiles('server/publications/pending.js', 'server');
 
   api.addFiles('server/publications/fileupload.js', 'server');
   api.addFiles('server/publications/itinfo.js', 'server');

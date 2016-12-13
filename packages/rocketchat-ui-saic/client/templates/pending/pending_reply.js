@@ -3,9 +3,10 @@ Template.pendingreply.onRendered(function () {
 
   $('.flex-tab-bar').css("width", "0px");
   $('.main-content').css("right", "0px");
-
+  var _userid = FlowRouter.getParam('_userid');
   var _id = FlowRouter.getParam('_id');
-  // alert(_id);
+  var _username = FlowRouter.getParam('_username');
+
   if (_id) {
     Meteor.call("issuefindOne", _id, function (error, result) {
       // 向用户显示错误信息并终止
@@ -13,6 +14,7 @@ Template.pendingreply.onRendered(function () {
         console.log(error);
         return;
       }
+      console.log(result);
       if (result.category.id) {
         $('#category').val(result.category.name);
       }
@@ -36,17 +38,22 @@ Template.pendingreply.onRendered(function () {
         $('#replyadd').show();
         $('#pull').hide();
         if (result.mmtQuestionAnswerList.length === 2) {
-          $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' id='other'/></div>" +
-            "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+          replycontrol();
+          $("[name='other']").click(function () {
+            FlowRouter.go('pending-staff', { _id: _id });
+          });
 
         } else {
           $.each(result.mmtQuestionAnswerList,
             function (idx, item) {
               if (item.answer) {
-                $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' id='other" + item.id + "' /></div>" +
+                $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
                   "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
                 $('#other' + item.id).val(item.createBy.name);
+                // $('#other' + item.id).text("测试");
                 $('#replyText' + item.id).val(item.answer);
+                $('#other' + item.id).attr("readonly", "readonly");
+                $('#replyText' + item.id).attr("readonly", "readonly");
               }
             });
 
@@ -62,8 +69,10 @@ Template.pendingreply.onRendered(function () {
             $('#reply').show();
             $('#replyadd').show();
             $('#pull').hide();
-            $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' id='other'/></div>" +
-              "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+            replycontrol();
+            $("[name='other']").click(function () {
+              FlowRouter.go('pending-staff', { _id: _id });
+            });
           };
 
         });
@@ -72,7 +81,7 @@ Template.pendingreply.onRendered(function () {
     $("#reply").click(function (e) {
       var queryParams = {
         id: _id,
-        mmtQuestionAnswer: { "forwardUser": +$('#other').val(), "answer": +$('#replyText').val() }
+        mmtQuestionAnswer: { "forwardUser": +$("[name='other']").val(), "answer": +$('#replyText').val() }
 
       };
       console.log(queryParams.mmtQuestionAnswer.answer);
@@ -90,12 +99,32 @@ Template.pendingreply.onRendered(function () {
     });
 
     $("#replyadd").click(function (e) {
-      $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' id='other'/></div>" +
-        "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+      // replycontrol();
+      Meteor.call("questionadd", _id,
+        function (error, result) {
+          if (error) {
+            return alert(error.reason);
+          } else {
+            //$("[name='other']").click(function () {
+            //FlowRouter.go('pending-staff', { _id: _id });
+            //});
+            FlowRouter.go('pending-index');
+          };
+
+        });
     });
 
   }
 
+  function replycontrol() {
+    if (!_userid) {
+      $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='' value=''/></div>" +
+        "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+    } else {
+      $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='" + _userid + "' value='" + _username + "'/></div>" +
+        "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+    }
+  };
 
 
   $('#imagetable').bootstrapTable({

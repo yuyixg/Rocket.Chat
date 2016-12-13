@@ -108,6 +108,24 @@ AccountBox.addRoute({
     pageTemplate: 'pendingreply'
 }, saicManagerRoutes);
 
+AccountBox.addRoute({
+    name: 'pending-reply',
+    path: '/pendingreply/:_id/:_userid/:_username',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '处理问题',
+    pageTemplate: 'pendingreply'
+}, saicManagerRoutes);
+
+
+
+AccountBox.addRoute({
+    name: 'pending-staff',
+    path: '/pendingstaff/:_id',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '员工信息',
+    pageTemplate: 'stafflist'
+}, saicManagerRoutes);
+
 
 
 AccountBox.addRoute({

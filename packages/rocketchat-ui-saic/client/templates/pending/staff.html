@@ -1,0 +1,25 @@
+<template name='stafflist'>
+     <div>
+        <input type="text" id="searchtext" placeholder="" autocomplete="off">
+        <input type="button" id="search" value="搜索">
+    </div>
+    <div>
+        <table id="stafftable">
+        </table>
+    </div>
+     <script>
+        function queryParams(params) { //配置参数          
+            var queryParams = {
+
+                 title: $('#searchtext').val(),  
+                searchCatId: '',
+                page: {
+                    "pageNo": params.offset / params.limit + 1,
+                    "pageSize": params.limit,
+                    "orderBy": "update_date"
+                }
+            };
+            return queryParams;
+        }
+    </script>
+</template>

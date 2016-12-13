@@ -1,8 +1,10 @@
 <template name="pendingreply">
+
 	<form id="pending-form">
 		<div class="rocket-form">
 			<fieldset>
 				<div class="input-line">
+						
 					<div>
 						<input type="text" name="category" id="category" placeholder="问题类别" />
 					</div>
@@ -29,5 +31,11 @@
 			<input type="button" id='close' value='返回' class="button delete"/>
 
 		</div>
+		<script>
+		     Uploader.uploadUrl="http://10.64.20.165:8080/mmt-web/f/file/upload/knowledge";
+			function deleteissue(id) {
+             $('#imagetable').bootstrapTable('removeByUniqueId', id);
+             }
+			</script>
 	</form>
 </template>
