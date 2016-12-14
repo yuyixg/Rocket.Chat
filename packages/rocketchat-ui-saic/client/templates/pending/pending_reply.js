@@ -39,9 +39,9 @@ Template.pendingreply.onRendered(function () {
         $('#pull').hide();
         if (result.mmtQuestionAnswerList.length === 2) {
           replycontrol();
-         // $("[name='other']").click(function () {
+          // $("[name='other']").click(function () {
           //  FlowRouter.go('pending-staff', { _id: _id });
-        //  });
+          //  });
 
         } else {
           $.each(result.mmtQuestionAnswerList,
@@ -70,9 +70,9 @@ Template.pendingreply.onRendered(function () {
             $('#replyadd').show();
             $('#pull').hide();
             replycontrol();
-           // $("[name='other']").click(function () {
-           //   FlowRouter.go('pending-staff', { _id: _id });
-          //  });
+            // $("[name='other']").click(function () {
+            //   FlowRouter.go('pending-staff', { _id: _id });
+            //  });
           };
 
         });
@@ -130,19 +130,19 @@ Template.pendingreply.onRendered(function () {
 
   function replycontrol() {
     //if (!_userid) {
-      //$("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='' value=''/></div>" +
-      //  "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
-     // $("#replyContent").append(str);
+    //$("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='' value=''/></div>" +
+    //  "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+    // $("#replyContent").append(str);
     //  $('#boxselectother').hide();
     //  bind();
 
-   // } else {
-      // $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='" + _userid + "' value='" + _username + "'/></div>" +
-      //   "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
-      $("#replyContent").append(str);
-      $('#boxselectother').hide();
-      bind();
-   // }
+    // } else {
+    // $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='" + _userid + "' value='" + _username + "'/></div>" +
+    //   "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+    $("#replyContent").append(str);
+    $('#boxselectother').hide();
+    bind();
+    // }
   };
   function bind() {
     $('#select_other').bootstrapTable({
@@ -173,6 +173,10 @@ Template.pendingreply.onRendered(function () {
       columns: [{
         field: 'name',
         title: '姓名'
+      },
+      {
+        field: 'officname',
+        title: '部门'
       }
       ],
       onClickRow: function (value) {
