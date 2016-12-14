@@ -1,7 +1,8 @@
 
 Template.issueSubmit.onRendered(function () {
-  $('.flex-tab-bar').css("width", "0px");
-  $('.main-content').css("right", "0px");
+
+    var self = this;
+  saicRendered(self);
   $('#boxselectcategory').hide();
   $('#select_category').bootstrapTable({
     url: 'categorylist',         //请求后台的URL（*）
@@ -98,11 +99,13 @@ Template.issueSubmit.onRendered(function () {
           columns: [
             {
               field: 'answer',
-              title: '答复详情'
+              title: '答复详情',
+              width:'70%'
             },
             {
               field: 'createDate',
-              title: '答复日期'
+              title: '答复日期',
+               width:'30%'
             }
           ],
           data: answer
@@ -205,6 +208,7 @@ Template.issueSubmit.events({
     var imagearray = [];
     for (i in images) {
       image = images[i];
+      console.log(image);
       if (image.id) {
         imagearray.push({ attachUrl: image.url, id: image.id });
       }

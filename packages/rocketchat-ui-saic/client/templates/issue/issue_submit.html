@@ -1,96 +1,107 @@
 <template name="issueSubmit">
 	<form id="issue-form">
-		<div class="rocket-form">
-			<fieldset>
-				<div class="input-line">
-					<div>
-						<!-- <select class="form-control" id="txt_category" placeholder="请选择系统">
+		<div class="box box-solid box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">问题详情</h3>
+				<div class="box-tools pull-right">
+				</div>
+				<!-- /.box-tools -->
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<div class="rocket-form">
+					<fieldset>
+						<div class="input-line">
+							<div>
+								<!-- <select class="form-control" id="txt_category" placeholder="请选择系统">
 							<option value="0">请选择系统</option>
 			        	</select>-->
-						<div style="display:none">
-								<input type="text"  id="txt_category">
-						</div>
-						<input class="input-medium search-query" readonly="true" placeholder="请选择系统" id="selecttext_catgory" type="text" />
-
-						<div class="box" id="boxselectcategory">
-							<div class="box-header with-border">
-								<h3 class="box-title">请输入要查找的系统</h3>
-								<div class="box-tools pull-right">
-									<!-- Buttons, labels, and many other things can be placed here! -->
-									<!-- Here is a label for example -->
-									<span class="label label-primary" id="closebox">关闭</span>
+								<div style="display:none">
+									<input type="text" id="txt_category">
 								</div>
-								<!-- /.box-tools -->
-							</div>
-							<!-- /.box-header -->
-							<div class="box-body">
-								<div class="form-group" style="margin-top:0px;margin-bottom:0px">			
-									<div class="col-sm-6">
-										<input type="text" class="form-control" id="txt_search" placeholder="请输入要查找的系统">
+								<input class="input-medium search-query" readonly="true" placeholder="请选择系统" id="selecttext_catgory" type="text" />
+
+								<div class="box" id="boxselectcategory">
+									<div class="box-header with-border">
+										<h3 class="box-title">请选择系统</h3>
+										<div class="box-tools pull-right">
+											<!-- Buttons, labels, and many other things can be placed here! -->
+											<!-- Here is a label for example -->
+
+											<span class="label label-primary" id="closebox">关闭</span>
+										</div>
+										<!-- /.box-tools -->
 									</div>
-									<div class="col-sm-4" style="text-align:left;">
-										<button type="button" style="margin-left:50px" id="btn_query" class="btn btn-default">查询</button>
-		
+									<!-- /.box-header -->
+									<div class="box-body">
+					
+										<div class="input-group input-group-sm">
+											<input type="text" id="txt_search" placeholder="请输入要查找的系统" class="form-control">
+											<span class="input-group-btn">
+                                            <button type="button" id="btn_query" class="btn btn-info btn-flat">Go!</button>
+                                        </span>
+										</div>
+										<table id="select_category">
+										</table>
 									</div>
+									<!-- /.box-body -->
 								</div>
-								<table id="select_category">
-								</table>
+								<!-- /.box -->
+
 							</div>
-							<!-- /.box-body -->
 						</div>
-						<!-- /.box -->
-
-					</div>
-				</div>
-				<div class="input-line">
-					<div>
-						<input type="text" name="title" id="title" placeholder="问题标题" />
-					</div>
-				</div>
-				<div class="input-line">
-					<div>
-						<textarea name="description" class="form-control" placeholder="问题内容" id="url" rows="5"></textarea>
-					</div>
-				</div>
-				<div class="input-line" style="display:none">
-					<div class="message-buttons">
-						<div class="mic">
-							<i class="icon-mic" style="font-size:20px" aria-label="{{_ " Record "}}"></i>
+						<div class="input-line">
+							<div>
+								<input type="text" name="title" id="title" placeholder="问题标题" />
+							</div>
 						</div>
-						<div class="stop-mic hidden">
-							<i class="icon-stop" style="font-size:20px" aria-label="{{_ " Stop_Recording "}}"></i>
+						<div class="input-line">
+							<div>
+								<textarea name="description" class="form-control" placeholder="问题内容" id="url" rows="5"></textarea>
+							</div>
 						</div>
-						<div id="micRecord">
+						<div class="input-line" style="display:none">
+							<div class="message-buttons">
+								<div class="mic">
+									<i class="icon-mic" style="font-size:20px" aria-label="{{_ " Record "}}"></i>
+								</div>
+								<div class="stop-mic hidden">
+									<i class="icon-stop" style="font-size:20px" aria-label="{{_ " Stop_Recording "}}"></i>
+								</div>
+								<div id="micRecord">
+								</div>
+							</div>
+
+							<div>
+							</div>
 						</div>
-					</div>
+						<div class="input-line">
 
-					<div>
-					</div>
+							{{>upload_bootstrap multiple=false callbacks=imageuploadCallbacks}}
+
+						</div>
+						<table id="imagetable">
+
+						</table>
+						<table id="answers">
+						</table>
+					</fieldset>
+
+
+					<button id="gotobackbutton" type="button" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
+					<button id="savebutton" class="button save"><i class="icon-floppy"></i><span>{{_ "Save"}}</span></button>
+					<button id="closebutton" type="button" class="button back"><i class="icon-floppy"></i><span>关闭</span></button>
+					<button id="deletebutton" type="button" class="button back"><i class="icon-floppy"></i><span>删除</span></button>
 				</div>
-				<div class="input-line">
-
-					{{>upload_bootstrap multiple=false callbacks=imageuploadCallbacks}}
-
-				</div>
-				<table id="imagetable">
-
-				</table>
-				<table id="answers">
-				</table>
-			</fieldset>
-
-
-			<button id="gotobackbutton" type="button" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
-			<button id="savebutton" class="button save"><i class="icon-floppy"></i><span>{{_ "Save"}}</span></button>
-			<button id="closebutton" type="button" class="button back"><i class="icon-floppy"></i><span>关闭此问题</span></button>
-			<button id="deletebutton" type="button" class="button back"><i class="icon-floppy"></i><span>删除此问题</span></button>
-		</div>
-		<script>
+				<script>
 		     Uploader.uploadUrl="http://10.64.20.165:8080/mmt-web/f/file/upload/knowledge";
 			function deleteissue(id) {
              $('#imagetable').bootstrapTable('removeByUniqueId', id);
              }
 			</script>
+			</div>
+		</div>
+
 	</form>
 
 
