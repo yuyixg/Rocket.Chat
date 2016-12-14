@@ -39,9 +39,9 @@ Template.pendingreply.onRendered(function () {
         $('#pull').hide();
         if (result.mmtQuestionAnswerList.length === 2) {
           replycontrol();
-          $("[name='other']").click(function () {
-            FlowRouter.go('pending-staff', { _id: _id });
-          });
+         // $("[name='other']").click(function () {
+          //  FlowRouter.go('pending-staff', { _id: _id });
+        //  });
 
         } else {
           $.each(result.mmtQuestionAnswerList,
@@ -81,7 +81,7 @@ Template.pendingreply.onRendered(function () {
     $("#reply").click(function (e) {
       var queryParams = {
         id: _id,
-        mmtQuestionAnswer: { "forwardUser": +$("[name='other']").val(), "answer": +$('#replyText').val() }
+        mmtQuestionAnswer: { "forwardUser": +$("txt_other").val(), "answer": +$('#replyText').val() }
 
       };
       console.log(queryParams.mmtQuestionAnswer.answer);
@@ -116,16 +116,82 @@ Template.pendingreply.onRendered(function () {
 
   }
 
-  function replycontrol() {
-    if (!_userid) {
-      $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='' value=''/></div>" +
-        "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
-    } else {
-      $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='" + _userid + "' value='" + _username + "'/></div>" +
-        "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
-    }
-  };
+  var str = "<div class='input-line'><div><div style='display:none'><input type='text'  id='txt_other'>" +
+    "</div><input class='input-medium search-query' readonly='true' placeholder='转给他人处理' id='selectother' type='text' />" +
+    "<div class='box' id='boxselectother'><div class='box-header with-border'>" +
+    "<h3 class='box-title'>请指定人员</h3><div class='box-tools pull-right'>" +
+    "<span class='label label-primary' id='closebox'>关闭</span></div>" +
+    "</div><div class='box-body'><div class='form-group' style='margin-top:0px;margin-bottom:0px'>" +
+    "<div class='col-sm-6'><input type='text' class='form-control' id='txt_search' placeholder='输入姓名'>" +
+    "</div><div class='col-sm-4' style='text-align:center;'>" +
+    "<button type='button'  id='btn_query' class='btn btn-default'>查询</button>" +
+    "</div></div><table id='select_other'></table></div></div></div></div>" +
+    "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>";
 
+  function replycontrol() {
+    //if (!_userid) {
+      //$("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='' value=''/></div>" +
+      //  "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+     // $("#replyContent").append(str);
+    //  $('#boxselectother').hide();
+    //  bind();
+
+   // } else {
+      // $("#replyContent").append("<div><span>转给他人处理：</span><input type='text' name='other' id='" + _userid + "' value='" + _username + "'/></div>" +
+      //   "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>");
+      $("#replyContent").append(str);
+      $('#boxselectother').hide();
+      bind();
+   // }
+  };
+  function bind() {
+    $('#select_other').bootstrapTable({
+      url: 'categorylist',         //请求后台的URL（*）
+      method: 'meteor',
+      striped: true,                      //是否显示行间隔色
+      cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+      pagination: true,                   //是否显示分页（*）
+      sortable: false,                     //是否启用排序
+      sortOrder: "asc",                   //排序方式
+      queryParams: queryParams,//传递参数（*）
+      sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+      pageNumber: 1,                       //初始化加载第一页，默认第一页
+      pageSize: 10,                       //每页的记录行数（*）
+      pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+      search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+      strictSearch: false,
+      showColumns: false,                  //是否显示所有的列
+      showRefresh: false,                  //是否显示刷新按钮
+      minimumCountColumns: 2,             //最少允许的列数
+      clickToSelect: true,                //是否启用点击选中行
+      // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+      uniqueId: "id",                     //每一行的唯一标识pagination，一般为主键列
+      showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
+      cardView: false,                    //是否显示详细视图
+      detailView: false,                   //是否显示父子表
+      showHeader: false,
+      columns: [{
+        field: 'name',
+        title: '标题'
+      }
+      ],
+      onClickRow: function (value) {
+        $('#selectother').val(value.name);
+        $('#txt_other').val(value.id);
+        $('#boxselectother').hide();
+      }
+    });
+    $('#closebox').click(function () {
+      $('#boxselectother').hide();
+    });
+    $('#btn_query').click(function () {
+      $('#select_other').bootstrapTable('refresh');
+    });
+
+    $('#selectother').click(function () {
+      $('#boxselectother').show();
+    });
+  }
 
   $('#imagetable').bootstrapTable({
     uniqueId: 'name',

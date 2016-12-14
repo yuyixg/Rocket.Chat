@@ -4,7 +4,7 @@
 		<div class="rocket-form">
 			<fieldset>
 				<div class="input-line">
-						
+
 					<div>
 						<input type="text" name="category" id="category" placeholder="问题类别" />
 					</div>
@@ -25,10 +25,10 @@
 				</table>
 				<div id="replyContent"></div>
 			</fieldset>
-			<input type="button" id='pull' value="认领" class='button save'/>&nbsp;
-			<input type="button" id='reply' value="保存" class='button remove'/>&nbsp;
-			<input type="button"  id='replyadd' value='问题补充' class='button remove'/>&nbsp;
-			<input type="button" id='close' value='返回' class="button delete"/>
+			<input type="button" id='pull' value="认领" class='button save' />&nbsp;
+			<input type="button" id='reply' value="保存" class='button remove' />&nbsp;
+			<input type="button" id='replyadd' value='问题补充' class='button remove' />&nbsp;
+			<input type="button" id='close' value='返回' class="button delete" />
 
 		</div>
 		<script>
@@ -38,4 +38,17 @@
              }
 			</script>
 	</form>
+	<script>
+			function queryParams(params) {  //配置参数  
+			   var querydata = {
+          name: $('#txt_search').val(),
+          page: {
+              "pageNo": params.offset / params.limit + 1,
+                    "pageSize": params.limit,
+            "orderBy": "update_date"
+          }
+        };
+      return querydata;  
+  }  
+		</script>
 </template>
