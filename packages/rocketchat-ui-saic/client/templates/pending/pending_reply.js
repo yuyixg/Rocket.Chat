@@ -175,7 +175,7 @@ Template.pendingreply.onRendered(function () {
         title: '姓名'
       },
       {
-        field: 'officname',
+        field: 'officeName',
         title: '部门'
       }
       ],
