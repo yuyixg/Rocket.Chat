@@ -70,9 +70,9 @@ Template.pendingreply.onRendered(function () {
             $('#replyadd').show();
             $('#pull').hide();
             replycontrol();
-            $("[name='other']").click(function () {
-              FlowRouter.go('pending-staff', { _id: _id });
-            });
+           // $("[name='other']").click(function () {
+           //   FlowRouter.go('pending-staff', { _id: _id });
+          //  });
           };
 
         });
@@ -119,13 +119,13 @@ Template.pendingreply.onRendered(function () {
   var str = "<div class='input-line'><div><div style='display:none'><input type='text'  id='txt_other'>" +
     "</div><input class='input-medium search-query' readonly='true' placeholder='转给他人处理' id='selectother' type='text' />" +
     "<div class='box' id='boxselectother'><div class='box-header with-border'>" +
-    "<h3 class='box-title'>请指定人员</h3><div class='box-tools pull-right'>" +
+    "<h3 class='box-title'  style='font-size:14px'>请指定人员</h3><div class='box-tools pull-right'>" +
     "<span class='label label-primary' id='closebox'>关闭</span></div>" +
-    "</div><div class='box-body'><div class='form-group' style='margin-top:0px;margin-bottom:0px'>" +
-    "<div class='col-sm-6'><input type='text' class='form-control' id='txt_search' placeholder='输入姓名'>" +
-    "</div><div class='col-sm-4' style='text-align:center;'>" +
-    "<button type='button'  id='btn_query' class='btn btn-default'>查询</button>" +
-    "</div></div><table id='select_other'></table></div></div></div></div>" +
+    "</div><div class='box-body'><div class=input-group input-group-sm'>" +
+    "<input type='text' class='form-control' id='txt_search' placeholder='输入姓名'>" +
+    "<span class='input-group-btn'>" +
+    "<button type='button' id='btn_query' class='btn btn-info btn-flat'>Go!</button></span>" +
+    "</div><table id='select_other'></table></div></div></div></div>" +
     "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>";
 
   function replycontrol() {
@@ -146,7 +146,7 @@ Template.pendingreply.onRendered(function () {
   };
   function bind() {
     $('#select_other').bootstrapTable({
-      url: 'categorylist',         //请求后台的URL（*）
+      url: 'stafflist',         //请求后台的URL（*）
       method: 'meteor',
       striped: true,                      //是否显示行间隔色
       cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -169,10 +169,10 @@ Template.pendingreply.onRendered(function () {
       showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
       cardView: false,                    //是否显示详细视图
       detailView: false,                   //是否显示父子表
-      showHeader: false,
+      showHeader: true,
       columns: [{
         field: 'name',
-        title: '标题'
+        title: '姓名'
       }
       ],
       onClickRow: function (value) {
