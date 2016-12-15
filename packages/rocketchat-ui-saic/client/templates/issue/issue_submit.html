@@ -91,12 +91,12 @@
 
 
 					<button id="gotobackbutton" type="button" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
-					<button id="savebutton" class="button save"><i class="icon-floppy"></i><span>{{_ "Save"}}</span></button>
+					<button id="savebutton" class="button save"><i class="icon-floppy"></i><span>提交</span></button>
 					<button id="closebutton" type="button" class="button back"><i class="icon-floppy"></i><span>关闭</span></button>
-					<button id="deletebutton" type="button" class="button back"><i class="icon-floppy"></i><span>删除</span></button>
+					<button id="deletebutton" type="button" style="display:none" class="button back"><i class="icon-floppy"></i><span>删除</span></button>
 				</div>
 				<script>
-		     Uploader.uploadUrl="http://10.64.20.165:8080/mmt-web/f/file/upload/knowledge";
+		     Uploader.uploadUrl="http://saicapp.ngrok.fusioninfo.cn/mmt-web/f/file/upload/knowledge";
 			function deleteissue(id) {
              $('#imagetable').bootstrapTable('removeByUniqueId', id);
              }

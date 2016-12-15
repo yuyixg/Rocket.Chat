@@ -126,7 +126,7 @@ Template.issueSubmit.onRendered(function () {
   $('.jqUploadclass').fileupload(
     'option',
     'redirect',
-    'http://' + window.location.host + '/fileupoadresult?%s'
+    encodeURI('http://' + window.location.host + '/fileupoadresult?%s')
   );
 
   $('#imagetable').bootstrapTable({
