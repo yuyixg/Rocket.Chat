@@ -28,6 +28,7 @@ Meteor.methods(
                 });
             return result;
         },
+        //获取员工信息
         'stafflist': function (data) {
       var result = HTTP.call('POST', mmtServerURL + "/mmt-web/f/sys/user/listUser",
         {
@@ -39,7 +40,6 @@ Meteor.methods(
           rows: []
         });
       }
-      console.log(result.data);
       return result.data;
     }
     }
