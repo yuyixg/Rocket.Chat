@@ -31,17 +31,13 @@ Template.pendingreply.onRendered(function () {
 
       if (result.processFlag == 0) {
         $('#reply').hide();
-        $('#replyadd').hide();
         $('#pull').show();
       } else {
         $('#reply').show();
-        $('#replyadd').show();
         $('#pull').hide();
+        //console.log(result.mmtQuestionAnswerList.length);
         if (result.mmtQuestionAnswerList.length === 2) {
           replycontrol();
-          // $("[name='other']").click(function () {
-          //  FlowRouter.go('pending-staff', { _id: _id });
-          //  });
 
         } else {
           $.each(result.mmtQuestionAnswerList,
@@ -50,7 +46,6 @@ Template.pendingreply.onRendered(function () {
                 $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
                   "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
                 $('#other' + item.id).val(item.createBy.name);
-                // $('#other' + item.id).text("测试");
                 $('#replyText' + item.id).val(item.answer);
                 $('#other' + item.id).attr("readonly", "readonly");
                 $('#replyText' + item.id).attr("readonly", "readonly");
@@ -67,12 +62,8 @@ Template.pendingreply.onRendered(function () {
             return alert(error.reason);
           } else {
             $('#reply').show();
-            $('#replyadd').show();
             $('#pull').hide();
             replycontrol();
-            // $("[name='other']").click(function () {
-            //   FlowRouter.go('pending-staff', { _id: _id });
-            //  });
           };
 
         });
@@ -98,6 +89,7 @@ Template.pendingreply.onRendered(function () {
       FlowRouter.go('pending-index');
     });
 
+/*
     $("#replyadd").click(function (e) {
       // replycontrol();
       Meteor.call("questionadd", _id,
@@ -113,6 +105,7 @@ Template.pendingreply.onRendered(function () {
 
         });
     });
+    */
 
   }
 

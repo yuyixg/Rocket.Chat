@@ -20,6 +20,8 @@ Template.knowledgeindex.onRendered(function () {
                     $("#KMtable").bootstrapTable('refresh');
                 });
         });
+
+    //查询
     $("#search").click(function () {
         $('#KMtable').bootstrapTable('refresh');
     });
@@ -74,11 +76,19 @@ Template.knowledgeindex.onRendered(function () {
                 var e = '<a href="/saic/knowledge/index/' + row.id + '">' + row.title + '</a>';
                 return e;
             }
+        },
+        {
+            formatter: function (value, row, index) {
+                var e = '<i id="up" style="color:red" class="fa fa-thumbs-up" aria-hidden="true"><span style="font-size:7pt">(10)</span></i><i id="down" style="color:green;padding-left:15px" class="fa fa-thumbs-down" aria-hidden="true"><span style="font-size:7pt">(5)</span></i>';
+                return e;
+            }
+
         }],
         formatLoadingMessage: function () {
             return "请稍等，正在加载中...";
         }
     });
+
 
     Meteor.call("getallcategory",
         function (error, result) {
@@ -250,6 +260,22 @@ Template.knowledgedetail.onRendered(function () {
     $("#back").click(function (e) {
         e.preventDefault();
         FlowRouter.go('knowledge-index');
+    });
+
+
+    //顶
+    $("#up").click(function () {
+        if ($("#up i").attr("class") == "fa fa-thumbs-o-up")
+            $("#up i").removeClass().addClass("fa fa-thumbs-up");
+        else
+            $("#up i").removeClass().addClass("fa fa-thumbs-o-up");
+    });
+    //踩
+    $("#down").click(function () {
+        if ($("#down i").attr("class") == "fa fa-thumbs-o-down")
+            $("#down i").removeClass().addClass("fa fa-thumbs-down");
+        else
+            $("#down i").removeClass().addClass("fa fa-thumbs-o-down");
     });
 
     Meteor.call("getknowledgedetailbyid", getAttributes,
