@@ -29,7 +29,7 @@ Meteor.methods(
             return result;
         },
         'stafflist': function (data) {
-      var result = HTTP.call('POST', "http://10.90.67.77:8081/mmt-web/f/sys/user/listUser",
+      var result = HTTP.call('POST', mmtServerURL + "/mmt-web/f/sys/user/listUser",
         {
           data: data,
           params: GetUser()
