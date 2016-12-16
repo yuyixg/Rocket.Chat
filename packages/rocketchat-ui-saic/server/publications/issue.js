@@ -67,6 +67,7 @@ Meteor.methods(
 
         params: GetUser()
       });
+      console.log(issue.data);
       return issue.data;
     },
     'issuedelete': function (id) {

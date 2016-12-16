@@ -14,13 +14,12 @@ Template.pendingreply.onRendered(function () {
         console.log(error);
         return;
       }
-      console.log(result);
       if (result.category.id) {
-        $('#category').val(result.category.name);
+        $('#category').text(result.category.name);
       }
 
-      $('#pending-form').find('[name=title]').val(result.title);
-      $('#pending-form').find('[name=description]').val(result.description);
+      $('#pending-form').find('[name=title]').text(result.title);
+      $('#pending-form').find('[name=description]').text(result.description);
 
       for (var att in result.attachUrlList) {
         var attach = result.attachUrlList[att];
@@ -32,9 +31,13 @@ Template.pendingreply.onRendered(function () {
       if (result.processFlag == 0) {
         $('#reply').hide();
         $('#pull').show();
+        $('#assign').show();
+        $('#replyadd').hide();
       } else {
         $('#reply').show();
         $('#pull').hide();
+        $('#replyadd').show();
+        $('#assign').hide();
         //console.log(result.mmtQuestionAnswerList.length);
         if (result.mmtQuestionAnswerList.length === 2) {
           replycontrol();
@@ -49,6 +52,7 @@ Template.pendingreply.onRendered(function () {
                 $('#replyText' + item.id).val(item.answer);
                 $('#other' + item.id).attr("readonly", "readonly");
                 $('#replyText' + item.id).attr("readonly", "readonly");
+                replycontrol();
               }
             });
 
@@ -63,6 +67,7 @@ Template.pendingreply.onRendered(function () {
           } else {
             $('#reply').show();
             $('#pull').hide();
+            $('#assign').hide();
             replycontrol();
           };
 
@@ -70,12 +75,30 @@ Template.pendingreply.onRendered(function () {
     });
 
     $("#reply").click(function (e) {
+      if ($('#replyText').val()) {
+        alert("回复内容不能为空！");
+      } else {
+        var queryParams = {
+          id: _id,
+          mmtQuestionAnswer: { "forwardUser": +$("txt_other").val(), "answer": +$('#replyText').val() }
+
+        };
+        Meteor.call("replyquestion", queryParams,
+          function (error, result) {
+            if (error) {
+              return alert(error.reason);
+            } else
+            { FlowRouter.go('pending-index'); }
+          });
+      }
+    });
+
+    $("#assign").click(function (e) {
       var queryParams = {
         id: _id,
         mmtQuestionAnswer: { "forwardUser": +$("txt_other").val(), "answer": +$('#replyText').val() }
 
       };
-      console.log(queryParams.mmtQuestionAnswer.answer);
       Meteor.call("replyquestion", queryParams,
         function (error, result) {
           if (error) {
@@ -83,29 +106,32 @@ Template.pendingreply.onRendered(function () {
           } else
           { FlowRouter.go('pending-index'); }
         });
+
     });
+
     $("#close").click(function (e) {
       e.preventDefault();
       FlowRouter.go('pending-index');
     });
 
-/*
+
     $("#replyadd").click(function (e) {
       // replycontrol();
-      Meteor.call("questionadd", _id,
-        function (error, result) {
-          if (error) {
-            return alert(error.reason);
-          } else {
-            //$("[name='other']").click(function () {
-            //FlowRouter.go('pending-staff', { _id: _id });
-            //});
-            FlowRouter.go('pending-index');
-          };
+      if ($('#replyText').val()) {
+        alert("回复内容不能为空！");
+      } else {
+        Meteor.call("questionadd", _id,
+          function (error, result) {
+            if (error) {
+              return alert(error.reason);
+            } else {
+              FlowRouter.go('pending-index');
+            };
 
-        });
+          });
+      }
     });
-    */
+
 
   }
 
@@ -119,7 +145,7 @@ Template.pendingreply.onRendered(function () {
     "<span class='input-group-btn'>" +
     "<button type='button' id='btn_query' class='btn btn-info btn-flat'>Go!</button></span>" +
     "</div><table id='select_other'></table></div></div></div></div>" +
-    "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5'></textarea></div>";
+    "<div><textarea  class='form-control' placeholder='回复内容' id='replyText' rows='5' required></textarea></div>";
 
   function replycontrol() {
     //if (!_userid) {

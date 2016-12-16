@@ -3,45 +3,55 @@
 	<form id="pending-form">
 		<div class="rocket-form">
 			<fieldset>
-					<div class="input-line">
-					<div>
-						<input type="text" name="user" id="user" placeholder="提问用户" />
+				<div class="box box-solid box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title" style="font-size:14px">问题信息</h3>
+						<!-- /.box-tools -->
 					</div>
-				</div>
-				<div class="input-line">
-					<div>
-						<input type="text" name="category" id="category" placeholder="问题类别" />
-					</div>
-				</div>
-				<div class="input-line">
-					<div>
-						<input type="text" name="title" id="title" placeholder="问题标题" />
-					</div>
-				</div>
-				<div class="input-line">
-					<div>
-						<textarea name="description" class="form-control" placeholder="问题内容" id="url" rows="5"></textarea>
-					</div>
-				</div>
+					<div class="box-body">
+						<div>
+							<lable>姓名：</lable>
+							<lable>111</lable>
+						</div><br />
+						<div>
+							<lable>工号：</lable>
+							<lable>111</lable>
+						</div> <br />
+						<div>
+							<lable>部门：</lable>
+							<lable>111</lable>
+						</div><br />
+						<div>
+							<lable>邮箱：</lable>
+							<lable>111</lable>
+						</div><br />
+						<div>
+							<lable>系统：</lable><label name="category" id="category"></label>
+						</div>
+						<br />
+						<div>
+							<lable>标题：</lable><label name="title" id="title"></label>
+						</div><br />
+						<div>
+							<lable>内容：</lable><label name="description" id="url" rows="5"></label>
+						</div>
+						<br />
+						<table id="imagetable">
 
-				<table id="imagetable">
-
-				</table>
+						</table>
+					</div>
+				</div>
 				<div id="replyContent"></div>
 			</fieldset>
-			<input type="button" id='pull' value="认领" class='button save' />&nbsp;
-			<input type="button" id='reply' value="提交" class='button remove' />&nbsp;
-		<!--<input type="button" id='replyadd' value='问题补充' class='button remove' />&nbsp;-->
-			<input type="button" id='close' value='返回' class="button delete" />
+			<input type="button" id='assign' value="分配" class='button save' />
+			<input style="padding-left:10px" type="button" id='pull' value="认领" class='button save' />
+			<input style="padding-left:10px" type="button" id='reply' value="提交" class='button remove' />
+			<input style="padding-left:10px" type="button" id='replyadd' value='问题补充' class='button remove' />
+			<input style="padding-left:10px" type="button" id='close' value='返回' class="button delete" />
 
 		</div>
-		<script>
-		     Uploader.uploadUrl="http://10.64.20.165:8080/mmt-web/f/file/upload/knowledge";
-			function deleteissue(id) {
-             $('#imagetable').bootstrapTable('removeByUniqueId', id);
-             }
-			</script>
 	</form>
+
 	<script>
 			function queryParams(params) {  //配置参数  
 			   var querydata = {
