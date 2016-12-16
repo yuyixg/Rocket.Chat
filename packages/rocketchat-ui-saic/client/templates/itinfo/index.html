@@ -41,9 +41,16 @@
 
 
 <template name="itinfodetail">
-    <h2>
-        <div id="itinfotitle"></div>
-    </h2>
-    <div id="itinfodetail"></div>
-    <div id="itAttachment"></div>
+    <div class="box box-solid box-primary">
+        <div class="box-header with-border">
+            <h3 id='title' class="box-title"></h3>
+            <!-- /.box-tools -->
+        </div>
+        <div class="box-body" id="detail" style="font-weight:normal;width:100%;"></div>        
+    </div>
+    <div class='submit'>
+        <button type="button" id="back" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
+
+
+    </div>
 </template>

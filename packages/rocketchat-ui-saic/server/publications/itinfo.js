@@ -12,17 +12,16 @@ Meteor.methods(
             //console.log(result.data);
             return result.data;
         },
-        'getQuestionCount': function (userId) {
+        'getQuestionCount': function () {
 
             var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/getQuestionCount",
                 {
                     data: {
-                        userId: userId,
-                        params: GetUser()
-                    }
+                        userId: GetUser().userid,
+                    },
+                    params: GetUser()
                 });
 
-            //console.log(result.data);
             return result.data;
         },
         'getlist': function (data) {
@@ -39,7 +38,7 @@ Meteor.methods(
             //        rows: []
             //    });
             //}
-           
+
             return result.data;
         }
     }
