@@ -1,5 +1,5 @@
 
-Template.pendingreply.onRendered(function() {
+Template.pendingreply.onRendered(function () {
 
     $('.flex-tab-bar').css("width", "0px");
     $('.main-content').css("right", "0px");
@@ -8,19 +8,20 @@ Template.pendingreply.onRendered(function() {
     var _username = FlowRouter.getParam('_username');
 
     if (_id) {
-        Meteor.call("issuefindOne", _id, function(error, result) {
+        Meteor.call("issuefindOne", _id, function (error, result) {
             // 向用户显示错误信息并终止
             if (error) {
                 console.log(error);
                 return;
             }
+
             if (result.category.id) {
                 $('#category').text(result.category.name);
             }
-            $('#pending-form').find('[name=name]').text(result.title);
-            $('#pending-form').find('[name=no]').text(result.description); 
-            $('#pending-form').find('[name=dept]').text(result.description);
-            $('#pending-form').find('[name=email]').text(result.title);
+            $('#pending-form').find('[name=name]').text(result.createBy.name);
+            $('#pending-form').find('[name=no]').text(result.createBy.no);
+            $('#pending-form').find('[name=dept]').text(result.createBy.officeName);
+            $('#pending-form').find('[name=email]').text(result.createBy.email);
             $('#pending-form').find('[name=title]').text(result.title);
             $('#pending-form').find('[name=description]').text(result.description);
 
@@ -47,7 +48,7 @@ Template.pendingreply.onRendered(function() {
 
                 } else {
                     $.each(result.mmtQuestionAnswerList,
-                        function(idx, item) {
+                        function (idx, item) {
                             if (item.answer) {
                                 $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
                                     "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
@@ -62,9 +63,9 @@ Template.pendingreply.onRendered(function() {
                 }
             }
         });
-        $("#pull").click(function(e) {
+        $("#pull").click(function (e) {
             Meteor.call("acceptbyid", _id,
-                function(error, result) {
+                function (error, result) {
                     if (error) {
                         return alert(error.reason);
                     } else {
@@ -77,7 +78,7 @@ Template.pendingreply.onRendered(function() {
                 });
         });
 
-        $("#reply").click(function(e) {
+        $("#reply").click(function (e) {
             if ($('#replyText').val()) {
                 alert("回复内容不能为空！");
             } else {
@@ -87,7 +88,7 @@ Template.pendingreply.onRendered(function() {
 
                 };
                 Meteor.call("replyquestion", queryParams,
-                    function(error, result) {
+                    function (error, result) {
                         if (error) {
                             return alert(error.reason);
                         } else
@@ -96,9 +97,9 @@ Template.pendingreply.onRendered(function() {
             }
         });
 
-        $("#assign").click(function(e) {
-           Meteor.call("acceptbyid", _id,
-                function(error, result) {
+        $("#assign").click(function (e) {
+            Meteor.call("acceptbyid", _id,
+                function (error, result) {
                     if (error) {
                         return alert(error.reason);
                     } else {
@@ -111,19 +112,18 @@ Template.pendingreply.onRendered(function() {
                 });
         });
 
-        $("#close").click(function(e) {
+        $("#close").click(function (e) {
             e.preventDefault();
             FlowRouter.go('pending-index');
         });
 
 
-        $("#replyadd").click(function(e) {
-            // replycontrol();
+        $("#replyadd").click(function (e) {
             if ($('#replyText').val()) {
                 alert("回复内容不能为空！");
             } else {
                 Meteor.call("questionadd", _id,
-                    function(error, result) {
+                    function (error, result) {
                         if (error) {
                             return alert(error.reason);
                         } else {
@@ -138,7 +138,7 @@ Template.pendingreply.onRendered(function() {
     }
 
     var str = "<div class='input-line'><div><div style='display:none'><input type='text'  id='txt_other'>" +
-        "</div><input class='input-medium search-query' readonly='true' placeholder='转给他人处理' id='selectother' type='text' />" +
+        "</div><input class='input-medium search-query' readonly='true' placeholder='点击转给他人' id='selectother' type='text' />" +
         "<div class='box' id='boxselectother'><div class='box-header with-border'>" +
         "<h3 class='box-title'  style='font-size:14px'>请指定人员</h3><div class='box-tools pull-right'>" +
         "<span class='label label-primary' id='closebox'>关闭</span></div>" +
@@ -200,20 +200,20 @@ Template.pendingreply.onRendered(function() {
                 title: '部门'
             }
             ],
-            onClickRow: function(value) {
+            onClickRow: function (value) {
                 $('#selectother').val(value.name);
                 $('#txt_other').val(value.id);
                 $('#boxselectother').hide();
             }
         });
-        $('#closebox').click(function() {
+        $('#closebox').click(function () {
             $('#boxselectother').hide();
         });
-        $('#btn_query').click(function() {
+        $('#btn_query').click(function () {
             $('#select_other').bootstrapTable('refresh');
         });
 
-        $('#selectother').click(function() {
+        $('#selectother').click(function () {
             $('#boxselectother').show();
         });
     }
@@ -225,7 +225,7 @@ Template.pendingreply.onRendered(function() {
             {
                 field: 'url',
                 title: '预览',
-                formatter: function(value, row, index) {
+                formatter: function (value, row, index) {
                     var image = '<a href="' + value + '" data-lightbox="image1"><img style="width:100px;height:60px" src="' + value + '" /></a>';
                     return image;
                 }
@@ -234,7 +234,7 @@ Template.pendingreply.onRendered(function() {
     });
 })
 
-Template.pendingreply.onDestroyed(function() {
+Template.pendingreply.onDestroyed(function () {
     $('.main-content .content').empty();
     $('.flex-tab-bar').css("width", "40px");
     $('.main-content').css("right", "40px");
