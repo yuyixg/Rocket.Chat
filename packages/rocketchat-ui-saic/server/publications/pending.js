@@ -1,5 +1,6 @@
 Meteor.methods(
     {
+        //获取待处理问题
         'issueallList': function (data) {
             var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
                 {
@@ -11,7 +12,6 @@ Meteor.methods(
                     rows: []
                 });
             }
-            console.log(result.data);
             return result.data;
 
         },
