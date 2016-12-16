@@ -35,7 +35,7 @@
 
 									<!-- /.box-header -->
 									<div class="box-body">
-					
+
 										<div class="input-group input-group-sm">
 											<input type="text" id="txt_search" placeholder="请输入要查找的系统" class="form-control">
 											<span class="input-group-btn">
@@ -79,8 +79,25 @@
 						</div>
 						<div class="input-line">
 
-							{{>upload_bootstrap multiple=false callbacks=imageuploadCallbacks}}
+							<div id="imageupload">
+								<div class="uploadPanel">
+									<!-- The fileinput-button span is used to style the file input field as button  -->
+									<div class="btn btn-primary btn-file upload-control">
+										<i class="glyphicon glyphicon-upload"></i>浏览上传… <input type="file" class="jqUploadclass"  data-form-data="{}" accept="image/gif,image/jpeg,image/jpg,image/png,image/bmp">
+									</div>
+									<div class="form-control upload-control">
+										<div class="progressInner">
+											<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+												style="width:0%">
 
+											</div>
+											<div class="progress-label">
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<table id="imagetable">
 
@@ -96,7 +113,7 @@
 					<button id="deletebutton" type="button" style="display:none" class="button back"><i class="icon-floppy"></i><span>删除</span></button>
 				</div>
 				<script>
-		     Uploader.uploadUrl="http://saicapp.ngrok.fusioninfo.cn/mmt-web/f/file/upload/knowledge";
+		     Uploader.uploadUrl="http://appfileupload.ngrok.fusioninfo.cn/mmt-web/f/file/upload/knowledge";
 			function deleteissue(id) {
              $('#imagetable').bootstrapTable('removeByUniqueId', id);
              }
