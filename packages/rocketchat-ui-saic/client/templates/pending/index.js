@@ -8,7 +8,7 @@ Template.pendingindex.onRendered(function () {
         $('#pendingtable').bootstrapTable('refresh');
     });
     $('#pendingtable').bootstrapTable({
-        url: 'issueList',
+        url: 'issueallList',
         method: 'meteor',
         striped: true,
         //是否显示行间隔色
@@ -26,7 +26,7 @@ Template.pendingindex.onRendered(function () {
         //分页方式：client客户端分页，server服务端分页（*）
         pageNumber: 1,
         //初始化加载第一页，默认第一页
-        pageSize: 8,
+        pageSize: 10,
         //每页的记录行数（*）
         pageList: [10, 25, 50, 100],
         //可供选择的每页的行数（*）
@@ -54,24 +54,15 @@ Template.pendingindex.onRendered(function () {
         //是否显示父子表  
         columns: [
             {
-                field: 'title'
+                field: 'title',
+                title:'标题'
             },
             {
+                title:'发布时间',
                 formatter: function (value, row, index) {
                     return row.createDate.substr(0, 10);
                 }
             }
-            /*
-                        {
-                            field: 'id',
-                            align: 'right',
-                            formatter: function (value, row, index) {
-                                var e = '<a  class=" gray small" id=del' + row.id + '>领取</a>&nbsp;' +
-                                    '<a  class=" gray small" id=deal' + row.id + ' href="/saic/pending/index/' + row.id + '">回复</a>';
-                                return e;
-            
-                            }
-                        }*/
         ],
         onClickRow: function (value) {
             FlowRouter.go('pending-reply', { _id: value.id});

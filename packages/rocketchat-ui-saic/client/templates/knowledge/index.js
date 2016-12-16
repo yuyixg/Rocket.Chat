@@ -44,7 +44,7 @@ Template.knowledgeindex.onRendered(function () {
         //分页方式：client客户端分页，server服务端分页（*）
         pageNumber: 1,
         //初始化加载第一页，默认第一页
-        pageSize: 8,
+        pageSize: 10,
         //每页的记录行数（*）
         pageList: [10, 25, 50, 100],
         //可供选择的每页的行数（*）
@@ -67,19 +67,21 @@ Template.knowledgeindex.onRendered(function () {
         //是否显示详细视图
         detailView: false,
         //是否显示父子表
-        showHeader: false,
+        showHeader: true,
         search: false,
         //是否显示父子表  
         columns: [{
             field: 'id',
+            title:'主题',
             formatter: function (value, row, index) {
                 var e = '<a href="/saic/knowledge/index/' + row.id + '">' + row.title + '</a>';
                 return e;
             }
         },
         {
+            title:'评价',
             formatter: function (value, row, index) {
-                var e = '<i id="up" style="color:red" class="fa fa-thumbs-up" aria-hidden="true"><span style="font-size:7pt">(10)</span></i><i id="down" style="color:green;padding-left:15px" class="fa fa-thumbs-down" aria-hidden="true"><span style="font-size:7pt">(5)</span></i>';
+                var e = '<i id="up" style="color:red" class="fa fa-thumbs-up" aria-hidden="true"><span style="font-size:7pt">(10)</span></i><i id="down" style="color:green;padding-left:10px" class="fa fa-thumbs-down" aria-hidden="true"><span style="font-size:7pt">(5)</span></i>';
                 return e;
             }
 
@@ -265,14 +267,14 @@ Template.knowledgedetail.onRendered(function () {
 
     //顶
     $("#up").click(function () {
-        if ($("#up i").attr("class") == "fa fa-thumbs-o-up")
+        if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down")
             $("#up i").removeClass().addClass("fa fa-thumbs-up");
         else
             $("#up i").removeClass().addClass("fa fa-thumbs-o-up");
     });
     //踩
     $("#down").click(function () {
-        if ($("#down i").attr("class") == "fa fa-thumbs-o-down")
+     if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down")
             $("#down i").removeClass().addClass("fa fa-thumbs-down");
         else
             $("#down i").removeClass().addClass("fa fa-thumbs-o-down");

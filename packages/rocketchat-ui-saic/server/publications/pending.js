@@ -1,5 +1,20 @@
 Meteor.methods(
     {
+        //获取待处理问题
+        'issueallList': function (data) {
+            var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
+                {
+                    data: data,
+                    params: GetUser()
+                });
+            if (result.data.total == 0) {
+                result.data = _.extend(result.data, {
+                    rows: []
+                });
+            }
+            return result.data;
+
+        },
         //认领
         'acceptbyid': function (data) {
             var result = HTTP.call('POST', mmtServerURL + "/mmt-web/f/mm/mmtQuestion/claimQuestion",
@@ -28,19 +43,19 @@ Meteor.methods(
                 });
             return result;
         },
+        //获取员工信息
         'stafflist': function (data) {
-      var result = HTTP.call('POST', mmtServerURL + "/mmt-web/f/sys/user/listUser",
-        {
-          data: data,
-          params: GetUser()
-        });
-      if (result.data.total == 0) {
-        result.data = _.extend(result.data, {
-          rows: []
-        });
-      }
-      console.log(result.data);
-      return result.data;
-    }
+            var result = HTTP.call('POST', mmtServerURL + "/mmt-web/f/sys/user/listUser",
+                {
+                    data: data,
+                    params: GetUser()
+                });
+            if (result.data.total == 0) {
+                result.data = _.extend(result.data, {
+                    rows: []
+                });
+            }
+            return result.data;
+        }
     }
 )
