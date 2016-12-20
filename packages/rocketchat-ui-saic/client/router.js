@@ -26,7 +26,7 @@ AccountBox.addRoute({
     name: 'knowledge-index',
     path: '/knowledge/index',
     sideNav: 'saicFlex',
-    i18nPageTitle: '知识库',
+    i18nPageTitle: '运行',
     pageTemplate: 'knowledgeindex'
 }, saicManagerRoutes);
 
