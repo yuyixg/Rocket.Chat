@@ -102,6 +102,7 @@ Package.onUse(function (api) {
   api.addFiles('server/publications/fileupload.js', 'server');
   api.addFiles('server/publications/itinfo.js', 'server');
 
+	api.addAssets('client/assets/ETS.png', 'client');
 
 });
 
