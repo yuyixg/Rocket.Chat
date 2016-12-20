@@ -2,6 +2,7 @@ Template.knowledgeindex.onRendered(function () {
     var self = this;
     saicRendered(self);
     var id;
+    $("#category").hide();
     Meteor.call("getcategorybyuserid",
         function (error, result) {
             // 向用户显示错误信息并终止
@@ -20,6 +21,18 @@ Template.knowledgeindex.onRendered(function () {
                     $("#KMtable").bootstrapTable('refresh');
                 });
         });
+
+    //订制产品
+    $("[name=dz]").click(function () {
+        if ($("[name=dz]").text() == "订制产品") {
+            $('#category').show();
+            $("[name=dz]").text("隐藏");
+        }
+        else {
+            $("[name=dz]").text("订制产品");
+            $('#category').hide();
+        }
+    });
 
     //查询
     $("#search").click(function () {
@@ -130,8 +143,8 @@ Template.knowledgeindex.onRendered(function () {
                                 $(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class', 'active');
                         })
                 });
-            $('#knowledgeList').append("<br/><div class='submit'><button name='save' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd' id='search'><span>+添加至我的常用产品</span></button>" +
-                "&nbsp<button name='remove' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span> -从我的常用产品中删除</span></button></div>");
+            $('#knowledgeList').append("<br/><div class='submit'><button name='save' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd' id='search'><span>+添加</span></button>" +
+                "&nbsp<button name='remove' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span> -移除</span></button></div>");
             $("[name=save]").click(function (e) {
                 var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
@@ -216,8 +229,8 @@ function refresh_li() {
                         })
                 });
             $('#knowledgeList').append("<br/><div class='submit'>" +
-                "<button name='save' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span>+添加至我的常用产品</span></button>" +
-                "&nbsp<button name='remove' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span> -从我的常用产品中删除</span></button></div>");
+                "<button name='save' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span>+添加</span></button>" +
+                "&nbsp<button name='remove' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span> -移除</span></button></div>");
             $("[name=save]").click(function (e) {
                 var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
@@ -268,7 +281,7 @@ Template.knowledgedetail.onRendered(function () {
         id: FlowRouter.getParam('_id')
     };
 
-    $("#back").click(function (e) {
+    $("[name=back]").click(function (e) {
         e.preventDefault();
         FlowRouter.go('knowledge-index');
     });
