@@ -281,7 +281,7 @@ Template.knowledgedetail.onRendered(function () {
         id: FlowRouter.getParam('_id')
     };
 
-    $("[name=back]").click(function (e) {
+    $("#back").click(function (e) {
         e.preventDefault();
         FlowRouter.go('knowledge-index');
     });
@@ -291,15 +291,24 @@ Template.knowledgedetail.onRendered(function () {
     $("#up").click(function () {
         if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down") {
             $("#up i").removeClass().addClass("fa fa-thumbs-up");
+            swal("谢谢!", "", "success");
         }
         else if ($("#down i").attr("class") == "fa fa-thumbs-down") {
-            alert("您已顶过该帖，请勿重复顶贴！");
+            swal("您已顶过该帖，请勿重复顶贴！", "", "warning");
         }
         else {
-            if (confirm("确定取消吗？"))
-                $("#up i").removeClass().addClass("fa fa-thumbs-o-up");
-            else
-                return false;
+            swal({
+                title: "确定取消吗？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes!",
+                closeOnConfirm: true
+            },
+                function () {
+                    $("#up i").removeClass().addClass("fa fa-thumbs-o-up");
+                });
+
         }
 
         upordown(1);
@@ -309,16 +318,23 @@ Template.knowledgedetail.onRendered(function () {
     $("#down").click(function () {
         if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down") {
             $("#down i").removeClass().addClass("fa fa-thumbs-down");
-
+            swal("谢谢!", "", "success");
         }
         else if ($("#up i").attr("class") == "fa fa-thumbs-up") {
-            alert("您已顶过该帖，请勿重复顶贴！");
+            swal("您已顶过该帖，请勿重复顶贴！", "", "warning");
         }
         else {
-            if (confirm("确定取消吗？"))
-            { $("#down i").removeClass().addClass("fa fa-thumbs-o-down"); }
-            else
-                return false;
+            swal({
+                title: "确定取消吗？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes!",
+                closeOnConfirm: true
+            },
+                function () {
+                    $("#down i").removeClass().addClass("fa fa-thumbs-o-down");
+                });
         }
         upordown(-1);
     });
