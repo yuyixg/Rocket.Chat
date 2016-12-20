@@ -1,6 +1,6 @@
 Template.issueindex.onRendered(function () {
     var self = this;
-  saicRendered(self);
+    saicRendered(self);
     var _type = FlowRouter.getParam('_type');
     if (_type) {
 
@@ -17,6 +17,14 @@ Template.issueindex.onRendered(function () {
                 $('#txt_status').val('已完成');
                 $("#txt_status").find("option[text='已完成']").attr("selected", true);
                 break;
+            case '4':
+                $('#txt_status').val('需补充');
+                $("#txt_status").find("option[text='需补充']").attr("selected", true);
+                break;
+            case '5':
+                $('#txt_status').val('已撤销');
+                $("#txt_status").find("option[text='已撤销']").attr("selected", true);
+                break;
 
         }
     }
@@ -26,7 +34,7 @@ Template.issueindex.onRendered(function () {
     $('#issuetable').bootstrapTable({
         url: 'issueList',         //请求后台的URL（*）
         method: 'meteor',                      //请求方式（*）
-       // toolbar: '#toolbar',                //工具按钮用哪个容器
+        // toolbar: '#toolbar',                //工具按钮用哪个容器
         striped: true,                      //是否显示行间隔色
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
@@ -43,7 +51,7 @@ Template.issueindex.onRendered(function () {
         showRefresh: false,                  //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
-       // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",                     //每一行的唯一标识pagination，一般为主键列
         showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
