@@ -72,16 +72,28 @@ Template.knowledgeindex.onRendered(function () {
         //是否显示父子表  
         columns: [{
             field: 'id',
-            title:'主题',
+            title: '主题',
             formatter: function (value, row, index) {
                 var e = '<a href="/saic/knowledge/index/' + row.id + '">' + row.title + '</a>';
                 return e;
             }
         },
         {
-            title:'评价',
+            title: '评价',
             formatter: function (value, row, index) {
-                var e = '<i id="up" style="color:red" class="fa fa-thumbs-up" aria-hidden="true"><span style="font-size:7pt">(10)</span></i><i id="down" style="color:green;padding-left:10px" class="fa fa-thumbs-down" aria-hidden="true"><span style="font-size:7pt">(5)</span></i>';
+                var agreeCount, disagreeCount;
+                if (row.agreeCount != undefined)
+                { agreeCount = row.agreeCount; }
+                else
+                { agreeCount = 0; }
+                if (row.disagreeCount != undefined)
+                { disagreeCount = row.disagreeCount; }
+                else
+                { disagreeCount = 0; }
+                var e = '<i id="up" style="color:red" class="fa fa-thumbs-up" aria-hidden="true">' +
+                    '<span style="font-size:7pt">(' + agreeCount + ')</span></i>' +
+                    '<i id="down" style="color:green;padding-left:10px" class="fa fa-thumbs-down" aria-hidden="true">' +
+                    '<span style="font-size:7pt">(' + disagreeCount + ')</span></i>';
                 return e;
             }
 
@@ -112,16 +124,15 @@ Template.knowledgeindex.onRendered(function () {
                     $('#knowledgeList').append("</ul>");
                     $("a").on("click",
                         function () {
-                            // alert(Pitem.id);
-                            // alert($(this).parent("#knowledgeList #" + Pitem.id + " li").attr("class"));
                             if ($(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class') === 'active')
                                 $(this).parent("#knowledgeList #" + Pitem.id + " li").removeClass();
                             else
                                 $(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class', 'active');
                         })
                 });
-            $('#knowledgeList').append("<br/><div class='submit'><button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
-            $("#save").click(function (e) {
+            $('#knowledgeList').append("<br/><div class='submit'><button name='save' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd' id='search'><span>+添加至我的常用产品</span></button>" +
+                "&nbsp<button name='remove' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span> -从我的常用产品中删除</span></button></div>");
+            $("[name=save]").click(function (e) {
                 var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
                 $(arrChk).each(function () {
@@ -137,7 +148,7 @@ Template.knowledgeindex.onRendered(function () {
                     });
             });
 
-            $("#remove").click(function (e) {
+            $("[name=remove]").click(function (e) {
                 var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
                 $(arrChk).each(function () {
@@ -198,8 +209,6 @@ function refresh_li() {
 
                     $("a").on("click",
                         function () {
-                            // alert(Pitem.id);
-                            // alert($(this).parent("#knowledgeList #" + Pitem.id + " li").attr("class"));
                             if ($(this).parent("#knowledgeList #" + Pitem.id + " li").attr('class') === 'active')
                                 $(this).parent("#knowledgeList #" + Pitem.id + " li").removeClass();
                             else
@@ -207,9 +216,9 @@ function refresh_li() {
                         })
                 });
             $('#knowledgeList').append("<br/><div class='submit'>" +
-                "<button id='save' class='button save'><i class='icon-floppy'></i><span>保存</span></button>" +
-                "&nbsp<button id='remove' class='button remove'><i class='glyphicon glyphicon-remove'></i><span>删除</span></button></div>");
-            $("#save").click(function (e) {
+                "<button name='save' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span>+添加至我的常用产品</span></button>" +
+                "&nbsp<button name='remove' style='background:#f4f4f4;color:black;border:1px solid #bdbdbd'  id='search'><span> -从我的常用产品中删除</span></button></div>");
+            $("[name=save]").click(function (e) {
                 var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
                 $(arrChk).each(function () {
@@ -224,7 +233,7 @@ function refresh_li() {
                     });
             });
 
-            $("#remove").click(function (e) {
+            $("[name=remove]").click(function (e) {
                 var arrChk = $("#knowledgeList  li.active a");
                 var list = new Array();
                 $(arrChk).each(function () {
@@ -267,18 +276,57 @@ Template.knowledgedetail.onRendered(function () {
 
     //顶
     $("#up").click(function () {
-        if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down")
+        if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down") {
             $("#up i").removeClass().addClass("fa fa-thumbs-up");
-        else
-            $("#up i").removeClass().addClass("fa fa-thumbs-o-up");
+        }
+        else if ($("#down i").attr("class") == "fa fa-thumbs-down") {
+            alert("您已顶过该帖，请勿重复顶贴！");
+        }
+        else {
+            if (confirm("确定取消吗？"))
+                $("#up i").removeClass().addClass("fa fa-thumbs-o-up");
+            else
+                return false;
+        }
+
+        upordown(1);
     });
+
     //踩
     $("#down").click(function () {
-     if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down")
+        if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down") {
             $("#down i").removeClass().addClass("fa fa-thumbs-down");
-        else
-            $("#down i").removeClass().addClass("fa fa-thumbs-o-down");
+
+        }
+        else if ($("#up i").attr("class") == "fa fa-thumbs-up") {
+            alert("您已顶过该帖，请勿重复顶贴！");
+        }
+        else {
+            if (confirm("确定取消吗？"))
+            { $("#down i").removeClass().addClass("fa fa-thumbs-o-down"); }
+            else
+                return false;
+        }
+        upordown(-1);
     });
+
+    function upordown(type) {
+        var queryParams = {
+            id: getAttributes.id,
+            thumbsUp: { "support": type }
+
+        };
+
+        Meteor.call("upordown", queryParams,
+            function (error, result) {
+                if (error) {
+                    return alert(error.reason);
+                }
+                // else
+                // { FlowRouter.go('knowledge-index'); }
+            });
+    }
+
 
     Meteor.call("getknowledgedetailbyid", getAttributes,
         function (error, result) {
@@ -287,12 +335,14 @@ Template.knowledgedetail.onRendered(function () {
                 console.log(error);
                 return alert(error.reason);
             }
+            // console.log(item.title);
+            $('#detail').html(result.description);
+            $('#title').text(result.title);
+            if (result.thumbsUp.support == 1)
+                $("#up i").removeClass().addClass("fa fa-thumbs-up");
+            if (result.thumbsUp.support == -1)
+                $("#down i").removeClass().addClass("fa fa-thumbs-down");
 
-            $.each(result,
-                function (idx, item) {
-                    $('#detail').html(item.description);
-                    $('#title').text(item.title);
-                })
 
         });
 
