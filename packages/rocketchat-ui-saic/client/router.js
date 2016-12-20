@@ -10,7 +10,7 @@ AccountBox.addRoute({
     name: 'itinfo-index',
     path: '/itinfo/index',
     sideNav: 'saicFlex',
-    i18nPageTitle: 'IT公告',
+    i18nPageTitle: '运行',
     pageTemplate: 'itinfoindex'
 }, saicManagerRoutes);
 

@@ -282,14 +282,14 @@ Template.issueSubmit.events({
                 return;
             }
             var reader = new FileReader();
-            var total = 10000;
-            var breaker = 100;
+            var total = 20000;
+            var breaker = 200;
             var turn = parseInt(100 / (total / breaker));
             var progress = 0;
             $("#imageupload .progress-label").html("1% 完成");
             var timer = setInterval(function() {
                 progress = progress + turn;
-                $("#imageupload .progress-label").html(progress + "% 完成");
+                $("#imageupload .progress-label").html(progress + "% 完成，请耐心等待！");
                 $("#imageupload .progress-bar").attr("style", "width:" + progress + "%");
                 if (progress >= 96) {
                     clearInterval(timer);

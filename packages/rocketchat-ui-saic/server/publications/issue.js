@@ -70,7 +70,7 @@ Meteor.methods(
       return issue.data;
     },
     'issuedelete': function (id) {
-      var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/deleteMmtQuestion', {
+      var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/cancelMmtQuestion', {
         data: { id: id },
         params: GetUser()
       });
