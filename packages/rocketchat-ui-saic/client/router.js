@@ -34,7 +34,7 @@ AccountBox.addRoute({
     name: 'pending-index',
     path: '/pending/index',
     sideNav: 'saicFlex',
-    i18nPageTitle: '待处理问题',
+    i18nPageTitle: '运行',
     pageTemplate: 'pendingindex'
 }, saicManagerRoutes);
 
@@ -72,7 +72,7 @@ AccountBox.addRoute({
     name: 'issue-index',
     path: '/issueindex',
     sideNav: 'saicFlex',
-    i18nPageTitle: '我的提问',
+    i18nPageTitle: '运行',
     titleTemplate:'saictitleTemplate',
     pageTemplate: 'issueindex'
 }, saicManagerRoutes);
@@ -81,7 +81,7 @@ AccountBox.addRoute({
     name: 'issue-indextype',
     path: '/issueindex/:_type',
     sideNav: 'saicFlex',
-    i18nPageTitle: '我的提问',
+    i18nPageTitle: '运行',
     pageTemplate: 'issueindex'
 }, saicManagerRoutes);
 

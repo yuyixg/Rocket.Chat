@@ -24,6 +24,7 @@ Meteor.methods(
           rows: []
         });
       }
+      console.log(result.data);
       return result.data;
 
     },

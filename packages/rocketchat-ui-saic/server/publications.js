@@ -1,6 +1,6 @@
 import { HTTP } from 'meteor/http';
 mmtServerURL = 'http://10.64.20.165:8080/';
-//mmtServerURL = 'http://10.90.224.153:8080/';
+//mmtServerURL = 'http://10.90.67.77:8081/';
 GetDateTime = function (format) {
   var d = new Date();
   var date = {
