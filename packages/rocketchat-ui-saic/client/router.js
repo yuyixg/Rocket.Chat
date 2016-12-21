@@ -86,6 +86,14 @@ AccountBox.addRoute({
 }, saicManagerRoutes);
 
 AccountBox.addRoute({
+    name: 'pending-indextype',
+    path: '/pendingindex/:_type',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '待处理问题',
+    pageTemplate: 'issueindex'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
     name: 'issue-create',
     path: '/issuecreate',
     sideNav: 'saicFlex',
