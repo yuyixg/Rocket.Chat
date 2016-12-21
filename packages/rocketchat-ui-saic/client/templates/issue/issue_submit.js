@@ -186,6 +186,8 @@ Template.issueSubmit.events({
     },
     'click button.save': function (e) {
         e.preventDefault();
+
+    
         var images = $('#imagetable').bootstrapTable("getData");
 
         var imagearray = [];
@@ -209,6 +211,21 @@ Template.issueSubmit.events({
             "remarks": ""
         };
         console.log(issueAttributes);
+        if(!issueAttributes.category)
+        {
+            toastr.warning('请选择系统!');
+            return;
+        }
+         if(!issueAttributes.title)
+        {
+            toastr.warning('请填写标题!');
+            return;
+        }
+          if(!issueAttributes.description)
+        {
+            toastr.warning('请填写详细描述!');
+            return;
+        }
         var _id = FlowRouter.getParam('_id');
         if (_id) {
             _.extend(issueAttributes, { id: _id });
