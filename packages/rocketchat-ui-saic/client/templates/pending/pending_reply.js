@@ -14,7 +14,7 @@ Template.pendingreply.onRendered(function () {
                 console.log(error);
                 return;
             }
-
+console.log(result);
             if (result.category.id) {
                 $('#category').text(result.category.name);
             }
@@ -30,8 +30,6 @@ Template.pendingreply.onRendered(function () {
                 var file = { id: attach.id, name: attach.id, url: attach.attachUrl }
                 $('#imagetable').bootstrapTable("append", file);
             }
-
-
             if (result.processFlag == 0) {
                 $('#reply').hide();
                 $('#pull').show();
@@ -42,14 +40,13 @@ Template.pendingreply.onRendered(function () {
                 $('#pull').hide();
                 $('#replyadd').show();
                 $('#assign').hide();
-                //console.log(result.mmtQuestionAnswerList.length);
-                if (result.mmtQuestionAnswerList.length === 2) {
+                if (result.mmtQuestionAnswerList.length === 2||(result.mmtQuestionAnswerList.length === 3 && result.mmtQuestionAnswerList.answer == undefined)) {
                     replycontrol();
 
                 } else {
                     $.each(result.mmtQuestionAnswerList,
                         function (idx, item) {
-                            if (item.answer) {
+                            if (item.answer != undefined) {
                                 $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
                                     "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
                                 $('#other' + item.id).val(item.createBy.name);
@@ -68,7 +65,9 @@ Template.pendingreply.onRendered(function () {
                 function (error, result) {
                     if (error) {
                         return alert(error.reason);
-                    } else {
+                    } 
+                    else {
+                        console.log(result);
                         $('#reply').show();
                         $('#pull').hide();
                         $('#assign').hide();
@@ -79,7 +78,7 @@ Template.pendingreply.onRendered(function () {
         });
 
         $("#reply").click(function (e) {
-            if ($('#replyText').val()) {
+            if ($('#replyText').val()=="") {
                 alert("回复内容不能为空！");
             } else {
                 var queryParams = {
