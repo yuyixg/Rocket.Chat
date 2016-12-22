@@ -1,6 +1,6 @@
 import { HTTP } from 'meteor/http';
-mmtServerURL = 'http://10.64.20.165:8080/';
-//mmtServerURL = 'http://10.90.67.77:8081/';
+//mmtServerURL = 'http://10.64.20.165:8080/';
+mmtServerURL = 'http://10.90.67.77:8081/';
 GetDateTime = function (format) {
   var d = new Date();
   var date = {
@@ -25,7 +25,16 @@ GetDateTime = function (format) {
 }
 GetUser = function () {
   var user = Meteor.user();
-  return {userid: user.username }
+  return { userid: user.username }
+}
+GetRoles = function () {
+  var roles = Session.get('roles');
+  if (roles) {
+    return roles;
+  }
+  else {
+     Session.set('roles','');
+  }
 }
 
 
