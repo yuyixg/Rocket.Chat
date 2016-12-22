@@ -52,6 +52,24 @@ Template.pendingreply.onRendered(function () {
                                // replycontrol();
                             }
                         });
+            }else if (result.processFlag === 3 || result.processFlag === 4) {
+                $('#reply').show();
+                $('#pull').hide();
+                $('#assign').hide();
+                $('#replyadd').show();
+                $.each(result.mmtQuestionAnswerList,
+                        function (idx, item) {
+                            if (item.answer != undefined) {
+                                $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
+                                    "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
+                                $('#other' + item.id).val(item.createBy.name);
+                                $('#replyText' + item.id).val(item.answer);
+                                $('#other' + item.id).attr("readonly", "readonly");
+                                $('#replyText' + item.id).attr("readonly", "readonly");
+                               // replycontrol();
+                            }
+                        });
+                        replycontrol();
             }
             else {
                 $('#reply').show();
