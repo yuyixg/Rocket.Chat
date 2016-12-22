@@ -2,7 +2,7 @@ Meteor.methods(
     {
         //获取待处理问题
         'issueallList': function (data) {
-            var result = HTTP.call('POST', "http://10.90.67.77:8081/mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
+            var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/queryMmtQuestion",
                 {
                     data: data,
                     params: GetUser()
@@ -27,6 +27,16 @@ Meteor.methods(
         //回复
         'replyquestion': function (data) {
             var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestionAnswer/saveAnswer",
+                {
+                    data: data,
+                    params: GetUser()
+                });
+
+            return result;
+        },
+         //分配
+        'distribution': function (data) {
+            var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/distributionQuestion",
                 {
                     data: data,
                     params: GetUser()

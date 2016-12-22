@@ -3,6 +3,7 @@ Template.issueSubmit.onRendered(function () {
 
     var self = this;
     saicRendered(self);
+    
     $('#boxselectcategory').hide();
     $('#select_category').bootstrapTable({
         url: 'categorylist',         //请求后台的URL（*）
@@ -162,6 +163,7 @@ Template.issueSubmit.onDestroyed(function () {
 })
 
 Template.issueSubmit.events({
+     
     'click .rocket-form .mic': function (e, t) {
         AudioRecorder.start(function () {
             t.$('.stop-mic').removeClass('hidden');
@@ -256,8 +258,9 @@ Template.issueSubmit.events({
 
     },
     'click #gotobackbutton'(e/*, instance*/) {
+       var _type = FlowRouter.getParam('_type');
         e.preventDefault();
-        FlowRouter.go('issue-index');
+        FlowRouter.go('issue-index',{_type:_type});
     },
 
     'click #deletebutton'(e/*, instance*/) {
