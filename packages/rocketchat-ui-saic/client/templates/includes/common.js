@@ -1,3 +1,19 @@
+import { Session } from 'meteor/session'
+checkPermission = function (rolename) {
+	var roles = Session.get('roles');
+	console.log(roles);
+	var flag = false;
+	$.each(roles, function (i, r) {
+	
+		if (r.permission === rolename) {
+			console.log('find');
+			flag=true;
+			return false;
+			
+		}
+	});
+	return flag;
+}
 saicRendered = function (self) {
 
 	//	$('.fixed-title').css("display", "none");
@@ -11,6 +27,19 @@ saicRendered = function (self) {
 			MeteorAdminLTE.run()
 		});
 	}
+	var roles = Session.get('roles');
+	if (!roles) {
+		Meteor.call("getroles", function (error, result) {
+			// 向用户显示错误信息并终止
+			if (error) {
+				console.log(error);
+				return;
+			}
+			console.log(result);
+			Session.set('roles', result);
+		})
+	}
+
 
 }
 

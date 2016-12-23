@@ -34,7 +34,7 @@ Meteor.methods(
 
             return result;
         },
-         //分配
+        //分配
         'distribution': function (data) {
             var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtQuestion/distributionQuestion",
                 {
@@ -66,6 +66,35 @@ Meteor.methods(
                 });
             }
             return result.data;
+        },
+        //获取员工信息
+        'assignedlist': function (data) {
+            var result = HTTP.call('POST', mmtServerURL + "mmt-web/f/mm/mmtUserLocationDept/queryULD",
+                {
+                    data: { user: data.name, page: data.page },
+                    params: GetUser()
+                });
+                console.log({ user: data.name, page: data.page });
+            if (result.data.total == 0) {
+                result.data = _.extend(result.data, {
+                    rows: []
+                });
+            }
+            console.log(result);
+            return result.data;
+        },
+        'getroles': function () {
+            try {
+                var result = HTTP.call('GET', mmtServerURL + 'mmt-web/f/sys/user/listMenu',
+                    {
+                        params: GetUser()
+                    });
+                console.log(result);
+                return result.data;
+            }
+            catch (ex) {
+                console.log(ex);
+            }
         }
     }
 )

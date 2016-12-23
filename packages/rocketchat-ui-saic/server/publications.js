@@ -1,5 +1,5 @@
-mmtServerURL = 'http://10.64.20.165:8080/';
-//mmtServerURL = 'http://10.90.67.77:8081/';
+//mmtServerURL = 'http://10.64.20.165:8080/';
+mmtServerURL = 'http://10.90.67.77:8081/';
 GetDateTime = function (format) {
   var d = new Date();
   var date = {
@@ -26,22 +26,7 @@ GetUser = function () {
   var user = Meteor.user(); 
   return { userid: user.username }
 }
-GetRoles = function () {
-  try {
 
-
-      var result = HTTP.call('GET', mmtServerURL + 'mmt-web/f/sys/user/listMenu',
-        {
-          params: GetUser()
-        });
-    console.log(result);
-      return result;
-
-  }
-  catch (ex) {
-    console.log(ex);
-  }
-}
 
 
 

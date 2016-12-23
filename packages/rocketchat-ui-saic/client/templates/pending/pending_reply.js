@@ -33,7 +33,8 @@ Template.pendingreply.onRendered(function () {
             if (result.processFlag === 0) {
                 $('#reply').hide();
                 $('#pull').show();
-                $('#assign').show();
+                if (checkPermission('mm:mmtQuestion:assignment'))
+                    $('#assign').show();
                 $('#replyadd').hide();
             } else if (result.processFlag === 5) {
                 $('#reply').hide();
@@ -41,42 +42,42 @@ Template.pendingreply.onRendered(function () {
                 $('#assign').hide();
                 $('#replyadd').hide();
                 $.each(result.mmtQuestionAnswerList,
-                        function (idx, item) {
-                            if (item.answer != undefined) {
-                                $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
-                                    "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
-                                $('#other' + item.id).val(item.createBy.name);
-                                $('#replyText' + item.id).val(item.answer);
-                                $('#other' + item.id).attr("readonly", "readonly");
-                                $('#replyText' + item.id).attr("readonly", "readonly");
-                               // replycontrol();
-                            }
-                        });
-            }else if (result.processFlag === 3 || result.processFlag === 4) {
+                    function (idx, item) {
+                        if (item.answer != undefined) {
+                            $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
+                                "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
+                            $('#other' + item.id).val(item.createBy.name);
+                            $('#replyText' + item.id).val(item.answer);
+                            $('#other' + item.id).attr("readonly", "readonly");
+                            $('#replyText' + item.id).attr("readonly", "readonly");
+                            // replycontrol();
+                        }
+                    });
+            } else if (result.processFlag === 3 || result.processFlag === 4) {
                 $('#reply').show();
                 $('#pull').hide();
                 $('#assign').hide();
                 $('#replyadd').show();
                 $.each(result.mmtQuestionAnswerList,
-                        function (idx, item) {
-                            if (item.answer != undefined) {
-                                $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
-                                    "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
-                                $('#other' + item.id).val(item.createBy.name);
-                                $('#replyText' + item.id).val(item.answer);
-                                $('#other' + item.id).attr("readonly", "readonly");
-                                $('#replyText' + item.id).attr("readonly", "readonly");
-                               // replycontrol();
-                            }
-                        });
-                        replycontrol();
+                    function (idx, item) {
+                        if (item.answer != undefined) {
+                            $("#replyContent").append("<div><span>回复人：</span><label style='font-weight:normal'  id='other" + item.id + "' /></div>" +
+                                "<div><textarea  class='form-control' placeholder='回复内容' id='replyText" + item.id + "' rows='5'></textarea></div><br/>");
+                            $('#other' + item.id).val(item.createBy.name);
+                            $('#replyText' + item.id).val(item.answer);
+                            $('#other' + item.id).attr("readonly", "readonly");
+                            $('#replyText' + item.id).attr("readonly", "readonly");
+                            // replycontrol();
+                        }
+                    });
+                replycontrol();
             }
             else {
                 $('#reply').show();
                 $('#pull').hide();
                 $('#replyadd').show();
                 $('#assign').hide();
-                if (result.mmtQuestionAnswerList.length === 2 ) {
+                if (result.mmtQuestionAnswerList.length === 2) {
                     replycontrol();
 
                 } else {
@@ -119,7 +120,7 @@ Template.pendingreply.onRendered(function () {
                 return;
 
             } else {
-              
+
                 var queryParams = {
                     id: _id,
                     mmtQuestionAnswer: { forwardUser: $("#txt_other").val(), answer: $('#replyText').val() }
@@ -133,7 +134,7 @@ Template.pendingreply.onRendered(function () {
                         } else
                         { FlowRouter.go('pending-index'); }
                     });
-                    
+
             }
         });
 
@@ -148,7 +149,7 @@ Template.pendingreply.onRendered(function () {
                 "<button type='button' id='btn_query' class='btn btn-info btn-flat'>Go!</button></span>" +
                 "</div><table id='select_other'></table></div></div></div></div>";
             $("#replyContent").append(str);
-            bind();
+            bind('assign');
             $('#submit').show();
             $('#reply').hide();
             $('#pull').hide();
@@ -221,9 +222,16 @@ Template.pendingreply.onRendered(function () {
         $('#boxselectother').hide();
         bind();
     };
-    function bind() {
+    function bind(callname) {
+        console.log(callname);
+        var methodname = 'stafflist';
+        var tid = 'id';
+        if (callname === 'assign') {
+            tid = 'userId';
+            methodname = 'assignedlist';
+        }
         $('#select_other').bootstrapTable({
-            url: 'stafflist',         //请求后台的URL（*）
+            url: methodname,         //请求后台的URL（*）
             method: 'meteor',
             striped: true,                      //是否显示行间隔色
             cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -242,7 +250,7 @@ Template.pendingreply.onRendered(function () {
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: true,                //是否启用点击选中行
             // height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-            uniqueId: "id",                     //每一行的唯一标识pagination，一般为主键列
+            uniqueId: tid,                     //每一行的唯一标识pagination，一般为主键列
             showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
@@ -253,13 +261,22 @@ Template.pendingreply.onRendered(function () {
             },
             {
                 field: 'officeName',
-                title: '部门'
+                title: '部门', formatter(value, row, index) {
+                    if (callname === 'assign')
+                        return row.locationName + '-' + row.deptName;
+                    else return value;
+                }
             }
             ],
             onClickRow: function (value) {
                 $('#selectother').val(value.name);
-                $('#txt_other').val(value.id);
-                console.log( $('#txt_other').val());
+                if (value.userId) {
+               
+                    $('#txt_other').val(value.userId);
+                }
+                else
+                    $('#txt_other').val(value.id);
+                console.log($('#txt_other').val());
                 $('#boxselectother').hide();
             }
         });
@@ -276,7 +293,7 @@ Template.pendingreply.onRendered(function () {
 
         $('#selectother').click(function () {
             $('#boxselectother').show();
-             
+
         });
     }
 

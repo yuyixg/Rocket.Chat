@@ -4,13 +4,12 @@ Meteor.methods(
       var issue = _.extend(Attributes, {
         createDate: GetDateTime('yyyy-MM-dd hh:mm:ss'), updateDate: GetDateTime('yyyy-MM-dd hh:mm:ss'),
       });
-      console.log(issue);
+
       var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/saveMmtQuestion',
         {
           data: issue,
           params: GetUser()
         });
-      console.log(result);
       return result;
     },
     'issueList': function (data) {
@@ -24,8 +23,6 @@ Meteor.methods(
           rows: []
         });
       }
-      console.log(result);
-      GetRoles();
       return result.data;
 
     },
@@ -81,7 +78,7 @@ Meteor.methods(
 
     },
     'issueclose': function (id) {
-      console.log(id);
+
       var result = HTTP.call('POST', mmtServerURL + 'mmt-web/f/mm/mmtQuestion/closeMmtQuestion', {
         data: { id: id },
         params: GetUser()

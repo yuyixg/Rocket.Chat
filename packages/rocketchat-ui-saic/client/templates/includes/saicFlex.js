@@ -1,3 +1,4 @@
+
 Template.saicFlex.helpers({
 	active(...routes) {
 		FlowRouter.watchPathChange();
