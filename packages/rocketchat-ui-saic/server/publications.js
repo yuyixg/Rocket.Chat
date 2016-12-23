@@ -1,6 +1,6 @@
-import { HTTP } from 'meteor/http';
-//mmtServerURL = 'http://10.64.20.165:8080/';
-mmtServerURL = 'http://10.90.67.77:8081/';
+
+mmtServerURL = 'http://10.64.20.165:8080/';
+//mmtServerURL = 'http://10.90.67.77:8081/';
 GetDateTime = function (format) {
   var d = new Date();
   var date = {
@@ -24,16 +24,23 @@ GetDateTime = function (format) {
   return format;
 }
 GetUser = function () {
-  var user = Meteor.user();
+  var user = Meteor.user(); 
   return { userid: user.username }
 }
 GetRoles = function () {
-  var roles = Session.get('roles');
-  if (roles) {
-    return roles;
+  try {
+
+
+      var result = HTTP.call('GET', mmtServerURL + 'mmt-web/f/sys/user/listMenu',
+        {
+          params: GetUser()
+        });
+    console.log(result);
+      return result;
+
   }
-  else {
-     Session.set('roles','');
+  catch (ex) {
+    console.log(ex);
   }
 }
 

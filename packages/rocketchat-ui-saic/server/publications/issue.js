@@ -24,7 +24,8 @@ Meteor.methods(
           rows: []
         });
       }
-      console.log(result.data);
+      console.log(result);
+      GetRoles();
       return result.data;
 
     },
