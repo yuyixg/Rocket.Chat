@@ -22,6 +22,8 @@ AccountBox.addRoute({
     pageTemplate: 'itinfodetail'
 }, saicManagerRoutes);
 
+
+
 AccountBox.addRoute({
     name: 'knowledge-index',
     path: '/knowledge/index',
@@ -34,7 +36,7 @@ AccountBox.addRoute({
     name: 'pending-index',
     path: '/pending/index',
     sideNav: 'saicFlex',
-    i18nPageTitle: '待处理问题',
+    i18nPageTitle: '运行',
     pageTemplate: 'pendingindex'
 }, saicManagerRoutes);
 
@@ -45,12 +47,7 @@ AccountBox.addRoute({
     pageTemplate: 'knowledgedetail'
 }, saicManagerRoutes);
 
-AccountBox.addRoute({
-    name: 'pending-index',
-    path: '/pending/index/:_id',
-    sideNav: 'saicFlex',
-    pageTemplate: 'pendingdeal'
-}, saicManagerRoutes);
+
 
 AccountBox.addRoute({
     name: 'task-list',
@@ -70,9 +67,18 @@ AccountBox.addRoute({
 
 AccountBox.addRoute({
     name: 'issue-index',
-    path: '/issueindex',
+    path: '/issueindex/',
     sideNav: 'saicFlex',
-    i18nPageTitle: '我的提问',
+    i18nPageTitle: '运行',
+    titleTemplate:'saictitleTemplate',
+    pageTemplate: 'issueindex'
+}, saicManagerRoutes);
+
+AccountBox.addRoute({
+    name: 'issue-index',
+    path: '/issueindex/:_type',
+    sideNav: 'saicFlex',
+    i18nPageTitle: '运行',
     titleTemplate:'saictitleTemplate',
     pageTemplate: 'issueindex'
 }, saicManagerRoutes);
@@ -81,9 +87,10 @@ AccountBox.addRoute({
     name: 'issue-indextype',
     path: '/issueindex/:_type',
     sideNav: 'saicFlex',
-    i18nPageTitle: '我的提问',
+    i18nPageTitle: '运行',
     pageTemplate: 'issueindex'
 }, saicManagerRoutes);
+
 
 AccountBox.addRoute({
     name: 'issue-create',
@@ -95,7 +102,7 @@ AccountBox.addRoute({
 
 AccountBox.addRoute({
     name: 'issue-edit',
-    path: '/issueedit/:_id',
+    path: '/issueedit/:_id&:_type',
     sideNav: 'saicFlex',
     i18nPageTitle: '编辑问题',
     pageTemplate: 'issueSubmit'
@@ -103,30 +110,20 @@ AccountBox.addRoute({
 
 AccountBox.addRoute({
     name: 'pending-reply',
-    path: '/pendingreply/:_id',
-    sideNav: 'saicFlex',
-    i18nPageTitle: '处理问题',
-    pageTemplate: 'pendingreply'
-}, saicManagerRoutes);
-
-AccountBox.addRoute({
-    name: 'pending-reply',
-    path: '/pendingreply/:_id/:_userid/:_username',
+    path: '/pendingreply/:_id&:_status',
     sideNav: 'saicFlex',
     i18nPageTitle: '处理问题',
     pageTemplate: 'pendingreply'
 }, saicManagerRoutes);
 
 
-
 AccountBox.addRoute({
-    name: 'pending-staff',
-    path: '/pendingstaff/:_id',
+    name: 'pending-index',
+    path: '/pending/index/:_status',
     sideNav: 'saicFlex',
-    i18nPageTitle: '员工信息',
-    pageTemplate: 'stafflist'
+    i18nPageTitle: '处理问题',
+    pageTemplate: 'pendingindex'
 }, saicManagerRoutes);
-
 
 
 AccountBox.addRoute({

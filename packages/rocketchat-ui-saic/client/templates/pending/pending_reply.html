@@ -14,6 +14,10 @@
 							<lable name="name"></lable>
 						</div><br />
 						<div>
+							<lable>帐号：</lable>
+							<lable name="loginName"></lable>
+						</div><br />
+						<div>
 							<lable>工号：</lable>
 							<lable name="no"></lable>
 						</div> <br />
@@ -36,6 +40,10 @@
 							<lable>内容：</lable><label style="font-weight:normal" name="description" id="url" rows="5"></label>
 						</div>
 						<br />
+						<div>
+							<lable>发布时间：</lable><label style="font-weight:normal" name="createdate" id="createdate" rows="5"></label>
+						</div>
+						<br />
 						<table id="imagetable">
 
 						</table>
@@ -43,11 +51,13 @@
 				</div>
 				<div id="replyContent"></div>
 			</fieldset>
-			<input type="button" id='assign' value="分配" class='button save' />
-			<input style="padding-left:10px" type="button" id='pull' value="认领" class='button save' />
-			<input style="padding-left:10px" type="button" id='reply' value="提交" class='button remove' />
-			<input style="padding-left:10px" type="button" id='replyadd' value='问题补充' class='button remove' />
 			<input style="padding-left:10px" type="button" id='close' value='返回' class="button delete" />
+			<input type="button" id='assign' value="分配" style="display:none" class='button save' />
+			<input style="padding-left:10px;display:none" type="button" id='pull' value="认领"   class='button save' />
+			<input style="padding-left:10px;display:none" type="button" id='reply' value="提交"   class='button remove' />
+			<input style="padding-left:10px;display:none" type="button" id='submit' value="提交"   class='button remove' />
+			<input style="padding-left:10px;display:none" type="button" id='replyadd' value='问题补充'   class='button remove' />
+			<!--<input style="padding-left:10px" type="button" id='close' value='返回' class="button delete" />-->
 
 		</div>
 	</form>

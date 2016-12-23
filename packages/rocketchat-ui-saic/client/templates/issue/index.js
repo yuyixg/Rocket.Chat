@@ -5,6 +5,10 @@ Template.issueindex.onRendered(function () {
     if (_type) {
 
         switch (_type) {
+            case '0':
+                $('#txt_status').val('全部');
+                $("#txt_status").find("option[text='全部']").attr("selected", true);
+                break; 
             case '1':
                 $('#txt_status').val('处理中');
                 $("#txt_status").find("option[text='处理中']").attr("selected", true);
@@ -56,7 +60,7 @@ Template.issueindex.onRendered(function () {
         showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                   //是否显示父子表
-        showHeader: false,
+        showHeader: true,
         columns: [{
             field: 'title',
             title: '标题'
@@ -67,8 +71,12 @@ Template.issueindex.onRendered(function () {
         }
         ],
         onClickRow: function (value) {
-            console.log(value);
-            FlowRouter.go('issue-edit', { _id: value.id });
+            var status;
+            if ($('#txt_status option:selected').text() == "全部")
+            { status = "0"; }
+            else
+            { status = $('#txt_status').get(0).selectedIndex; }
+            FlowRouter.go('issue-edit', { _id: value.id,_type:status });
         }
     });
 

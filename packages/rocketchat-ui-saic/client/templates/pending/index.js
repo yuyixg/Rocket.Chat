@@ -1,7 +1,38 @@
 
 Template.pendingindex.onRendered(function () {
-      var self = this;
-  saicRendered(self);
+    var self = this;
+    saicRendered(self);
+    var _type = FlowRouter.getParam('_status');
+    if (_type) {
+
+        switch (_type) {
+            case '0':
+                $('#txt_status').val('全部');
+                $("#txt_status").find("option[text='全部']").attr("selected", true);
+                break;
+            case '1':
+                $('#txt_status').val('问题池');
+                $("#txt_status").find("option[text='问题池']").attr("selected", true);
+                break;
+            case '2':
+                $('#txt_status').val('待处理');
+                $("#txt_status").find("option[text='待处理']").attr("selected", true);
+                break;
+            case '3':
+                $('#txt_status').val('已转交');
+                $("#txt_status").find("option[text='已转交']").attr("selected", true);
+                break;
+            case '4':
+                $('#txt_status').val('已答复');
+                $("#txt_status").find("option[text='已答复']").attr("selected", true);
+                break;
+            case '5':
+                $('#txt_status').val('已完成');
+                $("#txt_status").find("option[text='已完成']").attr("selected", true);
+                break;
+
+        }
+    }
     $('.flex-tab-bar').css("width", "0px");
     $('.main-content').css("right", "0px");
     $("#search").click(function () {
@@ -55,17 +86,27 @@ Template.pendingindex.onRendered(function () {
         columns: [
             {
                 field: 'title',
-                title:'标题'
+                title: '标题'
             },
+
             {
-                title:'发布时间',
-                formatter: function (value, row, index) {
-                    return row.createDate.substr(0, 10);
-                }
+                field: 'pendingProcessName',
+                title: '状态'
             }
+            //{
+            //    title: '发布时间',
+            //   formatter: function (value, row, index) {
+            //        return row.createDate.substr(0, 10);
+            //   }
+            // }
         ],
         onClickRow: function (value) {
-            FlowRouter.go('pending-reply', { _id: value.id});
+            var status;
+            if ($('#txt_status option:selected').text() == "全部")
+            { status = "0"; }
+            else
+            { status = $('#txt_status').get(0).selectedIndex; }
+            FlowRouter.go('pending-reply', { _id: value.id, _status: status });
         },
         formatLoadingMessage: function () {
             return "请稍等，正在加载中...";

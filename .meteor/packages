@@ -31,7 +31,7 @@ reactive-dict@1.1.8
 reactive-var@1.0.11
 reload@1.1.11
 service-configuration@1.0.11
-session@1.1.7
+session
 shell-server@0.2.1
 spacebars
 standard-minifier-css@1.3.2

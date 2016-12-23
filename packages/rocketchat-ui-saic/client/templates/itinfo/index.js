@@ -1,4 +1,4 @@
-Template.itinfoindex.onRendered(function() {
+Template.itinfoindex.onRendered(function () {
     var self = this;
     saicRendered(self);
 
@@ -33,7 +33,7 @@ Template.itinfoindex.onRendered(function() {
         columns: [
             {
                 title: "标题",
-                formatter: function(value, row, index) {
+                formatter: function (value, row, index) {
 
                     //var detail = '/saic/itinfo/index/' + row.id;
                     //var e =
@@ -48,7 +48,7 @@ Template.itinfoindex.onRendered(function() {
             {
                 //field:'update_date'
                 title: "发布时间",
-                formatter: function(value, row, index) {
+                formatter: function (value, row, index) {
                     return row.createDate.substr(0, 10);//;
                 }
             }
@@ -57,7 +57,7 @@ Template.itinfoindex.onRendered(function() {
 
 
     var ctx = document.getElementById("myChart").getContext("2d");
-    Meteor.call("getQuestionCount", function(error, result) {
+    Meteor.call("getQuestionCount", function (error, result) {
         // 向用户显示错误信息并终止
         if (error) {
             console.log(error);
@@ -68,10 +68,18 @@ Template.itinfoindex.onRendered(function() {
         var myCount = 0;
         var inProcessCount = 0;
         var finishedCount = 0;
+        var canceledCount = 0;
+        var repliedCount = 0;
         if (result.inProcessCount != undefined) { inProcessCount = result.inProcessCount };
         if (result.myCount != undefined) { myCount = result.myCount; }
         if (result.finishedCount != undefined) { finishedCount = result.finishedCount; }
-
+        if (result.canceledCount != undefined) {
+            canceledCount = result.canceledCount;
+        }
+        if (result.repliedCount != undefined) {
+            repliedCount = result.repliedCount;
+        }
+        console.log(result);
         var data = [
             {
                 value: inProcessCount,
@@ -90,7 +98,20 @@ Template.itinfoindex.onRendered(function() {
                 color: "#FDB45C",
                 highlight: "#FFC870",
                 label: "已完成"
-            }];
+            },
+            {
+                value: canceledCount,
+                color: "#66ff66",
+                highlight: "#00e600",
+                label: "已撤销"
+            },
+            {
+                value: repliedCount,
+                color: "#d98cd9",
+                highlight: "#993399",
+                label: "需补充"
+            },
+        ];
 
 
         var defaults = {
@@ -118,7 +139,7 @@ Template.itinfoindex.onRendered(function() {
         $("#chartLegend").append(myChart.generateLegend());
 
         $("#myChart").click(
-            function(evt) {
+            function (evt) {
                 var activePoints = myChart.getSegmentsAtEvent(evt);
                 //alert(activePoints[0]["label"] + ":"+ activePoints[0]["value"]); 
                 var typeName = activePoints[0]["label"];
@@ -129,6 +150,10 @@ Template.itinfoindex.onRendered(function() {
                     typeid = 2;
                 else if (typeName == "已完成")
                     typeid = 3;
+                else if (typeName == "需补充")
+                    typeid = 4;
+                else if (typeName == "已撤销")
+                    typeid = 5;
 
                 FlowRouter.go('issue-indextype', { _type: typeid });
             });
@@ -136,21 +161,21 @@ Template.itinfoindex.onRendered(function() {
     });
 
 });
-Template.itinfoindex.onDestroyed(function() {
+Template.itinfoindex.onDestroyed(function () {
     $('.main-content .content').empty();
 });
 
-Template.itinfodetail.onRendered(function() {
+Template.itinfodetail.onRendered(function () {
     var getAttributes = {
         id: FlowRouter.getParam('_id')
     };
 
-    $("#back").click(function(e) {
+    $("#back").click(function (e) {
         e.preventDefault();
         FlowRouter.go('itinfo-index');
     });
 
-    Meteor.call("getitinfobyid", getAttributes, function(error, result) {
+    Meteor.call("getitinfobyid", getAttributes, function (error, result) {
         // 向用户显示错误信息并终止
         if (error) {
             console.log(error);
@@ -165,7 +190,7 @@ Template.itinfodetail.onRendered(function() {
     });
 });
 
-Template.itinfodetail.onDestroyed(function() {
+Template.itinfodetail.onDestroyed(function () {
     $('.main-content .content').empty();
 });
 

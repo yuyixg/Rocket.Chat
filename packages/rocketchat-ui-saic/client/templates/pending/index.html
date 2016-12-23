@@ -5,15 +5,28 @@
             <!-- /.box-tools -->
         </div>
         <div class="box-body">
-            <div>
-                <input type="text" id="searchtext" placeholder="问题标题" autocomplete="off">
-                <input type="button" id="search" value="搜索">
-            </div><br/>
+            <div class="form-group" style="margin-top:0px;margin-bottom:0px">
+                <div class="col-sm-3">
+                    <select class="form-control" id="txt_status" placeholder="状态">
+                           <option>全部</option>
+                           <option>问题池</option>
+						   <option>待处理</option>
+                            <option>已转交</option>
+                            <option>已答复</option>
+							<option>已完成</option>
+				        </select>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" id="searchtext" placeholder="问题标题" autocomplete="off">
+                    <input type="button" id="search" value="搜索">
+                </div><br/>
+            </div>
             <div>
                 <table id="pendingtable">
                 </table>
                 <script>
-        function queryParams(params) { //配置参数       
+        function queryParams(params) { //配置参数   
+            var	processName= $('#txt_status').val();    
             var queryParams = {
                 title: $('#searchtext').val(),  
                 page: {
@@ -22,8 +35,11 @@
                     "orderBy": "update_date "
                 }
             };
-            _.extend(queryParams, { processName: "处理中" });
-            return queryParams;
+             if(processName!='全部')
+	{
+		_.extend(queryParams, { pendingProcessName : processName });
+	}
+    return queryParams;  
         }
     </script>
             </div>

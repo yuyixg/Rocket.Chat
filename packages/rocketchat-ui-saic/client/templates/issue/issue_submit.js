@@ -1,8 +1,9 @@
 
-Template.issueSubmit.onRendered(function() {
+Template.issueSubmit.onRendered(function () {
 
     var self = this;
     saicRendered(self);
+    
     $('#boxselectcategory').hide();
     $('#select_category').bootstrapTable({
         url: 'categorylist',         //请求后台的URL（*）
@@ -34,7 +35,7 @@ Template.issueSubmit.onRendered(function() {
             title: '标题'
         }
         ],
-        onClickRow: function(value) {
+        onClickRow: function (value) {
             console.log(value);
 
             $('#selecttext_catgory').val(value.name);
@@ -42,36 +43,70 @@ Template.issueSubmit.onRendered(function() {
             $('#boxselectcategory').hide();
         }
     });
-    $('#closebox').click(function() {
+    $('#closebox').click(function () {
         $('#boxselectcategory').hide();
     });
-    $('#btn_query').click(function() {
+    $('#btn_query').click(function () {
         $('#select_category').bootstrapTable('refresh');
     });
 
-    $('#selecttext_catgory').click(function() {
+    $('#selecttext_catgory').click(function () {
         $('#boxselectcategory').show();
     });
 
     var _id = FlowRouter.getParam('_id');
     if (_id) {
-        Meteor.call("issuefindOne", _id, function(error, result) {
+        $('#savebutton').hide();
+        $('#backbutton').hide();
+        $('#closebutton').hide();
+        $('#deletebutton').hide();
+        $("#issue-form").disable();
+        $('#gotobackbutton').show().removeAttr("disabled");
+
+        Meteor.call("issuefindOne", _id, function (error, result) {
             // 向用户显示错误信息并终止
             if (error) {
                 console.log(error);
                 return;
             }
             console.log(result);
+
+            //a、用户提交问题，下面按钮只有“提交”和“返回”
+            //b、事件状态“处理中”，用户下面按钮有“撤销”和“返回”。
+            //C、事件状态“需补充”，用户下面按钮“返回”和“提交”和“撤销”
+            //D、事件状态“已答复”，用户下面按钮“返回”，“提交”，“确认解决”和“撤销”。
+            //E、事件状态“已完成”，用户下面按钮“返回
+
+            if (result.processName === "处理中") {
+
+
+                $('#deletebutton').show().removeAttr("disabled");
+            }
+            else if (result.processName === "需补充") {
+                $('#savebutton').show();
+                $("#issue-form").enable();
+                $('#deletebutton').show();
+            }
+            else if (result.processName === "已答复") {
+                $("#issue-form").enable();
+                $('#savebutton').show();
+                $('#deletebutton').show();
+                $('#closebutton').show();
+            }
+
             if (result.category.id) {
                 $('#txt_category').val(result.category.id);
                 $('#selecttext_catgory').val(result.category.name);
             }
             $('#issue-form').find('[name=title]').val(result.title);
             $('#issue-form').find('[name=description]').val(result.description);
-
+            var isdelete = false;
+            if (result.processName === "需补充" || result.processName === "已答复") {
+                isdelete = true;
+            }
             for (var att in result.attachUrlList) {
                 var attach = result.attachUrlList[att];
-                var file = { id: attach.id, name: attach.id, url: attach.attachUrl }
+                var file = { id: attach.id, name: attach.id, url: attach.attachUrl, delete: isdelete }
                 $('#imagetable').bootstrapTable("append", file);
             }
 
@@ -103,7 +138,6 @@ Template.issueSubmit.onRendered(function() {
         $('#backbutton').hide();
         $('#closebutton').hide();
         $('#deletebutton').hide();
-
     }
 
     //当点击分类时候弹出
@@ -114,7 +148,7 @@ Template.issueSubmit.onRendered(function() {
             {
                 field: 'url',
                 title: '预览',
-                formatter: function(value, row, index) {
+                formatter: function (value, row, index) {
                     var image = '<a href="' + value + '" data-lightbox="image1"><img style="width:100px;height:60px" src="' + value + '" /></a>';
                     return image;
                 }
@@ -122,13 +156,17 @@ Template.issueSubmit.onRendered(function() {
             },
             {
                 field: 'name',
-                title: '操作', formatter: function(value, row, index) {
-                    return '<a href="javascript:void(0)"  class="glyphicon glyphicon-remove"  onclick="deleteissue(&quot;' + value + '&quot;)" >删除</a>';
+                title: '操作', formatter: function (value, row, index) {
+                    if (row.delete && row.delete == true) {
+                        return '<a href="javascript:void(0)"  class="glyphicon glyphicon-remove"  onclick="deleteissue(&quot;' + value + '&quot;)" >删除</a>';
+                    }
+                    else
+                    return '-';
                 }
             }]
     });
 })
-Template.issueSubmit.onDestroyed(function() {
+Template.issueSubmit.onDestroyed(function () {
     $('.main-content .content').empty();
 
     $('.flex-tab-bar').css("width", "40px");
@@ -136,19 +174,20 @@ Template.issueSubmit.onDestroyed(function() {
 })
 
 Template.issueSubmit.events({
-    'click .rocket-form .mic': function(e, t) {
-        AudioRecorder.start(function() {
+     
+    'click .rocket-form .mic': function (e, t) {
+        AudioRecorder.start(function () {
             t.$('.stop-mic').removeClass('hidden');
             t.$('.mic').addClass('hidden');
         }
         )
     },
-    'click .rocket-form .stop-mic': function(e, t) {
-        AudioRecorder.stop(function(blob) {
+    'click .rocket-form .stop-mic': function (e, t) {
+        AudioRecorder.stop(function (blob) {
             var text;
             var reader = new FileReader();
 
-            reader.onload = function(e) {
+            reader.onload = function (e) {
 
                 text = "<div class='upload-preview'>\n	<audio  style=\"width: 100%;\" controls=\"controls\">\n		<source id='audiosource' src=\"" + e.target.result + "\" type=\"audio/wav\">\n		Your browser does not support the audio element.\n	</audio>\n</div>";
                 $("#micRecord").html(text);
@@ -158,8 +197,10 @@ Template.issueSubmit.events({
         t.$('.stop-mic').addClass('hidden');
         return t.$('.mic').removeClass('hidden');
     },
-    'click button.save': function(e) {
+    'click button.save': function (e) {
         e.preventDefault();
+
+
         var images = $('#imagetable').bootstrapTable("getData");
 
         var imagearray = [];
@@ -183,12 +224,24 @@ Template.issueSubmit.events({
             "remarks": ""
         };
         console.log(issueAttributes);
+        if (!issueAttributes.category) {
+            toastr.warning('请选择系统!');
+            return;
+        }
+        if (!issueAttributes.title) {
+            toastr.warning('请填写标题!');
+            return;
+        }
+        if (!issueAttributes.description) {
+            toastr.warning('请填写详细描述!');
+            return;
+        }
         var _id = FlowRouter.getParam('_id');
         if (_id) {
             _.extend(issueAttributes, { id: _id });
         }
 
-        Meteor.call("issueInsert", issueAttributes, function(error, result) {
+        Meteor.call("issueInsert", issueAttributes, function (error, result) {
             // 向用户显示错误信息并终止
             if (error) {
                 swal({
@@ -213,13 +266,14 @@ Template.issueSubmit.events({
 
     },
     'click #gotobackbutton'(e/*, instance*/) {
+       var _type = FlowRouter.getParam('_type');
         e.preventDefault();
-        FlowRouter.go('issue-index');
+        FlowRouter.go('issue-index',{_type:_type});
     },
 
     'click #deletebutton'(e/*, instance*/) {
         e.preventDefault();
-        Meteor.call("issuedelete", FlowRouter.getParam('_id'), function(error, result) {
+        Meteor.call("issuedelete", FlowRouter.getParam('_id'), function (error, result) {
             // 向用户显示错误信息并终止
             if (error) {
                 swal({
@@ -244,7 +298,7 @@ Template.issueSubmit.events({
     },
     'click #closebutton'(e/*, instance*/) {
         e.preventDefault();
-        Meteor.call("issueclose", FlowRouter.getParam('_id'), function(error, result) {
+        Meteor.call("issueclose", FlowRouter.getParam('_id'), function (error, result) {
             // 向用户显示错误信息并终止
             if (error) {
                 swal({
@@ -267,7 +321,7 @@ Template.issueSubmit.events({
             }
         });
     },
-    "change #imageupload .jqUploadclass": function(event, template) {
+    "change #imageupload .jqUploadclass": function (event, template) {
         var func = this;
         var file = event.currentTarget.files[0];
         if (file) {
@@ -282,33 +336,34 @@ Template.issueSubmit.events({
                 return;
             }
             var reader = new FileReader();
-            var total = 20000;
-            var breaker = 200;
+            var total = 30000;
+            var breaker = 300;
             var turn = parseInt(100 / (total / breaker));
             var progress = 0;
             $("#imageupload .progress-label").html("1% 完成");
-            var timer = setInterval(function() {
+            var timer = setInterval(function () {
                 progress = progress + turn;
                 $("#imageupload .progress-label").html(progress + "% 完成，请耐心等待！");
                 $("#imageupload .progress-bar").attr("style", "width:" + progress + "%");
-                if (progress >= 96) {
+                if (progress >= 99) {
+                    $("#imageupload .progress-label").html( "100% 完成");
                     clearInterval(timer);
                 }
             }, breaker);
 
-            reader.onload = function(fileLoadEvent) {
+            reader.onload = function (fileLoadEvent) {
                 Meteor.call('saicfile-upload', { name: file.name, size: file.size, type: file.type, content: reader.result },
-                    function(error, fileInfo) {
-                        progress = 99;
+                    function (error, fileInfo) {
+                        progress = 100;
                         if (error) {
                             $("#imageupload .progress-label").html("上传文件失败，请减小图片大小后重试！");
                             $("#imageupload .progress-bar").attr("style", "width:0%");
                             return;
                         }
-                        var fileimage = { name: fileInfo.name, url: fileInfo.path }
-                        $('#imagetable').bootstrapTable("append", fileimage);
-                        $("#imageupload .progress-label").html(100 + "% 完成");
+                        var fileimage = { name: fileInfo.name, url: fileInfo.path ,delete:true}
                         $("#imageupload .progress-bar").attr("style", "width:100%");
+                        $('#imagetable').bootstrapTable("append", fileimage);
+
 
                     });
             };

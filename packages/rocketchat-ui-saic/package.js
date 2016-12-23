@@ -59,7 +59,7 @@ Package.onUse(function (api) {
   //clinet
   api.addFiles('client/templates/includes/saicFlex.html', 'client');
   api.addFiles('client/templates/includes/saicFlex.js', 'client');
-
+  api.addFiles('client/templates/includes/common.js', 'client');
   api.addFiles('client/router.js', 'client');
   api.addFiles('client/ui.js', 'client');
 

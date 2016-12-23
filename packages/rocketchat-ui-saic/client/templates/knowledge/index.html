@@ -3,7 +3,7 @@
         <br/>
         <div><span style="color:white;font-size:20px;">我们随时提供服务</span></div>
         <br/>
-        <div> <input type="text" id="searchtext" placeholder="搜索内容" autocomplete="off">
+        <div> <input type="text" id="searchtext" style="width:50%" placeholder="搜索内容" autocomplete="off">
             <input type="button" id="search" value="搜索"> <a id="link" href="/saic/issuecreate" style="color:white;text-decoration:underline;margin-left:5px">点击提问</a></div>
 
 
@@ -81,7 +81,9 @@
         </div>
     </div>
     <div class='submit'>
-        <button type="button" name="back" id="search" style="width:8%;border:1px solid gray;background-color:#3c8dbc">返回</button>
+       <!-- <button type="button" name="back" id="search" style="width:8%;border:1px solid gray;background-color:#3c8dbc">返回</button>-->
+       <button type="button" id="back" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
+
     </div>
 
 </template>

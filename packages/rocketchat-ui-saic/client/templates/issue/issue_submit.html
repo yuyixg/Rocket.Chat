@@ -83,7 +83,7 @@
 								<div class="uploadPanel">
 									<!-- The fileinput-button span is used to style the file input field as button  -->
 									<div class="btn btn-primary btn-file upload-control">
-										<i class="glyphicon glyphicon-upload"></i>浏览上传… <input type="file" class="jqUploadclass"  data-form-data="{}" accept="image/gif,image/jpeg,image/jpg,image/png,image/bmp">
+										<i class="glyphicon glyphicon-upload"></i>浏览上传… <input type="file" class="jqUploadclass" data-form-data="{}" accept="image/gif,image/jpeg,image/jpg,image/png,image/bmp">
 									</div>
 									<div class="form-control upload-control">
 										<div class="progressInner">
@@ -107,13 +107,12 @@
 					</fieldset>
 
 
-					<button id="gotobackbutton" type="button" class="button secondary back"><i class="icon-left-big"></i><span>{{_ "Back"}}</span></button>
-					<button id="savebutton" class="button save"><i class="icon-floppy"></i><span>提交</span></button>
-					<button id="closebutton" type="button" class="button back"><i class="icon-floppy"></i><span>关闭</span></button>
-					<button id="deletebutton" type="button" class="button back"><i class="icon-floppy"></i><span>撤销</span></button>
+					<button id="gotobackbutton" type="button" class="button secondary back"><span>返回</span></button>
+					<button id="savebutton" class="button save"><span>提交</span></button>
+					<button id="closebutton" type="button" class="button back"><span>确认解决</span></button>
+					<button id="deletebutton" type="button" class="button back"><span>撤销</span></button>
 				</div>
 				<script>
-		     Uploader.uploadUrl="http://appfileupload.ngrok.fusioninfo.cn/mmt-web/f/file/upload/knowledge";
 			function deleteissue(id) {
              $('#imagetable').bootstrapTable('removeByUniqueId', id);
              }
@@ -125,6 +124,7 @@
 
 
 	<script>
+
 			function queryParams(params) {  //配置参数  
 			   var querydata = {
           name: $('#txt_search').val(),
