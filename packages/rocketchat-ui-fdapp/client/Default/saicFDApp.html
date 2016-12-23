@@ -1,0 +1,32 @@
+<template name="saicFDApp">
+    <header>
+        <div>
+            <h4>FDApp</h4>
+        </div>
+    </header>
+    <div class="content">
+        <div class="wrapper">
+            <ul class="flex-list">
+                <li><a href="{{pathFor 'fddefault'}}" class="{{active 'fddefault'}}">首页/HomePage </a></li>
+                <li>发起新申请/New Request
+                    <ul>
+                        <li><a href="{{pathFor 'PRRequest'}}" class="{{active 'PRRequest'}}">PR</a></li>
+                        <li><a href="{{pathFor 'GRRequest'}}" class="{{active 'GRRequest'}}">GR</a></li>
+                        <li><a href="{{pathFor 'ERRequest'}}" class="{{active 'ERRequest'}}">ER</a></li>
+                        <li><a href="{{pathFor 'ARRequest'}}" class="{{active 'ARRequest'}}">AR</a></li>
+                        <li><a href="{{pathFor 'TRRequest'}}" class="{{active 'TRRequest'}}">TR</a></li>
+                    </ul>
+                </li>
+                <li>分类查看/View 
+                    <ul class="flex-list">
+                        <li><a href="{{pathFor 'PREdit'}}" class="{{active 'PREdit'}}">PR</a></li>
+                        <li><a href="{{pathFor 'GREdit'}}" class="{{active 'GREdit'}}">GR</a></li>
+                        <li><a href="{{pathFor 'EREdit'}}" class="{{active 'EREdit'}}">ER</a></li>
+                        <li><a href="{{pathFor 'AREdit'}}" class="{{active 'AREdit'}}">AR</a></li>
+                        <li><a href="{{pathFor 'TREdit'}}" class="{{active 'TREdit'}}">TR</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>
