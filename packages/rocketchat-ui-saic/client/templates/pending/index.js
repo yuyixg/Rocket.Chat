@@ -2,10 +2,14 @@
 Template.pendingindex.onRendered(function () {
     var self = this;
     saicRendered(self);
-    var _type = FlowRouter.getParam('_type');
+    var _type = FlowRouter.getParam('_status');
     if (_type) {
 
         switch (_type) {
+            case '0':
+                $('#txt_status').val('全部');
+                $("#txt_status").find("option[text='全部']").attr("selected", true);
+                break;
             case '1':
                 $('#txt_status').val('问题池');
                 $("#txt_status").find("option[text='问题池']").attr("selected", true);
@@ -88,16 +92,21 @@ Template.pendingindex.onRendered(function () {
             {
                 field: 'pendingProcessName',
                 title: '状态'
-            },
-            {
-                title: '发布时间',
-                formatter: function (value, row, index) {
-                    return row.createDate.substr(0, 10);
-                }
             }
+            //{
+            //    title: '发布时间',
+            //   formatter: function (value, row, index) {
+            //        return row.createDate.substr(0, 10);
+            //   }
+            // }
         ],
         onClickRow: function (value) {
-            FlowRouter.go('pending-reply', { _id: value.id });
+            var status;
+            if ($('#txt_status option:selected').text() == "全部")
+            { status = "0"; }
+            else
+            { status = $('#txt_status').get(0).selectedIndex; }
+            FlowRouter.go('pending-reply', { _id: value.id, _status: status });
         },
         formatLoadingMessage: function () {
             return "请稍等，正在加载中...";

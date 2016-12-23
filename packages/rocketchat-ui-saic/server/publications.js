@@ -1,4 +1,3 @@
-
 mmtServerURL = 'http://10.64.20.165:8080/';
 //mmtServerURL = 'http://10.90.67.77:8081/';
 GetDateTime = function (format) {

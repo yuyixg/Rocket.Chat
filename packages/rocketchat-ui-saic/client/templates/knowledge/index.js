@@ -3,6 +3,7 @@ Template.knowledgeindex.onRendered(function () {
     saicRendered(self);
     var id;
     $("#category").hide();
+   // var _category = FlowRouter.getParam('_category');
     Meteor.call("getcategorybyuserid",
         function (error, result) {
             // 向用户显示错误信息并终止
@@ -295,8 +296,8 @@ Template.knowledgedetail.onRendered(function () {
         }
         else {
             if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down") {
-              upordown($('#up i').removeClass().addClass('fa fa-thumbs-up'),1);   
-              swal('谢谢!', '', 'success');       
+                upordown($('#up i').removeClass().addClass('fa fa-thumbs-up'), 1);
+                swal('谢谢!', '', 'success');
 
             } else {
                 swal({
@@ -308,7 +309,7 @@ Template.knowledgedetail.onRendered(function () {
                     closeOnConfirm: true
                 },
                     function () {
-                         upordown($("#up i").removeClass().addClass("fa fa-thumbs-o-up"),1);                       
+                        upordown($("#up i").removeClass().addClass("fa fa-thumbs-o-up"), 1);
                     });
             }
         }
@@ -317,12 +318,15 @@ Template.knowledgedetail.onRendered(function () {
     //踩
     $("#down").click(function () {
         if ($("#up i").attr("class") == "fa fa-thumbs-up") {
+            //toastr.warning('您已顶过该帖，请勿重复顶贴!');
+            // return;
             swal("您已顶过该帖，请勿重复顶贴！", "", "warning");
             return;
         } else {
             if ($("#up i").attr("class") == "fa fa-thumbs-o-up" && $("#down i").attr("class") == "fa fa-thumbs-o-down") {
-            upordown($('#down i').removeClass().addClass('fa fa-thumbs-down'),-1);
-              swal('谢谢!', '', 'success')
+                upordown($('#down i').removeClass().addClass('fa fa-thumbs-down'), -1);
+                //toastr.success("谢谢!");
+                swal('谢谢!', '', 'success')
             } else {
                 swal({
                     title: "确定取消吗？",
@@ -333,7 +337,7 @@ Template.knowledgedetail.onRendered(function () {
                     closeOnConfirm: true
                 },
                     function () {
-                        upordown($("#down i").removeClass().addClass("fa fa-thumbs-o-down"),-1);                        
+                        upordown($("#down i").removeClass().addClass("fa fa-thumbs-o-down"), -1);
                     });
             }
 
@@ -341,7 +345,7 @@ Template.knowledgedetail.onRendered(function () {
 
     });
 
-    function upordown(str,type) {
+    function upordown(str, type) {
         var queryParams = {
             id: getAttributes.id,
             thumbsUp: { "support": type }
